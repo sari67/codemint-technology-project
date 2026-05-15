@@ -1,0 +1,490 @@
+/* 
+  Anti-Gravity Design System
+  Theme: Modern, Professional, Minimal
+*/
+
+:root {
+    /* Color Palette */
+    --primary-red: #FF2C2C;
+    --dark-grey: #353839;
+    --white: #FFFFFF;
+    --bg-light: #FAFAFC; /* Slightly off-white to contrast floating cards */
+    
+    /* Anti-gravity shadows */
+    --shadow-soft: 0 10px 40px rgba(53, 56, 57, 0.06);
+    --shadow-hover: 0 20px 50px rgba(53, 56, 57, 0.12);
+    
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--dark-grey);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- 1. Glassmorphism Sticky Navigation --- */
+header {
+    position: fixed; /* Sticky behavior managed by JS optionally, but fixed is easier for consistent blur */
+    top: 0;
+    width: 100%;
+    padding: 20px 5%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: var(--transition-smooth);
+}
+
+/* Add shadow when scrolled */
+header.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 15px 5%;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--dark-grey);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--primary-red);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--dark-grey);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+nav a:hover {
+    color: var(--primary-red);
+}
+
+.nav-btn {
+    background-color: transparent;
+    border: 2px solid var(--dark-grey);
+    padding: 8px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--dark-grey);
+    transition: var(--transition-smooth);
+}
+
+.nav-btn:hover {
+    background-color: var(--dark-grey);
+    color: var(--white);
+}
+
+/* --- 2. Hero Section --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background: radial-gradient(circle at top, #ffffff, var(--bg-light));
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -1.5px;
+    color: var(--dark-grey);
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: var(--primary-red);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(255, 44, 44, 0.25);
+}
+
+.cta-btn:hover {
+    transform: translateY(-4px); /* Slight lift */
+    box-shadow: 0 12px 30px rgba(255, 44, 44, 0.35);
+    background-color: #E62525;
+}
+
+/* --- 3. Featured Domains (Floating Cards) --- */
+.domains-section {
+    padding: 120px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--dark-grey);
+    letter-spacing: -1px;
+}
+
+.section-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+/* The Anti-Gravity Card */
+.card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 24px; /* Large radius */
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: var(--primary-red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+/* The core Y-axis offset hover */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 44, 44, 0.08);
+    color: var(--primary-red);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    transition: var(--transition-smooth);
+}
+
+.card:hover .card-icon {
+    background: var(--primary-red);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--dark-grey);
+}
+
+.card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* --- 4. Verify Section --- */
+.verify-section {
+    padding: 100px 5%;
+    background-color: var(--white);
+    text-align: center;
+}
+
+.verify-content {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-light);
+    padding: 60px 40px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-soft);
+}
+
+.verify-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.verify-content p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.verify-form {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.verify-form input {
+    flex: 1;
+    min-width: 250px;
+    padding: 16px 24px;
+    border: 2px solid transparent;
+    background: var(--white);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.verify-form input:focus {
+    border-color: rgba(255, 44, 44, 0.3);
+    box-shadow: 0 4px 20px rgba(255, 44, 44, 0.1);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--white);
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* --- Animations (Scroll Reveal & Fade In Up) --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpAnim 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUpAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Classes for Intersection Observer to trigger */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 5. Login Modal --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--primary-red);
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    color: var(--dark-grey);
+}
+
+.modal-content > p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #EAEAEA;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: rgba(255, 44, 44, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 44, 44, 0.08);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.form-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.forgot-pwd {
+    color: var(--primary-red);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-submit {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.95rem;
+}
+
+.signup-link a {
+    color: var(--primary-red);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3rem; }
+    nav { display: none; } /* Simplified for prototype */
+    .verify-form { flex-direction: column; }
+    .verify-form button { width: 100%; }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codmint Technologies | Where Developers Begin</title>
+    <!-- Modern Typography: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Glassmorphism Sticky Navigation -->
+    <header id="main-header">
+        <a href="#" class="logo">Codmint<span>.</span></a>
+        <nav>
+            <a href="#domains">Internships</a>
+            <a href="#verify">Verify Certificate</a>
+            <span id="user-display"
+                style="display: none; font-weight: 600; color: var(--primary-red); margin-right: 15px; margin-left: 20px;"></span>
+            <button id="login-btn" class="nav-btn">Log In</button>
+            <button id="register-btn" class="cta-btn"
+                style="padding: 8px 24px; font-size: 0.95rem; margin-left: 10px;">Sign Up</button>
+            <button id="logout-btn" class="nav-btn" style="display: none;">Log Out</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>Where Developers Begin</h1>
+            <p>A modern, seamless, and professional gateway to kickstart your tech career. Find your domain, verify your
+                achievements, and elevate your future.</p>
+            <a href="#domains" class="cta-btn">Explore Internships</a>
+        </div>
+    </section>
+
+    <!-- Featured Internship Domains -->
+    <section id="domains" class="domains-section">
+        <div class="section-header fade-in-up">
+            <h2>Internship Domains</h2>
+            <p>Discover opportunities tailored for the next generation of tech leaders.</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Floating Cards with anti-gravity hover effect -->
+            <div class="card scroll-reveal">
+                <div class="card-icon">💻</div>
+                <h3>Frontend Development</h3>
+                <p>Master the art of building beautiful, responsive, and interactive user interfaces using modern web
+                    technologies.</p>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">⚙️</div>
+                <h3>Backend Development</h3>
+                <p>Architect robust server-side logic, manage databases, and build scalable APIs that power modern
+                    applications.</p>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">🎨</div>
+                <h3>UI/UX Design</h3>
+                <p>Craft intuitive and engaging user experiences with a focus on modern design principles and user
+                    psychology.</p>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">📱</div>
+                <h3>Mobile App Development</h3>
+                <p>Build cross-platform applications that deliver seamless experiences across iOS and Android devices.
+                </p>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">📊</div>
+                <h3>Data Science</h3>
+                <p>Unlock insights from complex data sets using advanced analytics, machine learning, and visualization
+                    tools.</p>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">🛡️</div>
+                <h3>Cyber Security</h3>
+                <p>Protect digital assets and secure networks against evolving threats in an increasingly connected
+                    world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Verification Section -->
+    <section id="verify" class="verify-section">
+        <div class="verify-content scroll-reveal">
+            <h2>Certificate Verification</h2>
+            <p>Validate your hard work and achievements. Enter your unique certificate ID below.</p>
+            <form class="verify-form" onsubmit="event.preventDefault();">
+                <input type="text" placeholder="Enter Certificate ID (e.g., C-123456)" required>
+                <button type="submit" class="cta-btn">Verify Now</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Codmint Technologies. All rights reserved.</p>
+    </footer>
+
+    <!-- Professional Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="login-close">&times;</span>
+            <h2>Welcome Back</h2>
+            <p>Log in to access your dashboard</p>
+            <form id="login-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="new-password">
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" id="remember-me"> Remember me</label>
+                    <a href="#" class="forgot-pwd">Forgot Password?</a>
+                </div>
+                <button type="submit" class="cta-btn login-submit">Log In</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="#" id="switch-to-register">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Professional Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="register-close">&times;</span>
+            <h2>Create Account</h2>
+            <p>Join Codmint Technologies today</p>
+            <form id="register-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" placeholder="John Doe" required minlength="3" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="••••••••" required minlength="6"
+                        autocomplete="new-password">
+                </div>
+                <div class="input-group">
+                    <label for="reg-confirm">Confirm Password</label>
+                    <input type="password" id="reg-confirm" placeholder="••••••••" required minlength="6"
+                        autocomplete="new-password">
+                </div>
+                <p id="reg-error" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;">Passwords
+                    do not match.</p>
+                <button type="submit" class="cta-btn login-submit">Create Account</button>
+            </form>
+            <p class="signup-link">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
