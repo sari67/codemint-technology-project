@@ -426,56 +426,158 @@ nav.main-nav a:hover {
     line-height: 1.7;
 }
 
-/* --- 4. Verify Section --- */
+/* --- 4. Verify Section (Modern Card) --- */
 .verify-section {
-    padding: 100px 5%;
-    background-color: var(--white);
-    text-align: center;
+    padding: 120px 5%;
+    background: radial-gradient(circle at bottom right, rgba(255, 44, 44, 0.03), transparent);
+    position: relative;
 }
 
-.verify-content {
-    max-width: 700px;
+.verify-card {
+    max-width: 800px;
     margin: 0 auto;
-    background: var(--bg-light);
-    padding: 60px 40px;
-    border-radius: 30px;
+    background: var(--white);
+    padding: 80px 50px;
+    border-radius: 40px;
     box-shadow: var(--shadow-soft);
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: var(--transition-smooth);
+    position: relative;
+    z-index: 1;
 }
 
-.verify-content h2 {
-    font-size: 2.5rem;
+.verify-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: var(--shadow-hover);
+}
+
+.verify-icon {
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 44, 44, 0.08);
+    color: var(--primary-red);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    transition: var(--transition-smooth);
+}
+
+.verify-card:hover .verify-icon {
+    background: var(--primary-red);
+    color: var(--white);
+    transform: rotate(10deg);
+}
+
+.verify-card h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
     margin-bottom: 15px;
+    letter-spacing: -1px;
 }
 
-.verify-content p {
+.verify-card p {
     color: #666;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .verify-form {
     display: flex;
     gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+    background: #FAFAFC;
+    padding: 10px;
+    border-radius: 60px;
+    border: 1px solid #EAEAEA;
+    transition: var(--transition-smooth);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.verify-form:focus-within {
+    border-color: rgba(255, 44, 44, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 44, 44, 0.08);
+    background: var(--white);
+}
+
+.verify-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    gap: 12px;
+}
+
+.verify-input-wrapper .input-icon {
+    color: #AAA;
+    transition: var(--transition-smooth);
+}
+
+.verify-form:focus-within .input-icon {
+    color: var(--primary-red);
 }
 
 .verify-form input {
-    flex: 1;
-    min-width: 250px;
-    padding: 16px 24px;
-    border: 2px solid transparent;
-    background: var(--white);
-    border-radius: 50px;
-    font-size: 1rem;
+    border: none;
+    background: transparent;
+    padding: 15px 0;
+    font-size: 1.05rem;
     font-family: inherit;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-    transition: var(--transition-smooth);
+    width: 100%;
     outline: none;
 }
 
-.verify-form input:focus {
-    border-color: rgba(255, 44, 44, 0.3);
-    box-shadow: 0 4px 20px rgba(255, 44, 44, 0.1);
+.verify-submit-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    border-radius: 50px;
+    white-space: nowrap;
+}
+
+.verify-feedback {
+    margin-top: 25px;
+    font-weight: 500;
+    min-height: 24px;
+    transition: var(--transition-smooth);
+}
+
+/* Responsive adjustments for verify section */
+@media (max-width: 768px) {
+    .verify-card {
+        padding: 50px 30px;
+        border-radius: 30px;
+    }
+
+    .verify-card h2 {
+        font-size: 2rem;
+    }
+
+    .verify-form {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .verify-input-wrapper {
+        background: #FAFAFC;
+        border: 1px solid #EAEAEA;
+        border-radius: 50px;
+        padding: 5px 20px;
+    }
+
+    .verify-submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* --- Footer --- */

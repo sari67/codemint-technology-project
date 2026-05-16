@@ -361,4 +361,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 9. Certificate Verification Logic
+    const certForm = document.getElementById('certificate-verify-form');
+    const verifyFeedback = document.getElementById('verify-feedback');
+
+    if (certForm && verifyFeedback) {
+        certForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const certId = document.getElementById('cert-id').value.trim();
+            const submitBtn = certForm.querySelector('button');
+            const originalBtnContent = submitBtn.innerHTML;
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Verifying...</span>';
+            verifyFeedback.textContent = '';
+            verifyFeedback.style.color = 'var(--dark-grey)';
+
+            setTimeout(() => {
+                // Mock verification logic
+                if (certId.toUpperCase().startsWith('CM-2026-')) {
+                    verifyFeedback.textContent = `✅ Certificate ${certId} is VALID. Issued to an Outstanding Intern.`;
+                    verifyFeedback.style.color = '#28a745';
+                } else {
+                    verifyFeedback.textContent = `❌ Certificate ${certId} not found. Please check the ID and try again.`;
+                    verifyFeedback.style.color = 'var(--primary-red)';
+                }
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            }, 1500);
+        });
+    }
+
 });

@@ -99,13 +99,25 @@
 
     <!-- Certificate Verification Section -->
     <section id="verify" class="verify-section">
-        <div class="verify-content scroll-reveal">
-            <h2>Certificate Verification</h2>
-            <p>Validate your hard work and achievements. Enter your unique certificate ID below.</p>
-            <form class="verify-form" onsubmit="event.preventDefault();">
-                <input type="text" placeholder="Enter Certificate ID (e.g., C-123456)" required>
-                <button type="submit" class="cta-btn">Verify Now</button>
-            </form>
+        <div class="container">
+            <div class="verify-card scroll-reveal">
+                <div class="verify-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h2>Verify Your Achievement</h2>
+                <p>Validate your certificate and share your success with the world. Enter your unique ID below.</p>
+                <form class="verify-form" id="certificate-verify-form">
+                    <div class="verify-input-wrapper">
+                        <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        <input type="text" id="cert-id" placeholder="Certificate ID (e.g., CM-2026-X12)" required>
+                    </div>
+                    <button type="submit" class="cta-btn verify-submit-btn">
+                        <span>Verify Certificate</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </form>
+                <div id="verify-feedback" class="verify-feedback"></div>
+            </div>
         </div>
     </section>
 
