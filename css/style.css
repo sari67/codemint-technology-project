@@ -1,22 +1,21 @@
-/* 
-  Anti-Gravity Design System
-  Theme: Modern, Professional, Minimal
-*/
-
 :root {
-    /* Color Palette */
-    --primary-red: #FF2C2C;
-    --dark-grey: #353839;
+    /* Refined Color Palette */
+    --primary-red: #FF3D3D;
+    --primary-dark: #1A1A1C;
+    --dark-grey: #2D2E32;
+    --medium-grey: #6B6C72;
+    --light-grey: #F5F5F7;
     --white: #FFFFFF;
     --bg-light: #FAFAFC;
-    /* Slightly off-white to contrast floating cards */
 
     /* Anti-gravity shadows */
-    --shadow-soft: 0 10px 40px rgba(53, 56, 57, 0.06);
-    --shadow-hover: 0 20px 50px rgba(53, 56, 57, 0.12);
+    --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 20px 60px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.12);
 
-    /* Transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Premium Transitions */
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -35,38 +34,29 @@ body {
     color: var(--dark-grey);
     line-height: 1.6;
     overflow-x: hidden;
-    opacity: 0;
-    animation: pageReveal 1s ease-out forwards;
-}
-
-@keyframes pageReveal {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 /* --- 1. Glassmorphism Sticky Navigation --- */
 header {
     position: fixed;
-    /* Sticky behavior managed by JS optionally, but fixed is easier for consistent blur */
     top: 0;
     width: 100%;
-    padding: 20px 5%;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 24px 5%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     transition: var(--transition-smooth);
 }
 
-/* Add shadow when scrolled */
 header.scrolled {
+    padding: 16px 5%;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-    padding: 12px 5%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .logo {
@@ -115,8 +105,6 @@ nav.main-nav a:hover {
 .nav-btn:hover {
     background-color: var(--dark-grey);
     color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .mobile-menu-btn {
@@ -204,12 +192,12 @@ nav.main-nav a:hover {
 }
 
 .hero h1 {
-    font-size: 4.5rem;
+    font-size: 5rem;
     font-weight: 800;
     margin-bottom: 24px;
-    letter-spacing: -2px;
-    color: var(--dark-grey);
-    line-height: 1.05;
+    letter-spacing: -3px;
+    color: var(--primary-dark);
+    line-height: 1;
 }
 
 .text-red {
@@ -265,41 +253,31 @@ nav.main-nav a:hover {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: var(--white);
-    padding: 10px 18px;
-    border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    transition: var(--transition-smooth);
 }
 
-.hero-features span:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* Hero Stats Card */
 .stats-card {
     background: var(--white);
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+    padding: 50px;
+    border-radius: 32px;
+    box-shadow: var(--shadow-medium);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+    gap: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .stat-item {
-    padding: 24px;
-    border: 1px solid #F0F0F0;
-    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid var(--light-grey);
+    border-radius: 20px;
     transition: var(--transition-smooth);
+    background: var(--white);
 }
 
 .stat-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    border-color: rgba(255, 44, 44, 0.1);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(255, 61, 61, 0.1);
 }
 
 .stat-icon {
@@ -380,7 +358,7 @@ nav.main-nav a:hover {
 .card {
     background: var(--white);
     padding: 40px;
-    border-radius: 24px;
+    border-radius: 32px;
     box-shadow: var(--shadow-soft);
     transition: var(--transition-smooth);
     position: relative;
@@ -639,21 +617,19 @@ footer {
 /* --- 5. Login Modal --- */
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: var(--transition-smooth);
 }
 
 .modal.show {
@@ -663,14 +639,14 @@ footer {
 
 .modal-content {
     background-color: var(--white);
-    padding: 40px;
-    border-radius: 24px;
+    padding: 50px;
+    border-radius: 32px;
     width: 90%;
-    max-width: 450px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    max-width: 480px;
+    box-shadow: var(--shadow-hover);
     position: relative;
-    transform: translateY(-20px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
 }
 
 .modal.show .modal-content {
