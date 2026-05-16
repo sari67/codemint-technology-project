@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | Codmint Technologies</title>
+    <!-- Modern Typography: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-container {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .welcome-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stat-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 61, 61, 0.05);
+            color: var(--primary-red);
+        }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .stat-info p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .main-dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .main-dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-box {
+            background: var(--white);
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .application-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .app-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #F0F0F0;
+            border-radius: 18px;
+            transition: var(--transition-fast);
+        }
+
+        .app-item:hover {
+            border-color: var(--primary-red);
+            background: rgba(255, 61, 61, 0.02);
+        }
+
+        .app-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .app-details p {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #FFF9E6; color: #D9A500; }
+        .status-active { background: #E6F7FF; color: #0070CC; }
+
+        .announcements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .announcement {
+            padding-bottom: 15px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .announcement:last-child { border: none; }
+
+        .announcement h5 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--dark-grey);
+        }
+
+        .announcement p {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Glassmorphism Sticky Navigation -->
+    <header id="main-header">
+        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
+            <div style="background-color: var(--primary-red); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">C</div>
+            Codmint
+        </a>
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="internships.html">Internships</a>
+            <a href="services.html">Services</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+            <a href="verify.html" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span class="btn-text">Verify Certificate</span>
+            </a>
+            <span id="user-display" style="font-weight: 600; color: var(--primary-red);"></span>
+            <button id="logout-btn" class="nav-btn">Log Out</button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px; min-height: 80vh; background-color: var(--bg-light);">
+        <div class="dashboard-container">
+            <div class="welcome-header scale-in">
+                <div>
+                    <h1 id="dash-welcome">Welcome, <span class="text-red">User</span></h1>
+                    <p style="color: #666;">Here's what's happening with your internship journey.</p>
+                </div>
+                <a href="internships.html" class="cta-btn" style="text-decoration: none;">Apply for New Role</a>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card scroll-reveal">
+                    <div class="stat-icon-circle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3>2</h3>
+                        <p>Applications</p>
+                    </div>
+                </div>
+                <div class="stat-card scroll-reveal">
+                    <div class="stat-icon-circle" style="background: rgba(40, 167, 69, 0.05); color: #28a745;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                <div class="stat-card scroll-reveal">
+                    <div class="stat-icon-circle" style="background: rgba(0, 112, 204, 0.05); color: #0070CC;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1</h3>
+                        <p>Certificates</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-dashboard-grid">
+                <div class="section-box scroll-reveal">
+                    <h2>Recent Applications</h2>
+                    <div class="application-list">
+                        <div class="app-item">
+                            <div class="app-details">
+                                <h4>Web Development Intern</h4>
+                                <p>Applied on May 15, 2026</p>
+                            </div>
+                            <span class="status-badge status-pending">In Review</span>
+                        </div>
+                        <div class="app-item">
+                            <div class="app-details">
+                                <h4>UI/UX Design Intern</h4>
+                                <p>Applied on April 10, 2026</p>
+                            </div>
+                            <span class="status-badge status-active">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-box scroll-reveal">
+                    <h2>Announcements</h2>
+                    <div class="announcements-list">
+                        <div class="announcement">
+                            <h5>Weekly Review Tomorrow</h5>
+                            <p>Don't forget to submit your weekly progress report by 10 AM.</p>
+                        </div>
+                        <div class="announcement">
+                            <h5>New Mentorship Session</h5>
+                            <p>Interactive Q&A with Senior Developers this Friday at 6 PM.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3><div class="logo-icon">C</div> Codmint Technologies</h3>
+                <p>Where developers begin. Internships, mentorship, and real-world projects for the next generation of builders.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="verify.html">Verify Certificate</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <div class="contact-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <p>codmint.hr@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <p>Remote — India & Worldwide</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Codmint Technologies. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Dashboard Protection Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (!currentUserStr) {
+                alert('Please log in to access your dashboard.');
+                window.location.href = 'index.html';
+            } else {
+                const user = JSON.parse(currentUserStr);
+                const welcomeName = document.querySelector('#dash-welcome span');
+                if (welcomeName) welcomeName.textContent = user.name;
+            }
+        });
+    </script>
+</body>
+
+</html>
