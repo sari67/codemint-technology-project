@@ -302,62 +302,25 @@ nav.main-nav a:hover {
 }
 
 .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 28px;
+    display: inline-block;
+    padding: 16px 40px;
     background-color: var(--primary-red);
     color: var(--white);
     border: none;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition-smooth);
     text-decoration: none;
-    box-shadow: 0 8px 25px rgba(255, 61, 61, 0.2);
+    box-shadow: 0 8px 25px rgba(255, 44, 44, 0.25);
 }
 
 .cta-btn:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 35px rgba(255, 61, 61, 0.3);
-    background-color: #E63535;
-}
-
-.secondary-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 28px;
-    background-color: var(--white);
-    color: var(--primary-dark);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    text-decoration: none;
-    box-shadow: var(--shadow-soft);
-}
-
-.secondary-btn:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-medium);
-    border-color: rgba(0, 0, 0, 0.2);
-    background-color: var(--bg-light);
-}
-
-.nav-btn {
-    padding: 10px 22px;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: var(--transition-smooth);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    /* Slight lift */
+    box-shadow: 0 12px 30px rgba(255, 44, 44, 0.35);
+    background-color: #E62525;
 }
 
 /* --- 3. Featured Domains (Floating Cards) --- */
@@ -391,6 +354,7 @@ nav.main-nav a:hover {
     gap: 40px;
 }
 
+/* The Anti-Gravity Card */
 .card {
     background: var(--white);
     padding: 40px;
@@ -403,14 +367,13 @@ nav.main-nav a:hover {
     border: 1px solid rgba(0, 0, 0, 0.02);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
-.card .apply-btn {
+.card .cta-btn.apply-btn {
     margin-top: auto;
-    width: 100%;
-    padding: 12px 25px;
+    padding: 12px 24px;
     font-size: 0.95rem;
+    width: 100%;
 }
 
 .card::before {
@@ -624,171 +587,14 @@ nav.main-nav a:hover {
     }
 }
 
-/* --- Footer (Modern Dark Theme) --- */
+/* --- Footer --- */
 footer {
-    background-color: var(--primary-dark);
-    color: var(--white);
-    padding: 80px 5% 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 60px;
-    margin-bottom: 60px;
-}
-
-.footer-brand h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.footer-brand p {
-    color: var(--medium-grey);
-    line-height: 1.7;
-    margin-bottom: 25px;
-    max-width: 400px;
-}
-
-.social-links {
-    display: flex;
-    gap: 12px;
-}
-
-.social-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    transition: var(--transition-smooth);
-    text-decoration: none;
-}
-
-.social-icon:hover {
-    background: var(--primary-red);
-    border-color: var(--primary-red);
-    transform: translateY(-5px);
-}
-
-.footer-links h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-links li {
-    margin-bottom: 15px;
-}
-
-.footer-links a {
-    color: var(--medium-grey);
-    text-decoration: none;
-    transition: var(--transition-smooth);
-}
-
-.footer-links a:hover {
-    color: var(--primary-red);
-    padding-left: 5px;
-}
-
-.footer-contact h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 20px;
-    color: var(--medium-grey);
-}
-
-.contact-item svg {
-    color: var(--primary-red);
-    margin-top: 3px;
-}
-
-.footer-bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-bottom p {
-    color: var(--medium-grey);
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--white);
+    color: #888;
     font-size: 0.9rem;
-}
-
-.footer-legal {
-    display: flex;
-    gap: 25px;
-}
-
-.footer-legal a {
-    color: var(--medium-grey);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: var(--transition-smooth);
-}
-
-.footer-legal a:hover {
-    color: var(--white);
-}
-
-@media (max-width: 992px) {
-    .footer-container {
-        grid-template-columns: 1fr 1fr;
-    }
-    .footer-brand {
-        grid-column: span 2;
-    }
-}
-
-@media (max-width: 600px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    .footer-brand {
-        grid-column: span 1;
-    }
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-    }
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* --- Animations (Scroll Reveal & Fade In Up) --- */
