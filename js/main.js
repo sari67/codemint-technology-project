@@ -304,9 +304,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 allApplications[user.email].push(newApp);
                 localStorage.setItem('allApplications', JSON.stringify(allApplications));
+
+                // Assign Default Simple Task based on Domain
+                const tasksByDomain = {
+                    'Web Development': { title: 'Create Landing Page', desc: 'Build a basic HTML/CSS landing page.' },
+                    'Python': { title: 'Python Scripting', desc: 'Write a script to automate a simple file task.' },
+                    'Data Science': { title: 'Data Cleaning', desc: 'Clean a sample CSV dataset using Pandas.' },
+                    'UI/UX Design': { title: 'Login Wireframe', desc: 'Design a low-fidelity login screen wireframe.' },
+                    'Android Development': { title: 'Hello Android', desc: 'Create a "Hello World" app in Android Studio.' },
+                    'AI/ML': { title: 'Model Setup', desc: 'Load a dataset and split it for training.' },
+                    'Cloud Computing': { title: 'S3 Bucket Setup', desc: 'Create and configure an AWS S3 bucket.' },
+                    'Cyber Security': { title: 'Security Audit', desc: 'Perform a basic security scan on a local port.' }
+                };
+
+                const domainTask = tasksByDomain[domain] || { title: 'Intro Task', desc: 'Complete the introductory module for your domain.' };
+                
+                const allTasks = JSON.parse(localStorage.getItem('userTasks') || '{}');
+                if (!allTasks[user.email]) {
+                    allTasks[user.email] = [
+                        { title: 'Profile Setup', desc: 'Account registration', completed: true },
+                        { title: 'Email Verified', desc: 'Security check', completed: true }
+                    ];
+                }
+
+                allTasks[user.email].push({
+                    title: domainTask.title,
+                    desc: domainTask.desc,
+                    completed: false,
+                    date: new Date().toLocaleDateString()
+                });
+
+                localStorage.setItem('userTasks', JSON.stringify(allTasks));
             }
 
-            alert('Your internship application has been submitted successfully! You can track its status in your Dashboard. ALL THE BEST!');
+            alert('Your internship application has been submitted successfully! A starter task has been assigned to your Dashboard. ALL THE BEST!');
             closeModal(applyModal);
             applyForm.reset();
             

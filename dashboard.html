@@ -327,6 +327,29 @@
             if (sidebarUserEmail) sidebarUserEmail.textContent = user.email;
             if (userAvatarInitial) userAvatarInitial.textContent = user.name.charAt(0).toUpperCase();
 
+            // Load completed and pending tasks
+            const taskList = document.getElementById('completed-tasks-list');
+            const allTasks = JSON.parse(localStorage.getItem('userTasks') || '{}');
+            const userTasks = allTasks[user.email] || [
+                { title: 'Profile Setup', desc: 'Account registration', completed: true },
+                { title: 'Email Verified', desc: 'Security check', completed: true }
+            ];
+
+            if (userTasks.length > 0) {
+                taskList.innerHTML = '';
+                userTasks.forEach(task => {
+                    const card = document.createElement('div');
+                    card.className = 'task-card fade-in-up';
+                    card.innerHTML = `
+                        <div class="task-icon">${task.completed ? '✅' : '📝'}</div>
+                        <h4>${task.title}</h4>
+                        <p style="font-size: 0.8rem; color: #888;">${task.desc}</p>
+                        ${!task.completed ? '<span style="font-size: 0.75rem; color: var(--primary-red); font-weight: 600;">Pending</span>' : '<span style="font-size: 0.75rem; color: #10B981; font-weight: 600;">Completed</span>'}
+                    `;
+                    taskList.appendChild(card);
+                });
+            }
+
             // Load applied internships
             const appliedList = document.getElementById('applied-internships-list');
             const allApplications = JSON.parse(localStorage.getItem('allApplications') || '{}');
