@@ -28,6 +28,8 @@
             border-radius: 24px;
             box-shadow: var(--shadow-soft);
             height: fit-content;
+            position: sticky;
+            top: 100px;
         }
 
         .user-profile-header {
@@ -47,6 +49,7 @@
             font-size: 2rem;
             font-weight: 700;
             margin: 0 auto 15px;
+            box-shadow: 0 10px 20px rgba(255, 61, 61, 0.2);
         }
 
         .sidebar-nav {
@@ -68,6 +71,7 @@
             border-radius: 12px;
             transition: var(--transition-smooth);
             font-weight: 500;
+            cursor: pointer;
         }
 
         .sidebar-nav a:hover, .sidebar-nav a.active {
@@ -81,11 +85,23 @@
             gap: 30px;
         }
 
+        .dashboard-view {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .dashboard-view.active {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
         .dashboard-card {
             background: var(--white);
-            padding: 40px;
+            padding: 35px;
             border-radius: 24px;
             box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
 
         .dashboard-card h2 {
@@ -93,12 +109,13 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            font-size: 1.5rem;
         }
 
         .application-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
         .application-item {
@@ -106,7 +123,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            border: 1px solid #EAEAEA;
+            border: 1px solid #F0F0F0;
             border-radius: 16px;
             transition: var(--transition-smooth);
         }
@@ -114,17 +131,13 @@
         .application-item:hover {
             border-color: var(--primary-red);
             transform: translateX(5px);
-        }
-
-        .app-info h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            background: #FAFAFC;
         }
 
         .app-status {
             padding: 6px 16px;
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
         }
 
@@ -134,33 +147,77 @@
 
         .task-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
         }
 
         .task-card {
-            padding: 20px;
-            border-radius: 16px;
+            padding: 25px;
+            border-radius: 20px;
             background: #FAFAFC;
-            border: 1px solid #EAEAEA;
+            border: 1px solid #F0F0F0;
             text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .task-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
         }
 
         .task-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--white);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 15px;
             box-shadow: var(--shadow-soft);
+            font-size: 1.2rem;
+        }
+
+        /* Settings Form */
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--medium-grey);
+        }
+
+        .input-group input {
+            padding: 12px 18px;
+            border: 2px solid #F0F0F0;
+            border-radius: 12px;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-red);
         }
 
         @media (max-width: 992px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
+            }
+            .dashboard-sidebar {
+                position: static;
             }
         }
     </style>
@@ -199,7 +256,7 @@
         <div class="dashboard-container">
             <div class="fade-in-up">
                 <h1>Welcome back, <span id="dash-user-name" class="text-red">User</span>!</h1>
-                <p>Track your applications and learning progress.</p>
+                <p>Manage your professional journey with Codmint Technologies.</p>
             </div>
 
             <div class="dashboard-grid">
@@ -211,44 +268,96 @@
                         <p id="sidebar-user-email" style="font-size: 0.85rem; color: #888;">user@example.com</p>
                     </div>
                     <ul class="sidebar-nav">
-                        <li><a href="#" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a></li>
-                        <li><a href="internships.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> My Applications</a></li>
-                        <li><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Certificates</a></li>
-                        <li><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings</a></li>
+                        <li><a onclick="switchView('overview')" class="active" id="nav-overview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a></li>
+                        <li><a onclick="switchView('applications')" id="nav-applications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> My Applications</a></li>
+                        <li><a onclick="switchView('certificates')" id="nav-certificates"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Certificates</a></li>
+                        <li><a onclick="switchView('settings')" id="nav-settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings</a></li>
                     </ul>
                 </aside>
 
-                <!-- Main Content -->
+                <!-- Main Content Views -->
                 <div class="dashboard-main">
-                    <!-- Applications Card -->
-                    <div class="dashboard-card scale-in">
-                        <h2><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> My Applied Internships</h2>
-                        <div class="application-list" id="applied-internships-list">
-                            <!-- Placeholder if no applications -->
-                            <div style="text-align: center; padding: 30px; color: #888;">
-                                <p>You haven't applied for any internships yet.</p>
-                                <a href="internships.html" class="text-red" style="font-weight: 600;">Explore Internships</a>
+                    
+                    <!-- 1. Overview View -->
+                    <div id="view-overview" class="dashboard-view active">
+                        <div class="dashboard-card scale-in">
+                            <h2>📊 Internship Progress</h2>
+                            <div style="background: #FAFAFC; padding: 25px; border-radius: 20px; border: 1px solid #F0F0F0;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span style="font-weight: 600;">Overall Completion</span>
+                                    <span id="progress-percent" style="color: var(--primary-red); font-weight: 700;">15%</span>
+                                </div>
+                                <div style="width: 100%; height: 10px; background: #EAEAEA; border-radius: 10px; overflow: hidden;">
+                                    <div id="progress-bar" style="width: 15%; height: 100%; background: var(--primary-red); transition: width 1s ease-in-out;"></div>
+                                </div>
+                                <p style="font-size: 0.85rem; color: #888; margin-top: 15px;">You have completed 2 out of 8 introductory tasks. Keep going!</p>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card scale-in" style="animation-delay: 0.1s;">
+                            <h2>📝 Pending Tasks</h2>
+                            <div class="task-grid" id="pending-tasks-list">
+                                <!-- Tasks will be loaded here -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Completed Tasks Card -->
-                    <div class="dashboard-card scale-in" style="animation-delay: 0.1s;">
-                        <h2><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> Completed Tasks</h2>
-                        <div class="task-grid" id="completed-tasks-list">
-                            <div class="task-card">
-                                <div class="task-icon">✅</div>
-                                <h4>Profile Setup</h4>
-                                <p style="font-size: 0.8rem; color: #888;">Account registration</p>
-                            </div>
-                            <!-- Mock tasks -->
-                            <div class="task-card">
-                                <div class="task-icon">📧</div>
-                                <h4>Email Verified</h4>
-                                <p style="font-size: 0.8rem; color: #888;">Security check</p>
+                    <!-- 2. Applications View -->
+                    <div id="view-applications" class="dashboard-view">
+                        <div class="dashboard-card">
+                            <h2>📂 My Applied Internships</h2>
+                            <div class="application-list" id="applied-internships-list">
+                                <!-- Applications will be loaded here -->
                             </div>
                         </div>
                     </div>
+
+                    <!-- 3. Certificates View -->
+                    <div id="view-certificates" class="dashboard-view">
+                        <div class="dashboard-card">
+                            <h2>🎓 My Certificates</h2>
+                            <div style="text-align: center; padding: 60px 20px; color: #888;">
+                                <div style="font-size: 3rem; margin-bottom: 20px;">📜</div>
+                                <h3>No certificates yet</h3>
+                                <p>Complete your internship tasks to earn your verified certificate.</p>
+                                <button onclick="switchView('overview')" class="cta-btn" style="margin-top: 20px; padding: 10px 25px;">View Tasks</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Settings View -->
+                    <div id="view-settings" class="dashboard-view">
+                        <div class="dashboard-card">
+                            <h2>⚙️ Account Settings</h2>
+                            <p style="margin-bottom: 30px; color: #666;">Update your profile information and manage your account.</p>
+                            
+                            <form id="profile-edit-form" class="settings-form">
+                                <div class="input-group">
+                                    <label for="edit-name">Full Name</label>
+                                    <input type="text" id="edit-name" placeholder="Your Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="edit-email">Email Address</label>
+                                    <input type="email" id="edit-email" placeholder="email@example.com" readonly style="background: #F9F9F9; color: #888; cursor: not-allowed;">
+                                    <small style="color: #999;">Email cannot be changed.</small>
+                                </div>
+                                <div class="input-group">
+                                    <label for="edit-password">New Password (Leave blank to keep current)</label>
+                                    <input type="password" id="edit-password" placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="cta-btn" style="width: fit-content; margin-top: 10px; padding: 12px 30px;">Save Changes</button>
+                            </form>
+
+                            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #EEE;">
+                            
+                            <div style="background: #FFF5F5; border: 1px solid #FFDADA; padding: 25px; border-radius: 16px;">
+                                <h4 style="color: #D32F2F; margin-bottom: 10px;">Danger Zone</h4>
+                                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Once you delete your account, there is no going back. Please be certain.</p>
+                                <button class="nav-btn" style="border-color: #D32F2F; color: #D32F2F; padding: 8px 20px;">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -308,34 +417,45 @@
 
     <script src="js/main.js"></script>
     <script>
-        // Dashboard Specific Logic
-        document.addEventListener('DOMContentLoaded', () => {
+        // Dashboard Tab Switching Logic
+        function switchView(viewId) {
+            // Update Sidebar Active State
+            document.querySelectorAll('.sidebar-nav a').forEach(el => el.classList.remove('active'));
+            document.getElementById('nav-' + viewId).classList.add('active');
+
+            // Toggle Content Views
+            document.querySelectorAll('.dashboard-view').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + viewId).classList.add('active');
+            
+            // Re-load data for the specific view if needed
+            loadDashboardData();
+        }
+
+        function loadDashboardData() {
             const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
-            if (!currentUserStr) {
-                window.location.href = 'index.html'; // Redirect to home if not logged in
-                return;
-            }
+            if (!currentUserStr) return;
 
             const user = JSON.parse(currentUserStr);
-            const dashUserName = document.getElementById('dash-user-name');
-            const sidebarUserName = document.getElementById('sidebar-user-name');
-            const sidebarUserEmail = document.getElementById('sidebar-user-email');
-            const userAvatarInitial = document.getElementById('user-avatar-initial');
+            
+            // Update Profile UI
+            document.getElementById('dash-user-name').textContent = user.name;
+            document.getElementById('sidebar-user-name').textContent = user.name;
+            document.getElementById('sidebar-user-email').textContent = user.email;
+            document.getElementById('user-avatar-initial').textContent = user.name.charAt(0).toUpperCase();
+            
+            // Update Settings Form
+            document.getElementById('edit-name').value = user.name;
+            document.getElementById('edit-email').value = user.email;
 
-            if (dashUserName) dashUserName.textContent = user.name;
-            if (sidebarUserName) sidebarUserName.textContent = user.name;
-            if (sidebarUserEmail) sidebarUserEmail.textContent = user.email;
-            if (userAvatarInitial) userAvatarInitial.textContent = user.name.charAt(0).toUpperCase();
-
-            // Load completed and pending tasks
-            const taskList = document.getElementById('completed-tasks-list');
+            // Load Tasks
+            const taskList = document.getElementById('pending-tasks-list');
             const allTasks = JSON.parse(localStorage.getItem('userTasks') || '{}');
             const userTasks = allTasks[user.email] || [
                 { title: 'Profile Setup', desc: 'Account registration', completed: true },
                 { title: 'Email Verified', desc: 'Security check', completed: true }
             ];
 
-            if (userTasks.length > 0) {
+            if (taskList) {
                 taskList.innerHTML = '';
                 userTasks.forEach(task => {
                     const card = document.createElement('div');
@@ -350,24 +470,74 @@
                 });
             }
 
-            // Load applied internships
+            // Update Progress Bar
+            const completedCount = userTasks.filter(t => t.completed).length;
+            const totalCount = userTasks.length;
+            const percent = Math.round((completedCount / totalCount) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercent = document.getElementById('progress-percent');
+            if (progressBar) progressBar.style.width = percent + '%';
+            if (progressPercent) progressPercent.textContent = percent + '%';
+
+            // Load Applications
             const appliedList = document.getElementById('applied-internships-list');
             const allApplications = JSON.parse(localStorage.getItem('allApplications') || '{}');
             const userApplications = allApplications[user.email] || [];
 
-            if (userApplications.length > 0) {
-                appliedList.innerHTML = '';
-                userApplications.forEach(app => {
-                    const item = document.createElement('div');
-                    item.className = 'application-item fade-in-up';
-                    item.innerHTML = `
-                        <div class="app-info">
-                            <h4>${app.domain} Internship</h4>
-                            <p style="font-size: 0.85rem; color: #888;">Applied on: ${app.date}</p>
-                        </div>
-                        <span class="app-status ${app.statusClass}">${app.status}</span>
-                    `;
-                    appliedList.appendChild(item);
+            if (appliedList) {
+                if (userApplications.length > 0) {
+                    appliedList.innerHTML = '';
+                    userApplications.forEach(app => {
+                        const item = document.createElement('div');
+                        item.className = 'application-item';
+                        item.innerHTML = `
+                            <div class="app-info">
+                                <h4>${app.domain} Internship</h4>
+                                <p style="font-size: 0.85rem; color: #888;">Applied on: ${app.date}</p>
+                            </div>
+                            <span class="app-status ${app.statusClass}">${app.status}</span>
+                        `;
+                        appliedList.appendChild(item);
+                    });
+                } else {
+                    appliedList.innerHTML = '<div style="text-align: center; padding: 40px; color: #888;"><p>No applications found.</p><a href="internships.html" class="text-red">Browse Internships</a></div>';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboardData();
+
+            // Handle Profile Edit
+            const profileForm = document.getElementById('profile-edit-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newName = document.getElementById('edit-name').value;
+                    const newPwd = document.getElementById('edit-password').value;
+                    
+                    const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+                    const isLocal = !!localStorage.getItem('currentUser');
+                    const user = JSON.parse(currentUserStr);
+
+                    // Update in registeredUsers
+                    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                    const userIdx = registeredUsers.findIndex(u => u.email === user.email);
+                    
+                    if (userIdx !== -1) {
+                        registeredUsers[userIdx].name = newName;
+                        if (newPwd) registeredUsers[userIdx].password = newPwd;
+                        localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+                        
+                        // Update Current User session
+                        user.name = newName;
+                        const updatedUserStr = JSON.stringify(user);
+                        if (isLocal) localStorage.setItem('currentUser', updatedUserStr);
+                        else sessionStorage.setItem('currentUser', updatedUserStr);
+                        
+                        alert('Profile updated successfully!');
+                        loadDashboardData(); // Refresh UI
+                    }
                 });
             }
         });
