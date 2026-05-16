@@ -39,11 +39,11 @@ To get a local copy up and running, follow these simple steps:
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/your-username/codmint-internship-platform.git
+   git clone https://github.com/sari67/codemint-technology-project.git
    ```
 2. **Navigate to the project directory**
    ```sh
-   cd codmint-internship-platform
+   cd codemint-technology-project
    ```
 3. **Launch the project**
    Simply open the `index.html` file in your preferred web browser.
