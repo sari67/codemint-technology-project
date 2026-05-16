@@ -89,22 +89,36 @@ nav.main-nav a:hover {
     color: var(--primary-red);
 }
 
-.nav-btn {
-    background-color: transparent;
-    border: 2px solid var(--dark-grey);
-    padding: 8px 24px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 500;
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.verify-btn-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid #EAEAEA;
+    background: var(--white);
     color: var(--dark-grey);
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
     transition: var(--transition-smooth);
 }
 
-.nav-btn:hover {
-    background-color: var(--dark-grey);
-    color: var(--white);
+.verify-btn-header:hover {
+    background: var(--light-grey);
+    border-color: #DDD;
+}
+
+.apply-now-btn-header {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    border-radius: 12px;
 }
 
 .mobile-menu-btn {
@@ -1139,4 +1153,183 @@ footer {
 .back-to-top:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(255, 44, 44, 0.4);
+}
+
+/* --- 11. Footer (Premium Dark Theme) --- */
+footer {
+    background-color: #111111;
+    color: var(--white);
+    padding: 80px 5% 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.footer-brand h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.footer-logo-square {
+    background-color: var(--primary-red);
+    color: var(--white);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.footer-brand p {
+    color: #999;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-column h4 {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    padding-left: 5px;
+}
+
+.footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.contact-item svg {
+    color: var(--primary-red);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 25px;
+}
+
+.footer-bottom-links a {
+    color: #666;
+    text-decoration: none;
+}
+
+.footer-bottom-links a:hover {
+    color: #999;
+}
+
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+.send-message-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 40px;
+    font-size: 1.05rem;
+    width: fit-content !important;
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
+.send-message-btn svg {
+    transition: var(--transition-smooth);
+}
+
+.send-message-btn:hover svg {
+    transform: translate(5px, -5px);
 }

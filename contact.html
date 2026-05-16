@@ -26,15 +26,12 @@
             <a href="careers.html">Careers</a>
             <a href="contact.html">Contact</a>
         </nav>
-        <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
-            <a href="index.html#verify" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                <span class="btn-text">Verify Certificate</span>
+        <div class="header-actions">
+            <a href="index.html#verify" class="nav-btn verify-btn-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Verify Certificate</span>
             </a>
-            <button id="login-btn" class="nav-btn" style="padding: 8px 20px; font-size: 0.95rem;">Log In</button>
-            <button id="register-btn" class="cta-btn" style="padding: 8px 20px; font-size: 0.95rem;">Sign Up</button>
-            <span id="user-display" style="display: none; font-weight: 600; color: var(--primary-red);"></span>
-            <button id="logout-btn" class="nav-btn" style="display: none;">Log Out</button>
+            <a href="internships.html" class="cta-btn apply-now-btn-header">Apply Now</a>
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
@@ -99,49 +96,61 @@
                         <label>Message</label>
                         <textarea rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="cta-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        Send message
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <button type="submit" class="cta-btn send-message-btn">
+                        <span>Send message</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                     </button>
                 </form>
             </div>
         </div>
     </div>
 
-<footer id="contact" style="background-color: var(--white); border-top: 1px solid rgba(0,0,0,0.05); padding: 60px 5% 20px;">
-        <div
-            style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; text-align: left;">
-            <div style="flex: 1; min-width: 250px;">
-                <h3 style="color: var(--dark-grey); font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">
-                    Codmint<span style="color: var(--primary-red);">.</span></h3>
-                <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">Where developers begin. Internships,
-                    mentorship, and real-world projects for the next generation of builders.</p>
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>
+                    <div class="footer-logo-square">C</div>
+                    Codmint Technologies
+                </h3>
+                <p>Where developers begin. Internships, mentorship, and real-world projects for the next generation of builders.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                    <a href="#" class="social-icon" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                </div>
             </div>
-            <div style="flex: 1; min-width: 150px;">
-                <h4 style="color: var(--dark-grey); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Quick
-                    Links</h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 10px;"><a href="internships.html"
-                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Internships</a>
-                    </li>
-                    <li style="margin-bottom: 10px;"><a href="services.html"
-                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Services</a>
-                    </li>
-                    <li style="margin-bottom: 10px;"><a href="index.html#verify"
-                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Verify
-                            Certificate</a></li>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="index.html#verify">Verify Certificate</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
-            <div style="flex: 1; min-width: 200px;">
-                <h4 style="color: var(--dark-grey); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Contact
-                </h4>
-                <p style="color: #666; font-size: 0.95rem; margin-bottom: 10px;">📧codmint.hr@gmail.com</p>
-                <p style="color: #666; font-size: 0.95rem;">🌍 Remote — India & Worldwide</p>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <div class="footer-contact-info">
+                    <div class="contact-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <span>hello@codmint.tech</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span>Remote — India & Worldwide</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div
-            style="text-align: center; color: #888; font-size: 0.9rem; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+        <div class="footer-bottom">
             <p>&copy; 2026 Codmint Technologies. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
         </div>
     </footer>
 
