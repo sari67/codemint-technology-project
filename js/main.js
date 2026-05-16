@@ -135,6 +135,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (userDisplay) {
                 userDisplay.style.display = 'inline-block';
                 userDisplay.textContent = `Hello, ${user.name}`;
+                // Add Dashboard Link if it doesn't exist
+                if (!document.getElementById('nav-dash-link')) {
+                    const dashLink = document.createElement('a');
+                    dashLink.id = 'nav-dash-link';
+                    dashLink.href = 'dashboard.html';
+                    dashLink.textContent = 'Dashboard';
+                    dashLink.style.color = 'var(--primary-red)';
+                    dashLink.style.fontWeight = '600';
+                    document.querySelector('.main-nav').appendChild(dashLink);
+                }
             }
             if (logoutBtn) logoutBtn.style.display = 'inline-block';
             
@@ -148,6 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (registerBtn) registerBtn.style.display = 'inline-block';
             if (userDisplay) userDisplay.style.display = 'none';
             if (logoutBtn) logoutBtn.style.display = 'none';
+            
+            // Remove Dashboard Link if it exists
+            const dashLink = document.getElementById('nav-dash-link');
+            if (dashLink) dashLink.remove();
             
             // Clear newsletter if it was auto-filled
             if (newsletterInput) {
@@ -270,9 +284,38 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (applyPhoneError) applyPhoneError.style.display = 'none';
 
-            alert('Your internship application has been submitted successfully! We will review your application and get back to you soon. ALL THE BEST!');
+            // Save application to localStorage for Dashboard
+            const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (currentUserStr) {
+                const user = JSON.parse(currentUserStr);
+                const domain = document.getElementById('apply-domain').value;
+                const allApplications = JSON.parse(localStorage.getItem('allApplications') || '{}');
+                
+                if (!allApplications[user.email]) {
+                    allApplications[user.email] = [];
+                }
+                
+                const newApp = {
+                    domain: domain,
+                    date: new Date().toLocaleDateString(),
+                    status: 'Under Review',
+                    statusClass: 'status-review'
+                };
+                
+                allApplications[user.email].push(newApp);
+                localStorage.setItem('allApplications', JSON.stringify(allApplications));
+            }
+
+            alert('Your internship application has been submitted successfully! You can track its status in your Dashboard. ALL THE BEST!');
             closeModal(applyModal);
             applyForm.reset();
+            
+            // Redirect to dashboard after short delay if logged in
+            if (currentUserStr) {
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            }
         });
     }
 
