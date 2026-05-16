@@ -35,6 +35,13 @@ body {
     color: var(--dark-grey);
     line-height: 1.6;
     overflow-x: hidden;
+    opacity: 0;
+    animation: pageReveal 1s ease-out forwards;
+}
+
+@keyframes pageReveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* --- 1. Glassmorphism Sticky Navigation --- */
@@ -57,8 +64,9 @@ header {
 
 /* Add shadow when scrolled */
 header.scrolled {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    padding: 15px 5%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    padding: 12px 5%;
 }
 
 .logo {
@@ -107,6 +115,8 @@ nav.main-nav a:hover {
 .nav-btn:hover {
     background-color: var(--dark-grey);
     color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .mobile-menu-btn {
@@ -255,6 +265,16 @@ nav.main-nav a:hover {
     display: flex;
     align-items: center;
     gap: 8px;
+    background: var(--white);
+    padding: 10px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: var(--transition-smooth);
+}
+
+.hero-features span:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 /* Hero Stats Card */
@@ -361,12 +381,12 @@ nav.main-nav a:hover {
     background: var(--white);
     padding: 40px;
     border-radius: 24px;
-    /* Large radius */
     box-shadow: var(--shadow-soft);
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
     z-index: 1;
+    border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .card::before {
