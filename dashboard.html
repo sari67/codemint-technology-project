@@ -215,10 +215,51 @@
         @media (max-width: 992px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             .dashboard-sidebar {
-                position: static;
+                position: sticky;
+                top: 80px;
+                z-index: 100;
+                padding: 15px;
+                margin-bottom: 0;
             }
+            .user-profile-header {
+                display: none; /* Hide profile in sidebar on mobile to save space */
+            }
+            .sidebar-nav {
+                display: flex;
+                overflow-x: auto;
+                gap: 10px;
+                padding-bottom: 5px;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .sidebar-nav::-webkit-scrollbar {
+                display: none;
+            }
+            .sidebar-nav li {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            .sidebar-nav a {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            .dashboard-container {
+                padding: 20px 4%;
+            }
+            .dashboard-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .dashboard-card h2 { font-size: 1.2rem; }
+            .task-grid { grid-template-columns: 1fr; }
+            .application-item { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
