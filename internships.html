@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codmint Technologies | Where Developers Begin</title>
+    <!-- Modern Typography: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Glassmorphism Sticky Navigation -->
+    <header id="main-header">
+        <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px;">
+            <div style="background-color: var(--primary-red); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">C</div>
+            Codmint
+        </a>
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="internships.html">Internships</a>
+            <a href="services.html">Services</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+            <a href="index.html#verify" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span class="btn-text">Verify Certificate</span>
+            </a>
+            <button id="login-btn" class="nav-btn" style="padding: 8px 20px; font-size: 0.95rem;">Log In</button>
+            <button id="register-btn" class="cta-btn" style="padding: 8px 20px; font-size: 0.95rem;">Sign Up</button>
+            <span id="user-display" style="display: none; font-weight: 600; color: var(--primary-red);"></span>
+            <button id="logout-btn" class="nav-btn" style="display: none;">Log Out</button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    
+    <div style="padding-top: 60px; min-height: 70vh;">
+        <section id="domains" class="domains-section">
+        <div class="section-header fade-in-up">
+            <h2>Internship Domains</h2>
+            <p>Discover opportunities tailored for the next generation of tech leaders.</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Floating Cards with anti-gravity hover effect -->
+            <div class="card scroll-reveal">
+                <div class="card-icon">💻</div>
+                <h3>Frontend Development</h3>
+                <p>Master the art of building beautiful, responsive, and interactive user interfaces using modern web
+                    technologies.</p>
+                <button class="cta-btn apply-btn" data-domain="Frontend Development"
+                    style="margin-top: 20px; padding: 10px 20px; font-size: 0.9rem; width: 100%;">Apply Now</button>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">⚙️</div>
+                <h3>Backend Development</h3>
+                <p>Architect robust server-side logic, manage databases, and build scalable APIs that power modern
+                    applications.</p>
+                <button class="cta-btn apply-btn" data-domain="Backend Development"
+                    style="margin-top: 20px; padding: 10px 20px; font-size: 0.9rem; width: 100%;">Apply Now</button>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">🎨</div>
+                <h3>UI/UX Design</h3>
+                <p>Craft intuitive and engaging user experiences with a focus on modern design principles and user
+                    psychology.</p>
+                <button class="cta-btn apply-btn" data-domain="UI/UX Design"
+                    style="margin-top: 20px; padding: 10px 20px; font-size: 0.9rem; width: 100%;">Apply Now</button>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">📱</div>
+                <h3>Mobile App Development</h3>
+                <p>Build cross-platform applications that deliver seamless experiences across iOS and Android devices.
+                </p>
+                <button class="cta-btn apply-btn" data-domain="Mobile App Development"
+                    style="margin-top: 20px; padding: 10px 20px; font-size: 0.9rem; width: 100%;">Apply Now</button>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">📊</div>
+                <h3>Data Science</h3>
+                <p>Unlock insights from complex data sets using advanced analytics, machine learning, and visualization
+                    tools.</p>
+                <button class="cta-btn apply-btn" data-domain="Data Science"
+                    style="margin-top: 20px; padding: 10px 20px; font-size: 0.9rem; width: 100%;">Apply Now</button>
+            </div>
+
+            <div class="card scroll-reveal">
+                <div class="card-icon">🛡️</div>
+                <h3>Cyber Security</h3>
+                <p>Protect digital assets and secure networks against evolving threats in an increasingly connected
+                    world.</p>
+                <button class="cta-btn apply-btn" data-domain="Cyber Security"
+                    style="margin-top: 20px; padding: 10px 20px; font-size: 0.9rem; width: 100%;">Apply Now</button>
+            </div>
+        </div>
+    </section>
+    </div>
+<footer id="contact" style="background-color: var(--white); border-top: 1px solid rgba(0,0,0,0.05); padding: 60px 5% 20px;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; text-align: left;">
+            <div style="flex: 1; min-width: 250px;">
+                <h3 style="color: var(--dark-grey); font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">
+                    Codmint<span style="color: var(--primary-red);">.</span></h3>
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">Where developers begin. Internships,
+                    mentorship, and real-world projects for the next generation of builders.</p>
+            </div>
+            <div style="flex: 1; min-width: 150px;">
+                <h4 style="color: var(--dark-grey); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Quick
+                    Links</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;"><a href="internships.html"
+                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Internships</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><a href="services.html"
+                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Services</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><a href="index.html#verify"
+                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Verify
+                            Certificate</a></li>
+                </ul>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style="color: var(--dark-grey); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Contact
+                </h4>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 10px;">📧codmint.hr@gmail.com</p>
+                <p style="color: #666; font-size: 0.95rem;">🌍 Remote — India & Worldwide</p>
+            </div>
+        </div>
+        <div
+            style="text-align: center; color: #888; font-size: 0.9rem; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+            <p>&copy; 2026 Codmint Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Professional Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="login-close">&times;</span>
+            <h2>Welcome Back</h2>
+            <p>Log in to access your dashboard</p>
+            <form id="login-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="new-password">
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" id="remember-me"> Remember me</label>
+                    <a href="#" class="forgot-pwd">Forgot Password?</a>
+                </div>
+                <button type="submit" class="cta-btn login-submit">Log In</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="#" id="switch-to-register">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Professional Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="register-close">&times;</span>
+            <h2>Create Account</h2>
+            <p>Join Codmint Technologies today</p>
+            <form id="register-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" placeholder="John Doe" required minlength="3" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="••••••••" required minlength="6"
+                        autocomplete="new-password">
+                </div>
+                <div class="input-group">
+                    <label for="reg-confirm">Confirm Password</label>
+                    <input type="password" id="reg-confirm" placeholder="••••••••" required minlength="6"
+                        autocomplete="new-password">
+                </div>
+                <p id="reg-error" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;">Passwords
+                    do not match.</p>
+                <button type="submit" class="cta-btn login-submit">Create Account</button>
+            </form>
+            <p class="signup-link">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+        </div>
+    </div>
+
+    <!-- Professional Apply Modal -->
+    <div id="apply-modal" class="modal">
+        <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+            <span class="close-btn" id="apply-close">&times;</span>
+            <h2>Apply for Internship</h2>
+            <p>Take the first step towards your tech career.</p>
+            <form id="apply-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="apply-domain">Selected Domain</label>
+                    <input type="text" id="apply-domain" readonly
+                        style="background-color: #f5f5f5; color: #888; cursor: not-allowed;">
+                </div>
+                <div class="input-group">
+                    <label for="apply-name">Full Name</label>
+                    <input type="text" id="apply-name" placeholder="John Doe" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="apply-email">Email Address</label>
+                    <input type="email" id="apply-email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="apply-phone">Phone Number</label>
+                    <input type="tel" id="apply-phone" placeholder="9876543210" required autocomplete="off"
+                        maxlength="10" minlength="10" pattern="[0-9]{10}"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <p id="apply-phone-error" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;">
+                    Please enter a valid 10-digit phone number.</p>
+                <div class="input-group">
+                    <label for="apply-resume">Resume/CV Link (Google Drive, Dropbox, etc.)</label>
+                    <input type="url" id="apply-resume" placeholder="https://..." required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="apply-cover">Cover Letter (Optional)</label>
+                    <textarea id="apply-cover" rows="3" placeholder="Why are you a good fit for this role?"
+                        style="width: 100%; padding: 14px 20px; border: 2px solid #EAEAEA; border-radius: 12px; font-family: inherit; font-size: 1rem; resize: vertical; outline: none; transition: var(--transition-smooth);"></textarea>
+                </div>
+                <button type="submit" class="cta-btn login-submit" style="margin-top: 10px;">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codmint Technologies | Where Developers Begin</title>
+    <!-- Modern Typography: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Glassmorphism Sticky Navigation -->
+    <header id="main-header">
+        <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px;">
+            <div style="background-color: var(--primary-red); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">C</div>
+            Codmint
+        </a>
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="internships.html">Internships</a>
+            <a href="services.html">Services</a>
+            <a href="careers.html">Careers</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+            <a href="index.html#verify" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span class="btn-text">Verify Certificate</span>
+            </a>
+            <button id="login-btn" class="nav-btn" style="padding: 8px 20px; font-size: 0.95rem;">Log In</button>
+            <button id="register-btn" class="cta-btn" style="padding: 8px 20px; font-size: 0.95rem;">Sign Up</button>
+            <span id="user-display" style="display: none; font-weight: 600; color: var(--primary-red);"></span>
+            <button id="logout-btn" class="nav-btn" style="display: none;">Log Out</button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text fade-in-up">
+                <div class="hero-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    CODMINT TECHNOLOGIES
+                </div>
+                <h1>Where <span class="text-red">Developers</span><br>Begin.</h1>
+                <p>Real internships. Real mentors. Real projects. Build the skills, the portfolio, and the confidence to land your first tech role.</p>
+                <div class="hero-buttons">
+                    <a href="internships.html" class="secondary-btn">Explore Programs</a>
+                </div>
+                <div class="hero-features">
+                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Mentor-led</span>
+                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Project-based</span>
+                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Certificate on completion</span>
+                </div>
+            </div>
+            <div class="hero-stats fade-in-up" style="animation-delay: 0.2s;">
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <div class="stat-icon text-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </div>
+                        <h3>8+</h3>
+                        <p>Domains</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon text-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                        <h3>1,240+</h3>
+                        <p>Projects shipped</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon text-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                        </div>
+                        <h3>860+</h3>
+                        <p>Certificates issued</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon text-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                        <h3>49/50</h3>
+                        <p>Avg. rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Certificate Verification Section -->
+    <section id="verify" class="verify-section">
+        <div class="verify-content scroll-reveal">
+            <h2>Certificate Verification</h2>
+            <p>Validate your hard work and achievements. Enter your unique certificate ID below.</p>
+            <form class="verify-form" onsubmit="event.preventDefault();">
+                <input type="text" placeholder="Enter Certificate ID (e.g., C-123456)" required>
+                <button type="submit" class="cta-btn">Verify Now</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container scroll-reveal">
+            <div class="section-header">
+                <h2>What Our <span class="text-red">Interns</span> Say</h2>
+                <p>Join thousands of students who have kickstarted their careers with Codmint.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary-red)" style="opacity: 0.1;"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14C19.017 11.7909 17.2261 10 15.017 10H14.017V7H15.017C18.883 7 22.017 10.134 22.017 14V21H14.017ZM2.017 21L2.017 18C2.017 16.8954 2.91243 16 4.017 16H7.017V14C7.017 11.7909 5.2261 10 3.017 10H2.017V7H3.017C6.88297 7 10.017 10.134 10.017 14V21H2.017Z"></path></svg>
+                    </div>
+                    <p>"The Web Development internship was intensive and rewarding. The mentors were always there to guide me through complex problems."</p>
+                    <div class="testimonial-user">
+                        <div class="user-info">
+                            <h4>Rahul Sharma</h4>
+                            <p>Web Dev Intern</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary-red)" style="opacity: 0.1;"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14C19.017 11.7909 17.2261 10 15.017 10H14.017V7H15.017C18.883 7 22.017 10.134 22.017 14V21H14.017ZM2.017 21L2.017 18C2.017 16.8954 2.91243 16 4.017 16H7.017V14C7.017 11.7909 5.2261 10 3.017 10H2.017V7H3.017C6.88297 7 10.017 10.134 10.017 14V21H2.017Z"></path></svg>
+                    </div>
+                    <p>"I gained hands-on experience with Python and Data Science. The real-world projects helped me understand how industry works."</p>
+                    <div class="testimonial-user">
+                        <div class="user-info">
+                            <h4>Ananya Patel</h4>
+                            <p>Data Science Intern</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--primary-red)" style="opacity: 0.1;"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14C19.017 11.7909 17.2261 10 15.017 10H14.017V7H15.017C18.883 7 22.017 10.134 22.017 14V21H14.017ZM2.017 21L2.017 18C2.017 16.8954 2.91243 16 4.017 16H7.017V14C7.017 11.7909 5.2261 10 3.017 10H2.017V7H3.017C6.88297 7 10.017 10.134 10.017 14V21H2.017Z"></path></svg>
+                    </div>
+                    <p>"Codmint provided the perfect platform to transition from college to a professional environment. Highly recommended!"</p>
+                    <div class="testimonial-user">
+                        <div class="user-info">
+                            <h4>Karthik Raja</h4>
+                            <p>UI/UX Design Intern</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container scroll-reveal">
+            <div class="section-header">
+                <h2>Frequently Asked <span class="text-red">Questions</span></h2>
+                <p>Everything you need to know about our programs.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Who can apply for these internships?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our internships are open to college students, fresh graduates, and anyone looking to switch their career to technology.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is there any registration fee?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Some of our specialized training programs may have a nominal fee, while others are merit-based and free. Check the specific program details for more info.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Will I get a certificate upon completion?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all successful interns receive a verified certificate that can be showcased on LinkedIn and added to your resume.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-content scroll-reveal">
+            <h2>Stay <span class="text-red">Updated</span></h2>
+            <p>Subscribe to our newsletter for the latest internship openings and tech insights.</p>
+            <form class="newsletter-form" id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="cta-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="contact" style="background-color: var(--white); border-top: 1px solid rgba(0,0,0,0.05); padding: 60px 5% 20px;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; text-align: left;">
+            <div style="flex: 1; min-width: 250px;">
+                <h3 style="color: var(--dark-grey); font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">
+                    Codmint<span style="color: var(--primary-red);">.</span></h3>
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">Where developers begin. Internships,
+                    mentorship, and real-world projects for the next generation of builders.</p>
+            </div>
+            <div style="flex: 1; min-width: 150px;">
+                <h4 style="color: var(--dark-grey); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Quick
+                    Links</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;"><a href="internships.html"
+                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Internships</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><a href="services.html"
+                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Services</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><a href="index.html#verify"
+                            style="color: #666; text-decoration: none; transition: var(--transition-smooth);">Verify
+                            Certificate</a></li>
+                </ul>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style="color: var(--dark-grey); font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Contact
+                </h4>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 10px;">📧codmint.hr@gmail.com</p>
+                <p style="color: #666; font-size: 0.95rem;">🌍 Remote — India & Worldwide</p>
+            </div>
+        </div>
+        <div
+            style="text-align: center; color: #888; font-size: 0.9rem; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+            <p>&copy; 2026 Codmint Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Professional Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="login-close">&times;</span>
+            <h2>Welcome Back</h2>
+            <p>Log in to access your dashboard</p>
+            <form id="login-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="new-password">
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" id="remember-me"> Remember me</label>
+                    <a href="#" class="forgot-pwd">Forgot Password?</a>
+                </div>
+                <p id="login-error" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;">Invalid email or password.</p>
+                <button type="submit" class="cta-btn login-submit">Log In</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="#" id="switch-to-register">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Professional Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="register-close">&times;</span>
+            <h2>Create Account</h2>
+            <p>Join Codmint Technologies today</p>
+            <form id="register-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" placeholder="John Doe" required minlength="3" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="••••••••" required minlength="6"
+                        autocomplete="new-password">
+                </div>
+                <div class="input-group">
+                    <label for="reg-confirm">Confirm Password</label>
+                    <input type="password" id="reg-confirm" placeholder="••••••••" required minlength="6"
+                        autocomplete="new-password">
+                </div>
+                <p id="reg-error" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;">Passwords
+                    do not match.</p>
+                <button type="submit" class="cta-btn login-submit">Create Account</button>
+            </form>
+            <p class="signup-link">Already have an account? <a href="#" id="switch-to-login">Log In</a></p>
+        </div>
+    </div>
+
+    <!-- Professional Apply Modal -->
+    <div id="apply-modal" class="modal">
+        <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+            <span class="close-btn" id="apply-close">&times;</span>
+            <h2>Apply for Internship</h2>
+            <p>Take the first step towards your tech career.</p>
+            <form id="apply-form" class="login-form" autocomplete="off">
+                <div class="input-group">
+                    <label for="apply-domain">Selected Domain</label>
+                    <input type="text" id="apply-domain" readonly
+                        style="background-color: #f5f5f5; color: #888; cursor: not-allowed;">
+                </div>
+                <div class="input-group">
+                    <label for="apply-name">Full Name</label>
+                    <input type="text" id="apply-name" placeholder="John Doe" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="apply-email">Email Address</label>
+                    <input type="email" id="apply-email" placeholder="name@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="apply-phone">Phone Number</label>
+                    <input type="tel" id="apply-phone" placeholder="9876543210" required autocomplete="off"
+                        maxlength="10" minlength="10" pattern="[0-9]{10}"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <p id="apply-phone-error" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;">
+                    Please enter a valid 10-digit phone number.</p>
+                <div class="input-group">
+                    <label for="apply-resume">Resume/CV Link (Google Drive, Dropbox, etc.)</label>
+                    <input type="url" id="apply-resume" placeholder="https://..." required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="apply-cover">Cover Letter (Optional)</label>
+                    <textarea id="apply-cover" rows="3" placeholder="Why are you a good fit for this role?"
+                        style="width: 100%; padding: 14px 20px; border: 2px solid #EAEAEA; border-radius: 12px; font-family: inherit; font-size: 1rem; resize: vertical; outline: none; transition: var(--transition-smooth);"></textarea>
+                </div>
+                <button type="submit" class="cta-btn login-submit" style="margin-top: 10px;">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
