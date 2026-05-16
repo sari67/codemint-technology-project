@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateNavState() {
         const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
         const newsletterInput = document.querySelector('#newsletter-form input');
-        const dashboardLink = document.getElementById('dashboard-link');
         
         if (currentUserStr) {
             const user = JSON.parse(currentUserStr);
@@ -137,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 userDisplay.style.display = 'inline-block';
                 userDisplay.textContent = `Hello, ${user.name}`;
             }
-            if (dashboardLink) dashboardLink.style.display = 'inline-block';
             if (logoutBtn) logoutBtn.style.display = 'inline-block';
             
             // Auto-fill newsletter if empty
@@ -149,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginBtn) loginBtn.style.display = 'inline-block';
             if (registerBtn) registerBtn.style.display = 'inline-block';
             if (userDisplay) userDisplay.style.display = 'none';
-            if (dashboardLink) dashboardLink.style.display = 'none';
             if (logoutBtn) logoutBtn.style.display = 'none';
             
             // Clear newsletter if it was auto-filled
@@ -200,11 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeModal(loginModal);
                     loginForm.reset();
                     updateNavState(); // Update UI
-                    
-                    // Redirect to dashboard
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 500);
                 } else {
                     if (loginError) {
                         loginError.style.display = 'block';
