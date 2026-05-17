@@ -630,27 +630,31 @@ const initPlatform = () => {
                                     <p style="font-weight:700;font-size:1rem;color:#22c55e;margin:0;">Certificate Verified</p>
                                     <p style="font-size:0.8rem;color:#888;margin:0;font-family:monospace;">${certId}</p>
                                 </div>
-                            </div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                            </div>                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
                                 <div style="background:rgba(255,255,255,0.7);border:1px solid #EAEAEA;border-radius:12px;padding:14px 16px;">
-                                    <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Intern Name</p>
+                                    <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Name</p>
                                     <p style="font-weight:700;color:#1A1A1C;margin:0;font-size:0.95rem;">${found.name}</p>
+                                </div>
+                                <div style="background:rgba(255,255,255,0.7);border:1px solid #EAEAEA;border-radius:12px;padding:14px 16px;">
+                                    <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Certificate Id</p>
+                                    <p style="font-weight:700;color:#1A1A1C;margin:0;font-size:0.95rem;">${certId}</p>
                                 </div>
                                 <div style="background:rgba(255,255,255,0.7);border:1px solid #EAEAEA;border-radius:12px;padding:14px 16px;">
                                     <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Domain</p>
                                     <p style="font-weight:700;color:#1A1A1C;margin:0;font-size:0.95rem;">${found.domain}</p>
                                 </div>
                                 <div style="background:rgba(255,255,255,0.7);border:1px solid #EAEAEA;border-radius:12px;padding:14px 16px;">
-                                    <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Date Applied</p>
-                                    <p style="font-weight:700;color:#1A1A1C;margin:0;font-size:0.95rem;">${found.date || 'N/A'}</p>
+                                    <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Start and End date</p>
+                                    <p style="font-weight:700;color:#1A1A1C;margin:0;font-size:0.95rem;">${found.date || '05/17/2026'} to ${new Date(new Date(found.date || '2026-05-17').getTime() + 8*7*24*60*60*1000).toLocaleDateString()}</p>
                                 </div>
-                                <div style="background:rgba(255,255,255,0.7);border:1px solid #EAEAEA;border-radius:12px;padding:14px 16px;">
+                                <div style="background:rgba(255,255,255,0.7);border:1px solid #EAEAEA;border-radius:12px;padding:14px 16px;grid-column: span 2;">
                                     <p style="font-size:0.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Status</p>
-                                    <p style="font-weight:700;color:${statusColor};margin:0;font-size:0.95rem;">${found.status || 'Selected'}</p>
+                                    <p style="font-weight:700;color:${statusColor};margin:0;font-size:0.95rem;">${found.status || 'completed'}</p>
                                 </div>
                             </div>
-                            <div style="margin-top:16px;padding:12px 16px;background:rgba(34,197,94,0.06);border-radius:10px;font-size:0.82rem;color:#555;">
-                                <strong style="color:#22c55e;">✓ Authentic</strong> — This certificate was issued by Codmint Technologies and is on record in our system.
+                            <div style="margin-top:16px;padding:12px 16px;background:rgba(34,197,94,0.06);border-radius:10px;font-size:0.82rem;color:#555;display:flex;justify-content:space-between;align-items:center;">
+                                <span><strong style="color:#22c55e;">✓ Verified</strong> — Authentic Record</span>
+                                <span style="font-size:0.75rem;font-weight:600;color:#888;">Authorized by Codmint Technologies</span>
                             </div>
                         </div>`;
                 } else if (certId.startsWith('CM-2026-')) {

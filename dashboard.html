@@ -413,7 +413,8 @@
                     <ul class="sidebar-nav">
                         <li><a onclick="switchView('overview')" class="active" id="nav-overview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a></li>
                         <li><a onclick="switchView('applications')" id="nav-applications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> My Applications</a></li>
-                        <li><a onclick="switchView('certificates')" id="nav-certificates"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Certificates</a></li>
+                        <li><a onclick="switchView('tasks')" id="nav-tasks"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Tasks</a></li>
+                        <li><a onclick="nav-certificates" onclick="switchView('certificates')" id="nav-certificates"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Certificates</a></li>
                         <li><a onclick="switchView('settings')" id="nav-settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings</a></li>
                     </ul>
                 </aside>
@@ -525,6 +526,18 @@
                                 <button id="accept-offer-btn" onclick="acceptOfferLetter()" class="nav-btn" style="border-color: #10B981; color: #10B981; padding: 10px 25px; font-weight: 600; background: transparent;">
                                     Accept Internship Offer
                                 </button>
+                            </div>
+                        </div>
+                     </div>
+
+                    <!-- 2.5 Tasks View -->
+                    <div id="view-tasks" class="dashboard-view">
+                        <div class="dashboard-card">
+                            <h2>📝 Assigned Tasks</h2>
+                            <p style="color: #666; margin-bottom: 25px;">Complete your assigned tasks and submit your solutions for verification.</p>
+                            
+                            <div id="active-tasks-container" style="display: flex; flex-direction: column; gap: 24px;">
+                                <!-- Dynamic task detail and submission cards go here -->
                             </div>
                         </div>
                     </div>
@@ -793,8 +806,74 @@
                 });
             }
 
+            // Load Active Tasks in Dedicated Tasks View Tab
+            const activeTasksContainer = document.getElementById('active-tasks-container');
+            if (activeTasksContainer) {
+                activeTasksContainer.innerHTML = '';
+                // Filter user tasks to show user's active domain tasks
+                // Exclude system tasks like Profile Setup and Email Verified
+                const domainTasks = userTasks.filter(t => t.title !== 'Profile Setup' && t.title !== 'Email Verified');
+                
+                if (domainTasks.length > 0) {
+                    domainTasks.forEach((task, idx) => {
+                        const statusText = task.completed === true ? 'Completed' : (task.completed === 'Under Review' ? 'Under Review' : 'Pending');
+                        const statusClass = task.completed === true ? 'status-completed' : (task.completed === 'Under Review' ? 'status-review' : 'status-pending');
+                        
+                        const card = document.createElement('div');
+                        card.style.background = '#FFFFFF';
+                        card.style.border = '1px solid #EAEAEA';
+                        card.style.borderRadius = '20px';
+                        card.style.padding = '30px';
+                        card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.01)';
+                        card.style.display = 'flex';
+                        card.style.flexDirection = 'column';
+                        card.style.gap = '20px';
+                        
+                        card.innerHTML = `
+                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+                                <div>
+                                    <span style="display:inline-block;background:rgba(255, 61, 61, 0.08);color:var(--primary-red);font-size:0.75rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Active Internship Module</span>
+                                    <h3 style="margin:0;font-size:1.3rem;">${task.title}</h3>
+                                </div>
+                                <span class="app-status ${statusClass}">${statusText}</span>
+                            </div>
+                            
+                            <p style="color:#666;font-size:0.95rem;line-height:1.6;margin:0;">${task.desc}</p>
+                            
+                            ${task.completed === false ? `
+                                <hr style="border:0;border-top:1px solid #EAEAEA;margin:10px 0;">
+                                <form onsubmit="submitTaskSolution(event, ${idx})" style="display:flex;flex-direction:column;gap:15px;">
+                                    <div class="input-group">
+                                        <label style="font-size:0.85rem;font-weight:600;color:#555;">Submission Link (GitHub, Google Drive, or Figma URL)</label>
+                                        <input type="url" id="solution-link-${idx}" placeholder="https://github.com/yourusername/project" required style="padding:12px 18px;border:2px solid #F0F0F0;border-radius:12px;font-family:inherit;">
+                                    </div>
+                                    <div class="input-group">
+                                        <label style="font-size:0.85rem;font-weight:600;color:#555;">Submission Notes (Optional)</label>
+                                        <input type="text" id="solution-notes-${idx}" placeholder="e.g., Completed all frontend modules and added extra animations." style="padding:12px 18px;border:2px solid #F0F0F0;border-radius:12px;font-family:inherit;">
+                                    </div>
+                                    <button type="submit" class="cta-btn" style="width:fit-content;padding:12px 30px;">Submit Project Module</button>
+                                </form>
+                            ` : `
+                                <div style="background:#F9F9FB;border:1px dashed #EAEAEA;border-radius:12px;padding:15px;font-size:0.85rem;color:#777;display:flex;align-items:center;gap:10px;">
+                                    <span>🎉</span>
+                                    <span>${task.completed === 'Under Review' ? 'Task solution submitted! Codmint Mentors are currently evaluating your solution.' : 'Fantastic job! This module has been approved and marked as completed.'}</span>
+                                </div>
+                            `}
+                        `;
+                        activeTasksContainer.appendChild(card);
+                    });
+                } else {
+                    activeTasksContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: #888;">
+                            <p>No active internship tasks assigned. Apply for a domain to receive your tasks!</p>
+                            <a href="internships.html" class="cta-btn" style="display:inline-block;margin-top:15px;padding:10px 25px;text-decoration:none;">Browse Internship Tracks</a>
+                        </div>
+                    `;
+                }
+            }
+
             // Update Progress Bar
-            const completedCount = userTasks.filter(t => t.completed).length;
+            const completedCount = userTasks.filter(t => t.completed === true).length;
             const totalCount = userTasks.length;
             const percent = Math.round((completedCount / totalCount) * 100);
             const progressBar = document.getElementById('progress-bar');
@@ -875,6 +954,49 @@
                     }
                 } else {
                     offerLetterSec.style.display = 'none';
+                }
+            }
+        function submitTaskSolution(event, idx) {
+            event.preventDefault();
+            const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (!currentUserStr) return;
+            const user = JSON.parse(currentUserStr);
+            
+            const linkInput = document.getElementById('solution-link-' + idx);
+            const notesInput = document.getElementById('solution-notes-' + idx);
+            if (!linkInput) return;
+            
+            const allTasks = JSON.parse(localStorage.getItem('userTasks') || '{}');
+            const userTasks = allTasks[user.email] || [];
+            
+            // Map the domain tasks specifically (excluding system ones)
+            const domainTasks = userTasks.filter(t => t.title !== 'Profile Setup' && t.title !== 'Email Verified');
+            const targetTask = domainTasks[idx];
+            
+            if (targetTask) {
+                // Find the index in original userTasks array
+                const originalIdx = userTasks.findIndex(t => t.title === targetTask.title);
+                if (originalIdx !== -1) {
+                    userTasks[originalIdx].completed = 'Under Review';
+                    userTasks[originalIdx].submissionLink = linkInput.value;
+                    userTasks[originalIdx].submissionNotes = notesInput ? notesInput.value : '';
+                    userTasks[originalIdx].submissionDate = new Date().toLocaleDateString();
+                    
+                    allTasks[user.email] = userTasks;
+                    localStorage.setItem('userTasks', JSON.stringify(allTasks));
+                    
+                    // Also update status in allApplications to reflect "Under Review"!
+                    const allApplications = JSON.parse(localStorage.getItem('allApplications') || '{}');
+                    const userApps = allApplications[user.email] || [];
+                    if (userApps.length > 0) {
+                        userApps[0].status = 'Under Review';
+                        userApps[0].statusClass = 'status-review';
+                        allApplications[user.email] = userApps;
+                        localStorage.setItem('allApplications', JSON.stringify(allApplications));
+                    }
+                    
+                    alert('Task solution submitted successfully! Your submission is now Under Review.');
+                    loadDashboardData();
                 }
             }
         }
