@@ -414,6 +414,8 @@ const initPlatform = () => {
                     'UI/UX Design': { title: 'Login Wireframe', desc: 'Design a low-fidelity login screen wireframe in Figma.' },
                     'Mobile App Development': { title: 'Hello Android', desc: 'Create a "Hello World" app using React Native or Flutter.' },
                     'Flutter Engineering': { title: 'Flutter Counter App', desc: 'Build a stateful counter app using Flutter and Dart.' },
+                    'Machine Learning': { title: 'ML Model Training', desc: 'Train a simple classification model using scikit-learn on a sample dataset.' },
+                    'Node.js Engineering': { title: 'REST API with Express', desc: 'Build a Node.js Express REST API with GET, POST, and DELETE routes.' },
                     'AI/ML': { title: 'Model Setup', desc: 'Load a dataset and split it for training.' },
                     'Cloud Computing': { title: 'S3 Bucket Setup', desc: 'Create and configure an AWS S3 bucket.' },
                     'Cyber Security': { title: 'Security Audit', desc: 'Perform a basic security scan on a local port.' }
