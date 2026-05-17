@@ -25,6 +25,7 @@
             <a href="services.html">Services</a>
             <a href="careers.html">Careers</a>
             <a href="contact.html">Contact</a>
+            <a href="admin.html" style="color: var(--primary-red); font-weight: 600;">Admin</a>
         </nav>
         <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
             <a href="verify.html" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
@@ -51,22 +52,163 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                         </div>
                         <h2>Verify Your <span class="text-red">Certificate</span></h2>
-                        <p>Enter your unique certificate ID to validate your internship achievement.</p>
+                        <p>Enter your unique certificate ID to validate your Codmint internship achievement and view your details.</p>
                     </div>
                     <form id="certificate-verify-form" class="verify-form">
                         <div class="verify-input-wrapper">
                             <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                            <input type="text" id="cert-id" placeholder="Ex: CM-2026-XXXX" required>
+                            <input type="text" id="cert-id" placeholder="e.g. CM-2026-0001" required style="text-transform:uppercase;">
                         </div>
                         <button type="submit" class="cta-btn verify-submit-btn">
                             <span>Verify Now</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </form>
+                    <p style="font-size:0.8rem;color:#aaa;margin-top:16px;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        Format: <strong>CM-2026-XXXX</strong> &nbsp;|&nbsp; Find your ID in your <a href="dashboard.html" style="color:var(--primary-red);">Dashboard</a>
+                    </p>
                     <div id="verify-feedback" class="verify-feedback"></div>
                 </div>
             </div>
         </section>
+
+        <!-- ── Live Stats Below Verify ── -->
+        <section style="padding: 60px 5% 0; background: var(--bg-light);">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px;" class="scroll-reveal">
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.04);">
+                        <div style="font-size:2rem; font-weight:800; color:var(--primary-red); line-height:1;" id="stat-total-certs">860+</div>
+                        <div style="font-size:0.82rem; color:#888; font-weight:500; margin-top:6px;">Certificates Issued</div>
+                    </div>
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.04);">
+                        <div style="font-size:2rem; font-weight:800; color:#22c55e; line-height:1;" id="stat-verified">100%</div>
+                        <div style="font-size:0.82rem; color:#888; font-weight:500; margin-top:6px;">Verification Rate</div>
+                    </div>
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.04);">
+                        <div style="font-size:2rem; font-weight:800; color:#3b82f6; line-height:1;" id="stat-domains">8+</div>
+                        <div style="font-size:0.82rem; color:#888; font-weight:500; margin-top:6px;">Domains Covered</div>
+                    </div>
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.04);">
+                        <div style="font-size:2rem; font-weight:800; color:#f59e0b; line-height:1;" id="stat-applicants">1,240+</div>
+                        <div style="font-size:0.82rem; color:#888; font-weight:500; margin-top:6px;">Total Participants</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── How It Works ── -->
+        <section style="padding: 80px 5%; background: var(--bg-light);">
+            <div style="max-width: 900px; margin: 0 auto;" class="scroll-reveal">
+                <div style="text-align:center; margin-bottom:48px;">
+                    <p style="color:var(--primary-red); font-weight:700; letter-spacing:2px; font-size:0.82rem; text-transform:uppercase; margin-bottom:10px;">Simple Process</p>
+                    <h2 style="font-size:2.2rem; font-weight:700; color:var(--dark-grey); letter-spacing:-1px;">How to <span class="text-red">Verify</span></h2>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:24px;">
+                    <!-- Step 1 -->
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:20px; padding:30px 24px; position:relative; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+                        <div style="width:36px; height:36px; background:rgba(255,61,61,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+                            <span style="font-weight:800; color:var(--primary-red); font-size:1rem;">1</span>
+                        </div>
+                        <h4 style="font-size:1rem; font-weight:700; color:var(--dark-grey); margin-bottom:8px;">Get Your Certificate ID</h4>
+                        <p style="font-size:0.875rem; color:#666; line-height:1.6; margin:0;">Log in to your <a href="dashboard.html" style="color:var(--primary-red); font-weight:600;">Dashboard</a> and find your Certificate ID in the format <strong>CM-2026-XXXX</strong>.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:20px; padding:30px 24px; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+                        <div style="width:36px; height:36px; background:rgba(59,130,246,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+                            <span style="font-weight:800; color:#3b82f6; font-size:1rem;">2</span>
+                        </div>
+                        <h4 style="font-size:1rem; font-weight:700; color:var(--dark-grey); margin-bottom:8px;">Enter the ID Above</h4>
+                        <p style="font-size:0.875rem; color:#666; line-height:1.6; margin:0;">Type or paste your certificate ID in the input field above and click <strong>Verify Now</strong>.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div style="background:#fff; border:1px solid #EAEAEA; border-radius:20px; padding:30px 24px; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+                        <div style="width:36px; height:36px; background:rgba(34,197,94,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+                            <span style="font-weight:800; color:#22c55e; font-size:1rem;">3</span>
+                        </div>
+                        <h4 style="font-size:1rem; font-weight:700; color:var(--dark-grey); margin-bottom:8px;">View Your Details</h4>
+                        <p style="font-size:0.875rem; color:#666; line-height:1.6; margin:0;">Your intern name, domain, date applied, and status will be displayed instantly from our records.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Quick Try / Sample + FAQ ── -->
+        <section style="padding: 0 5% 80px; background: var(--bg-light);">
+            <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="scroll-reveal">
+
+                <!-- Quick Try -->
+                <div style="background:#fff; border:1px solid #EAEAEA; border-radius:20px; padding:28px; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+                    <h4 style="font-size:1rem; font-weight:700; color:var(--dark-grey); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        Quick Try
+                    </h4>
+                    <p style="font-size:0.82rem; color:#888; margin:0 0 16px;">Click a sample certificate ID to auto-fill and verify:</p>
+                    <div style="display:flex; flex-direction:column; gap:8px;" id="sample-ids">
+                        <button onclick="tryId('CM-2026-0001')" style="background:rgba(255,61,61,0.06); border:1px solid rgba(255,61,61,0.15); border-radius:10px; padding:10px 16px; font-family:monospace; font-size:0.88rem; font-weight:700; color:var(--primary-red); cursor:pointer; text-align:left; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,61,61,0.12)'" onmouseout="this.style.background='rgba(255,61,61,0.06)'">CM-2026-0001 →</button>
+                        <button onclick="tryId('CM-2026-0002')" style="background:rgba(255,61,61,0.06); border:1px solid rgba(255,61,61,0.15); border-radius:10px; padding:10px 16px; font-family:monospace; font-size:0.88rem; font-weight:700; color:var(--primary-red); cursor:pointer; text-align:left; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,61,61,0.12)'" onmouseout="this.style.background='rgba(255,61,61,0.06)'">CM-2026-0002 →</button>
+                        <button onclick="tryId('CM-2026-0003')" style="background:rgba(255,61,61,0.06); border:1px solid rgba(255,61,61,0.15); border-radius:10px; padding:10px 16px; font-family:monospace; font-size:0.88rem; font-weight:700; color:var(--primary-red); cursor:pointer; text-align:left; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,61,61,0.12)'" onmouseout="this.style.background='rgba(255,61,61,0.06)'">CM-2026-0003 →</button>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div style="background:#fff; border:1px solid #EAEAEA; border-radius:20px; padding:28px; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+                    <h4 style="font-size:1rem; font-weight:700; color:var(--dark-grey); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-red)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Common Questions
+                    </h4>
+                    <div style="display:flex; flex-direction:column; gap:14px;">
+                        <div style="border-bottom:1px solid #F0F0F0; padding-bottom:14px;">
+                            <p style="font-size:0.88rem; font-weight:600; color:var(--dark-grey); margin:0 0 4px;">Where do I find my Certificate ID?</p>
+                            <p style="font-size:0.82rem; color:#888; margin:0;">Log in to your <a href="dashboard.html" style="color:var(--primary-red);">Dashboard</a> → Applications section.</p>
+                        </div>
+                        <div style="border-bottom:1px solid #F0F0F0; padding-bottom:14px;">
+                            <p style="font-size:0.88rem; font-weight:600; color:var(--dark-grey); margin:0 0 4px;">What does "Under Review" status mean?</p>
+                            <p style="font-size:0.82rem; color:#888; margin:0;">Your application is submitted and the admin is reviewing your progress.</p>
+                        </div>
+                        <div>
+                            <p style="font-size:0.88rem; font-weight:600; color:var(--dark-grey); margin:0 0 4px;">Certificate not found?</p>
+                            <p style="font-size:0.82rem; color:#888; margin:0;">Contact us at <a href="mailto:codmint.hr@gmail.com" style="color:var(--primary-red);">codmint.hr@gmail.com</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Try JS -->
+        <script>
+            function tryId(id) {
+                const input = document.getElementById('cert-id');
+                if (input) {
+                    input.value = id;
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Auto-submit
+                    setTimeout(() => {
+                        const form = document.getElementById('certificate-verify-form');
+                        if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                    }, 400);
+                }
+            }
+            // Update stats from localStorage
+            window.addEventListener('DOMContentLoaded', () => {
+                const apps = JSON.parse(localStorage.getItem('allApplications') || '{}');
+                const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                let totalApps = 0;
+                for (const e in apps) totalApps += apps[e].length;
+                if (totalApps > 0) {
+                    const el = document.getElementById('stat-total-certs');
+                    if (el) el.textContent = totalApps;
+                    const elP = document.getElementById('stat-applicants');
+                    if (elP) elP.textContent = Math.max(totalApps, users.length);
+                }
+                const domains = new Set();
+                for (const e in apps) apps[e].forEach(a => domains.add(a.domain));
+                if (domains.size > 0) {
+                    const elD = document.getElementById('stat-domains');
+                    if (elD) elD.textContent = domains.size + '+';
+                }
+            });
+        </script>
     </main>
 
     <footer id="contact">
@@ -97,7 +239,8 @@
                     <li><a href="services.html">Services</a></li>
                     <li><a href="careers.html">Careers</a></li>
                     <li><a href="verify.html">Verify Certificate</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html">Contact</a>
+            <a href="admin.html" style="color: var(--primary-red); font-weight: 600;">Admin</a></li>
                 </ul>
             </div>
             <div class="footer-contact">

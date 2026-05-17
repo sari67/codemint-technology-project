@@ -25,6 +25,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -36,6 +37,7 @@
         opacity: 0;
         transform: translateX(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -47,6 +49,7 @@
         opacity: 0;
         transform: scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -54,9 +57,17 @@
 }
 
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .fade-in-up {
@@ -84,17 +95,44 @@
 }
 
 /* Staggered reveal for grid items */
-.card-grid .scroll-reveal:nth-child(1) { transition-delay: 0.1s; }
-.card-grid .scroll-reveal:nth-child(2) { transition-delay: 0.2s; }
-.card-grid .scroll-reveal:nth-child(3) { transition-delay: 0.3s; }
-.card-grid .scroll-reveal:nth-child(4) { transition-delay: 0.4s; }
-.card-grid .scroll-reveal:nth-child(5) { transition-delay: 0.5s; }
-.card-grid .scroll-reveal:nth-child(6) { transition-delay: 0.6s; }
+.card-grid .scroll-reveal:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.card-grid .scroll-reveal:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.card-grid .scroll-reveal:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.card-grid .scroll-reveal:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.card-grid .scroll-reveal:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.card-grid .scroll-reveal:nth-child(6) {
+    transition-delay: 0.6s;
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, a, input, select, textarea {
+    outline: none;
+}
+
+button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--primary-red);
+    outline-offset: 2px;
 }
 
 html {
@@ -147,7 +185,7 @@ header.scrolled {
 nav.main-nav {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 24px;
 }
 
 nav.main-nav a {
@@ -160,6 +198,19 @@ nav.main-nav a {
 
 nav.main-nav a:hover {
     color: var(--primary-red);
+}
+
+nav.main-nav a[href="admin.html"] {
+    color: var(--primary-red);
+    font-weight: 600;
+}
+
+nav.main-nav a[href="admin.html"]:hover {
+    color: #c41e1e;
+}
+
+.mobile-only-link {
+    display: none !important;
 }
 
 .nav-btn {
@@ -196,27 +247,162 @@ nav.main-nav a:hover {
     }
 
     .mobile-menu-btn {
-        display: block;
+        display: block !important;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        color: var(--dark-grey);
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 50%;
+        z-index: 1002;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
+    .mobile-menu-btn:hover {
+        background: rgba(255, 61, 61, 0.1);
+        border-color: rgba(255, 61, 61, 0.2);
+        color: var(--primary-red);
+        transform: scale(1.1);
+    }
+
+    .mobile-menu-btn.active {
+        background: #121216;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        transform: rotate(90deg);
+    }
+
+    /* Premium Dark Slide-out Side Drawer Menu on Mobile */
     nav.main-nav {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 300px;
+        right: -100%; /* Start offscreen dynamically */
+        width: max-content;
+        min-width: 280px;
+        max-width: 85%;
         height: 100vh;
-        background: var(--white);
+        overflow-y: auto; /* Allow scrolling if items overflow */
+        background: rgba(15, 15, 20, 0.97);
+        backdrop-filter: blur(30px) saturate(200%);
+        -webkit-backdrop-filter: blur(30px) saturate(200%);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
         flex-direction: column;
-        justify-content: center;
-        gap: 30px;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
-        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        justify-content: flex-start;
+        padding: 65px 16px 20px;
+        gap: 5px;
         z-index: 1001;
+        box-shadow: -15px 0 45px rgba(0, 0, 0, 0.5);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     nav.main-nav.active {
         right: 0;
+        /* Slide in smoothly! */
+    }
+
+    /* Custom Drawer Logo Header inside Drawer (for premium brand identity) */
+    nav.main-nav::before {
+        content: "CODMINT PLATFORM";
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+        padding-left: 14px;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    /* Drawer Links */
+    nav.main-nav a {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 10px 16px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        justify-content: flex-start;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    nav.main-nav a:hover {
+        background: rgba(255, 61, 61, 0.12);
+        border-color: rgba(255, 61, 61, 0.3);
+        color: var(--white);
+        transform: translateX(6px);
+        box-shadow: 0 4px 20px rgba(255, 61, 61, 0.15);
+    }
+
+    /* Specific styling for the Log In and Sign Up buttons in the drawer to look professional */
+    nav.main-nav #nav-mobile-login,
+    nav.main-nav #nav-mobile-register,
+    nav.main-nav #nav-mobile-logout {
+        margin-top: 5px;
+        justify-content: center;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    nav.main-nav #nav-mobile-login {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--white);
+    }
+
+    nav.main-nav #nav-mobile-login:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.02);
+    }
+
+    nav.main-nav #nav-mobile-register {
+        background: linear-gradient(135deg, #FF3D3D, #FF6B6B);
+        border: none;
+        color: var(--white);
+        box-shadow: 0 4px 15px rgba(255, 61, 61, 0.3);
+    }
+
+    nav.main-nav #nav-mobile-register:hover {
+        background: linear-gradient(135deg, #FF5252, #FF7F7F);
+        transform: scale(1.02) translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 61, 61, 0.45);
+    }
+
+    nav.main-nav #nav-mobile-logout {
+        background: rgba(211, 47, 47, 0.1);
+        border: 1px solid rgba(211, 47, 47, 0.3);
+        color: #FF5252;
+    }
+
+    nav.main-nav #nav-mobile-logout:hover {
+        background: #D32F2F;
+        color: var(--white);
+        border-color: #D32F2F;
+    }
+
+    /* User profile greeting card inside the drawer */
+    nav.main-nav .user-greeting-mobile {
+        background: rgba(255, 61, 61, 0.08);
+        border: 1px solid rgba(255, 61, 61, 0.2);
+        color: #FF6B6B;
+        font-size: 0.88rem;
+        font-weight: 700;
+        padding: 10px 14px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 8px;
+        display: block;
     }
 
     .btn-text {
@@ -743,7 +929,8 @@ footer {
     transform: translateY(-5px);
 }
 
-.footer-links h4, .footer-contact h4 {
+.footer-links h4,
+.footer-contact h4 {
     color: var(--white);
     font-size: 1.1rem;
     font-weight: 700;
@@ -823,7 +1010,7 @@ footer {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-    
+
     .footer-bottom {
         flex-direction: column;
         gap: 20px;
@@ -1325,7 +1512,7 @@ footer {
     padding: 16px 24px;
     border-radius: 50px;
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     outline: none;
     font-family: inherit;
 }
@@ -1338,6 +1525,7 @@ footer {
     .newsletter-form {
         flex-direction: column;
     }
+
     .newsletter-form button {
         width: 100%;
     }
@@ -1385,34 +1573,16 @@ footer {
     header {
         padding: 15px 5%;
     }
-    
-    .main-nav {
-        display: none; /* Hidden by default on mobile */
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.98);
-        flex-direction: column;
-        padding: 30px;
-        gap: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        backdrop-filter: blur(10px);
-    }
-    
-    .main-nav.active {
-        display: flex;
-        animation: fadeInUp 0.4s ease-out forwards;
-    }
-    
-    .header-actions .nav-btn, 
+
+    .header-actions .nav-btn,
     .header-actions .cta-btn {
         padding: 6px 12px;
         font-size: 0.85rem;
     }
 
     .header-actions .verify-btn .btn-text {
-        display: none; /* Hide text on small mobile, keep icon */
+        display: none;
+        /* Hide text on small mobile, keep icon */
     }
 }
 
@@ -1420,25 +1590,26 @@ footer {
     .section-header h1 {
         font-size: 2.2rem !important;
     }
-    
+
     .section-header h2 {
         font-size: 2rem !important;
     }
-    
+
     .card-grid {
         grid-template-columns: 1fr;
         padding: 10px;
     }
-    
+
     .footer-container {
         flex-direction: column;
         text-align: center;
     }
-    
-    .footer-contact, .footer-links {
+
+    .footer-contact,
+    .footer-links {
         align-items: center;
     }
-    
+
     .social-links {
         justify-content: center;
     }
@@ -1448,9 +1619,99 @@ footer {
     .header-actions {
         gap: 8px;
     }
-    
+
     .cta-btn {
         padding: 10px 20px;
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 992px) {
+    header {
+        padding: 15px 5%;
+    }
+
+    /* On mobile, hide Login/SignUp/Logout/Greeting from the header bar.
+       They are shown inside the slide-out drawer instead. */
+    .header-actions #login-btn,
+    .header-actions #register-btn,
+    .header-actions #logout-btn,
+    .header-actions #user-display {
+        display: none !important;
+    }
+
+    /* Hide only the verify certificate button in the mobile header to save space */
+    .header-actions .verify-btn {
+        display: none !important;
+    }
+
+    .mobile-only-link {
+        display: flex !important;
+    }
+
+    /* Special styling for greeting and logout inside the mobile menu drawer */
+    .main-nav .user-greeting-mobile {
+        font-weight: 600;
+        color: var(--primary-red);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding-top: 15px !important;
+        margin-top: 10px;
+    }
+
+    .main-nav .logout-link-mobile {
+        color: #d32f2f !important;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header h1 {
+        font-size: 2.2rem !important;
+    }
+
+    .section-header h2 {
+        font-size: 2rem !important;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .footer-contact,
+    .footer-links {
+        align-items: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Hide the third testimonial card on mobile screens to save space */
+    .testimonial-card:nth-child(3) {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-actions {
+        gap: 8px;
+    }
+
+    .cta-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Hide the 3rd and 4th stat items on extra small screens to save space */
+    .stat-item:nth-child(3),
+    .stat-item:nth-child(4) {
+        display: none !important;
     }
 }

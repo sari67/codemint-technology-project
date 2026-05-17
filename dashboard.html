@@ -134,6 +134,55 @@
             background: #FAFAFC;
         }
 
+        /* Professional Offer Letter Styling */
+        .offer-letter-container {
+            background: #FFFFFF;
+            border: 1px solid #EAEAEA;
+            border-radius: 20px;
+            padding: 45px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            color: #333;
+            max-width: 820px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+        
+        .letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .letter-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .offer-letter-container {
+                padding: 25px;
+            }
+            .letter-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .letter-header-details {
+                text-align: left !important;
+            }
+            .letter-signature-block {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 25px;
+            }
+            .signature-item {
+                text-align: left !important;
+            }
+        }
+
         .app-status {
             padding: 6px 16px;
             border-radius: 50px;
@@ -261,6 +310,58 @@
             .task-grid { grid-template-columns: 1fr; }
             .application-item { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
+
+        /* App-like Bottom Nav Styles */
+        .mobile-bottom-nav {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-sidebar {
+                display: none !important;
+            }
+            .dashboard-container {
+                padding-bottom: 100px !important;
+            }
+            .mobile-bottom-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 70px;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+                justify-content: space-around;
+                align-items: center;
+                z-index: 1000;
+                box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.03);
+            }
+            .mobile-bottom-nav a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: var(--medium-grey);
+                font-size: 0.75rem;
+                font-weight: 500;
+                gap: 4px;
+                width: 25%;
+                height: 100%;
+                transition: var(--transition-fast);
+                cursor: pointer;
+            }
+            .mobile-bottom-nav a .nav-icon {
+                font-size: 1.3rem;
+            }
+            .mobile-bottom-nav a.active {
+                color: var(--primary-red);
+                font-weight: 600;
+            }
+        }
     </style>
 </head>
 
@@ -279,6 +380,7 @@
             <a href="services.html">Services</a>
             <a href="careers.html">Careers</a>
             <a href="contact.html">Contact</a>
+            <a href="admin.html" style="color: var(--primary-red); font-weight: 600;">Admin</a>
         </nav>
         <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
             <a href="verify.html" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
@@ -349,6 +451,80 @@
                             <h2>📂 My Applied Internships</h2>
                             <div class="application-list" id="applied-internships-list">
                                 <!-- Applications will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Professional Internship Offer Letter Section -->
+                        <div class="dashboard-card" id="offer-letter-section" style="display: none; animation: fadeInUp 0.5s ease-out;">
+                            <h2>📜 Official Internship Offer Letter</h2>
+                            <p style="color: #666; margin-bottom: 25px;">Congratulations! You are officially selected. You can view, print, or download your official offer letter below.</p>
+                            
+                            <!-- The Styled Offer Letter Document -->
+                            <div class="offer-letter-container" id="offer-letter-content">
+                                <div class="letter-header">
+                                    <div class="letter-logo">
+                                        <div style="background-color: var(--primary-red); color: white; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem;">C</div>
+                                        <div>
+                                            <h3 style="margin: 0; font-weight: 800; font-size: 1.4rem; color: var(--dark-grey); letter-spacing: -0.5px;">Codmint</h3>
+                                            <span style="font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Technologies Private Limited</span>
+                                        </div>
+                                    </div>
+                                    <div class="letter-header-details" style="text-align: right; font-size: 0.8rem; color: #666;">
+                                        <p>Email: codmint.hr@gmail.com</p>
+                                        <p>Web: www.codmint.tech</p>
+                                        <p>Date: <span id="letter-date">May 17, 2026</span></p>
+                                    </div>
+                                </div>
+                                
+                                <hr style="border: 0; border-top: 2px solid var(--primary-red); margin: 20px 0;">
+                                
+                                <div class="letter-ref-block" style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: #444; margin-bottom: 25px;">
+                                    <span>Ref No: <span id="letter-ref-num">CM/INT/2026/7483</span></span>
+                                    <span>STATUS: OFFICIAL OFFER</span>
+                                </div>
+                                
+                                <div class="letter-to" style="margin-bottom: 25px; font-size: 0.95rem; line-height: 1.5; color: var(--dark-grey);">
+                                    <p style="font-weight: 700; margin-bottom: 5px;">To,</p>
+                                    <p style="font-weight: 600;" id="letter-candidate-name">Candidate Name</p>
+                                    <p style="color: #666;" id="letter-candidate-email">candidate@example.com</p>
+                                </div>
+                                
+                                <div class="letter-body" style="font-size: 0.95rem; line-height: 1.7; color: #333; text-align: justify; margin-bottom: 30px;">
+                                    <p style="font-weight: 700; font-size: 1rem; margin-bottom: 15px; color: var(--dark-grey);">Subject: Internship Offer for <span id="letter-domain" class="text-red">Web Development</span></p>
+                                    
+                                    <p>Dear <span id="letter-salutation-name" style="font-weight: 600;">Candidate</span>,</p>
+                                    
+                                    <p style="margin-top: 10px;">We are pleased to offer you an internship position as a <strong><span id="letter-body-domain">Web Development</span> Intern</strong> at Codmint Technologies. Your application and profile have been selected for this position after a rigorous review of your skills and portfolio.</p>
+                                    
+                                    <p style="margin-top: 10px;">The duration of this internship will be <strong>8 weeks</strong>, beginning on <strong><span id="letter-start-date">May 17, 2026</span></strong>. As an intern, you will receive expert mentorship, engage in practical hands-on tasks, and design clean, production-ready features. You will be expected to complete all assigned modules within deadlines and adhere to professional coding and documentation standards.</p>
+                                    
+                                    <p style="margin-top: 10px;">Upon successful completion of the curriculum and evaluation, you will be awarded an official <strong>Verified Internship Certificate</strong> and a Letter of Recommendation (LOR) from our tech leads, which will boost your career prospects immensely.</p>
+                                    
+                                    <p style="margin-top: 10px;">We are thrilled to welcome you to our builder community and look forward to building outstanding projects together!</p>
+                                </div>
+                                
+                                <div class="letter-signature-block" style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 40px;">
+                                    <div class="signature-item">
+                                        <p style="font-size: 0.8rem; color: #888; margin-bottom: 5px;">For candidate reference only</p>
+                                        <p style="font-size: 0.85rem; font-weight: 700; color: #10B981;">Ref No verified electronically</p>
+                                    </div>
+                                    <div class="signature-item" style="text-align: right;">
+                                        <div style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.6rem; color: var(--primary-red); margin-bottom: -5px;">Sarika Sharma</div>
+                                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--dark-grey); border-top: 1px solid #CCC; padding-top: 5px; margin-top: 5px;">HR Lead</p>
+                                        <p style="font-size: 0.75rem; color: #888;">Codmint Technologies</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div style="display: flex; gap: 15px; margin-top: 25px;">
+                                <button onclick="printOfferLetter()" class="cta-btn" style="display: flex; align-items: center; gap: 8px; padding: 12px 25px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                    Print / Save PDF
+                                </button>
+                                <button id="accept-offer-btn" onclick="acceptOfferLetter()" class="nav-btn" style="border-color: #10B981; color: #10B981; padding: 10px 25px; font-weight: 600; background: transparent;">
+                                    Accept Internship Offer
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -432,7 +608,8 @@
                     <li><a href="services.html">Services</a></li>
                     <li><a href="careers.html">Careers</a></li>
                     <li><a href="verify.html">Verify Certificate</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html">Contact</a>
+            <a href="admin.html" style="color: var(--primary-red); font-weight: 600;">Admin</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -456,20 +633,125 @@
         </div>
     </footer>
 
+    <!-- Native App-style Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav">
+        <a onclick="switchView('overview')" id="bottom-nav-overview" class="active">
+            <span class="nav-icon">📊</span>
+            <span class="nav-text">Overview</span>
+        </a>
+        <a onclick="switchView('applications')" id="bottom-nav-applications">
+            <span class="nav-icon">💼</span>
+            <span class="nav-text">Status</span>
+        </a>
+        <a onclick="switchView('tasks')" id="bottom-nav-tasks">
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Tasks</span>
+        </a>
+        <a onclick="switchView('settings')" id="bottom-nav-settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">Settings</span>
+        </a>
+    </div>
+
     <script src="js/main.js"></script>
     <script>
         // Dashboard Tab Switching Logic
         function switchView(viewId) {
             // Update Sidebar Active State
             document.querySelectorAll('.sidebar-nav a').forEach(el => el.classList.remove('active'));
-            document.getElementById('nav-' + viewId).classList.add('active');
+            const sideEl = document.getElementById('nav-' + viewId);
+            if (sideEl) sideEl.classList.add('active');
+
+            // Update Bottom Nav Active State
+            document.querySelectorAll('.mobile-bottom-nav a').forEach(el => el.classList.remove('active'));
+            const bottomEl = document.getElementById('bottom-nav-' + viewId);
+            if (bottomEl) bottomEl.classList.add('active');
 
             // Toggle Content Views
             document.querySelectorAll('.dashboard-view').forEach(el => el.classList.remove('active'));
-            document.getElementById('view-' + viewId).classList.add('active');
+            const viewEl = document.getElementById('view-' + viewId);
+            if (viewEl) viewEl.classList.add('active');
             
             // Re-load data for the specific view if needed
             loadDashboardData();
+        }
+
+        // Print Offer Letter Functionality
+        function printOfferLetter() {
+            const printContent = document.getElementById('offer-letter-content').innerHTML;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Internship Offer Letter - Codmint Technologies</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        body {
+                            font-family: 'Poppins', sans-serif;
+                            padding: 40px;
+                            color: #333;
+                            background: white;
+                        }
+                        .offer-letter-container {
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 30px;
+                            border: 1px solid #EEE;
+                            border-radius: 12px;
+                        }
+                        .letter-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .letter-logo {
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                        }
+                        .text-red {
+                            color: #FF3D3D;
+                        }
+                        @media print {
+                            body { padding: 0; }
+                            .offer-letter-container { border: none; box-shadow: none; padding: 0; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="offer-letter-container">
+                        \${printContent}
+                    </div>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                            setTimeout(function() { window.close(); }, 500);
+                        }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+
+        // Accept Offer Letter Functionality
+        function acceptOfferLetter() {
+            const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (!currentUserStr) return;
+            const user = JSON.parse(currentUserStr);
+
+            const acceptBtn = document.getElementById('accept-offer-btn');
+            if (acceptBtn) {
+                acceptBtn.innerHTML = '🎉 Offer Accepted';
+                acceptBtn.disabled = true;
+                acceptBtn.style.backgroundColor = '#10B981';
+                acceptBtn.style.color = '#fff';
+                acceptBtn.style.borderColor = '#10B981';
+                acceptBtn.style.cursor = 'not-allowed';
+            }
+            alert('Congratulations! You have successfully accepted the internship offer. Welcome to Codmint Technologies!');
+            localStorage.setItem('offerAccepted_' + user.email, 'true');
         }
 
         function loadDashboardData() {
@@ -542,6 +824,57 @@
                     });
                 } else {
                     appliedList.innerHTML = '<div style="text-align: center; padding: 40px; color: #888;"><p>No applications found.</p><a href="internships.html" class="text-red">Browse Internships</a></div>';
+                }
+            }
+
+            // Dynamic Offer Letter Population
+            const offerLetterSec = document.getElementById('offer-letter-section');
+            if (offerLetterSec) {
+                if (userApplications.length > 0) {
+                    const activeApp = userApplications[0];
+                    
+                    if (activeApp.status === 'Under Review' || activeApp.status === 'Selected' || activeApp.status === 'Approved') {
+                        // Dynamically update the offer letter template values
+                        document.getElementById('letter-candidate-name').textContent = user.name;
+                        document.getElementById('letter-candidate-email').textContent = user.email;
+                        document.getElementById('letter-salutation-name').textContent = user.name.split(' ')[0];
+                        document.getElementById('letter-domain').textContent = activeApp.domain;
+                        document.getElementById('letter-body-domain').textContent = activeApp.domain;
+                        document.getElementById('letter-date').textContent = activeApp.date;
+                        document.getElementById('letter-start-date').textContent = activeApp.date;
+                        
+                        // Generate a unique professional Ref No based on user email hash
+                        const refHash = Math.abs(user.email.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0) % 9000) + 1000;
+                        document.getElementById('letter-ref-num').textContent = `CM/INT/2026/${refHash}`;
+                        
+                        // Display the Offer Letter block
+                        offerLetterSec.style.display = 'block';
+                        
+                        // Check if already accepted
+                        const isAccepted = localStorage.getItem('offerAccepted_' + user.email) === 'true';
+                        const acceptBtn = document.getElementById('accept-offer-btn');
+                        if (acceptBtn) {
+                            if (isAccepted) {
+                                acceptBtn.innerHTML = '🎉 Offer Accepted';
+                                acceptBtn.disabled = true;
+                                acceptBtn.style.backgroundColor = '#10B981';
+                                acceptBtn.style.color = '#fff';
+                                acceptBtn.style.borderColor = '#10B981';
+                                acceptBtn.style.cursor = 'not-allowed';
+                            } else {
+                                acceptBtn.innerHTML = 'Accept Internship Offer';
+                                acceptBtn.disabled = false;
+                                acceptBtn.style.backgroundColor = 'transparent';
+                                acceptBtn.style.color = '#10B981';
+                                acceptBtn.style.borderColor = '#10B981';
+                                acceptBtn.style.cursor = 'pointer';
+                            }
+                        }
+                    } else {
+                        offerLetterSec.style.display = 'none';
+                    }
+                } else {
+                    offerLetterSec.style.display = 'none';
                 }
             }
         }

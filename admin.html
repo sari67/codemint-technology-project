@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codmint Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --admin-bg: #0f0f14;
+            --admin-card: #1a1a22;
+            --admin-border: rgba(255,255,255,0.07);
+            --admin-accent: #FF3D3D;
+            --admin-green: #22c55e;
+            --admin-yellow: #f59e0b;
+            --admin-blue: #3b82f6;
+            --admin-text: #e2e8f0;
+            --admin-muted: #64748b;
+        }
+
+        * { -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background: var(--admin-bg);
+            color: var(--admin-text);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* ── Login Gate ── */
+        #admin-gate {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 40%, rgba(255,61,61,0.08), transparent 60%),
+                        radial-gradient(circle at 80% 80%, rgba(59,130,246,0.06), transparent 50%),
+                        var(--admin-bg);
+        }
+
+        .gate-card {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 24px;
+            padding: 50px 44px;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        .gate-logo {
+            width: 56px; height: 56px;
+            background: var(--admin-accent);
+            border-radius: 14px;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; font-weight: 800; color: #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(255,61,61,0.35);
+        }
+
+        .gate-card h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+        .gate-card p { color: var(--admin-muted); margin-bottom: 32px; font-size: 0.9rem; }
+
+        .gate-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--admin-text);
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        .gate-input:focus { border-color: var(--admin-accent); outline: none; }
+
+        .gate-btn {
+            width: 100%;
+            background: var(--admin-accent);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 6px;
+            box-shadow: 0 8px 25px rgba(255,61,61,0.3);
+        }
+        .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,61,61,0.45); }
+
+        #gate-error {
+            color: #f87171;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* ── Admin Dashboard ── */
+        #admin-panel { display: none; }
+
+        .admin-header {
+            background: var(--admin-card);
+            border-bottom: 1px solid var(--admin-border);
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .admin-brand {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .admin-brand .badge {
+            background: var(--admin-accent);
+            color: #fff;
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem;
+        }
+        .admin-brand span { font-weight: 700; font-size: 1.15rem; }
+        .admin-brand small { color: var(--admin-muted); font-size: 0.75rem; display: block; font-weight: 400; }
+
+        .admin-nav-links { display: flex; gap: 6px; }
+        .admin-tab-btn {
+            background: transparent;
+            border: 1px solid var(--admin-border);
+            color: var(--admin-muted);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .admin-tab-btn:hover, .admin-tab-btn.active {
+            background: var(--admin-accent);
+            border-color: var(--admin-accent);
+            color: #fff;
+        }
+
+        .admin-exit-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--admin-border);
+            color: var(--admin-muted);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+        .admin-exit-btn:hover { border-color: var(--admin-accent); color: var(--admin-accent); }
+
+        /* Main content */
+        .admin-main {
+            padding: 40px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+        .stat-box:hover { transform: translateY(-4px); border-color: rgba(255,61,61,0.3); }
+
+        .stat-box .label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--admin-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .stat-box .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .stat-box .sub { font-size: 0.8rem; color: var(--admin-muted); }
+        .stat-box.red .value { color: var(--admin-accent); }
+        .stat-box.green .value { color: var(--admin-green); }
+        .stat-box.blue .value { color: var(--admin-blue); }
+        .stat-box.yellow .value { color: var(--admin-yellow); }
+
+        /* Tabs */
+        .tab-section { display: none; }
+        .tab-section.active { display: block; }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .count-badge {
+            background: rgba(255,61,61,0.15);
+            color: var(--admin-accent);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        /* Table */
+        .admin-table-wrap {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .admin-table th {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--admin-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 1px solid var(--admin-border);
+            background: rgba(255,255,255,0.02);
+        }
+        .admin-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--admin-border);
+            color: var(--admin-text);
+            vertical-align: middle;
+        }
+        .admin-table tr:last-child td { border-bottom: none; }
+        .admin-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .status-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .pill-green { background: rgba(34,197,94,0.15); color: var(--admin-green); }
+        .pill-yellow { background: rgba(245,158,11,0.15); color: var(--admin-yellow); }
+        .pill-blue { background: rgba(59,130,246,0.15); color: var(--admin-blue); }
+        .pill-red { background: rgba(255,61,61,0.15); color: var(--admin-accent); }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--admin-muted);
+        }
+        .empty-state svg { opacity: 0.3; margin-bottom: 16px; }
+        .empty-state p { font-size: 0.95rem; }
+
+        /* Action buttons in table */
+        .action-btn {
+            background: rgba(255,61,61,0.1);
+            border: 1px solid rgba(255,61,61,0.2);
+            color: var(--admin-accent);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .action-btn:hover { background: var(--admin-accent); color: #fff; }
+
+        /* Search bar */
+        .table-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .search-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--admin-border);
+            border-radius: 10px;
+            padding: 10px 16px;
+            color: var(--admin-text);
+            font-family: inherit;
+            font-size: 0.88rem;
+            width: 260px;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus { border-color: var(--admin-accent); outline: none; }
+        .search-input::placeholder { color: var(--admin-muted); }
+
+        /* Avatar */
+        .user-avatar {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--admin-accent), #ff7a7a);
+            display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem; color: #fff;
+            margin-right: 10px; vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        /* Overview chart bars */
+        .domain-bars { display: flex; flex-direction: column; gap: 14px; }
+        .domain-bar-item { display: flex; flex-direction: column; gap: 6px; }
+        .domain-bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; }
+        .domain-bar-label span:last-child { color: var(--admin-muted); }
+        .bar-track { height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--admin-accent), #ff7a7a); transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 0;
+        }
+        .admin-card {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+        .admin-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 22px; }
+
+        .recent-list { display: flex; flex-direction: column; gap: 14px; }
+        .recent-item {
+            display: flex; align-items: center; gap: 12px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--admin-border);
+        }
+        .recent-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .recent-item .meta { flex: 1; }
+        .recent-item .meta .name { font-size: 0.9rem; font-weight: 600; }
+        .recent-item .meta .detail { font-size: 0.78rem; color: var(--admin-muted); margin-top: 2px; }
+        .recent-item .time { font-size: 0.75rem; color: var(--admin-muted); white-space: nowrap; }
+
+        @media (max-width: 768px) {
+            .overview-grid { grid-template-columns: 1fr; }
+            .admin-nav-links { display: none; }
+            .admin-table th:nth-child(3),
+            .admin-table td:nth-child(3) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Admin Login Gate ── -->
+<div id="admin-gate">
+    <div class="gate-card">
+        <div class="gate-logo">C</div>
+        <h2>Admin Access</h2>
+        <p>Restricted area — Codmint staff only</p>
+        <input type="text" id="admin-user" class="gate-input" placeholder="Admin username" autocomplete="off">
+        <input type="password" id="admin-pass" class="gate-input" placeholder="Password" autocomplete="new-password">
+        <button class="gate-btn" id="admin-login-btn">Access Dashboard</button>
+        <p id="gate-error">Invalid credentials. Please try again.</p>
+        <p style="margin-top:20px; font-size:0.78rem; color:#475569;">
+            Default: <code style="color:#f59e0b;">admin</code> / <code style="color:#f59e0b;">codmint2026</code>
+        </p>
+    </div>
+</div>
+
+<!-- ── Admin Dashboard ── -->
+<div id="admin-panel">
+    <header class="admin-header">
+        <div class="admin-brand">
+            <div class="badge">C</div>
+            <div>
+                <span>Codmint Admin</span>
+                <small>Platform Management</small>
+            </div>
+        </div>
+        <nav class="admin-nav-links">
+            <button class="admin-tab-btn active" data-tab="overview">Overview</button>
+            <button class="admin-tab-btn" data-tab="users">Users</button>
+            <button class="admin-tab-btn" data-tab="applications">Applications</button>
+            <button class="admin-tab-btn" data-tab="certificates">Certificates</button>
+        </nav>
+        <a href="index.html" class="admin-exit-btn">Exit Panel</a>
+    </header>
+
+    <main class="admin-main">
+
+        <!-- Stats Row -->
+        <div class="stats-row" id="stats-row"></div>
+
+        <!-- Overview Tab -->
+        <div class="tab-section active" id="tab-overview">
+            <div class="overview-grid">
+                <div class="admin-card">
+                    <h3>Applications by Domain</h3>
+                    <div class="domain-bars" id="domain-bars"></div>
+                </div>
+                <div class="admin-card">
+                    <h3>Recent Registrations</h3>
+                    <div class="recent-list" id="recent-users"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div class="tab-section" id="tab-users">
+            <div class="table-toolbar">
+                <div class="section-title" style="margin:0;">
+                    Registered Users
+                    <span class="count-badge" id="users-count-badge">0</span>
+                </div>
+                <input type="text" class="search-input" id="user-search" placeholder="Search by name or email...">
+            </div>
+            <div class="admin-table-wrap">
+                <table class="admin-table" id="users-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-section" id="tab-applications">
+            <div class="table-toolbar">
+                <div class="section-title" style="margin:0;">
+                    All Applications
+                    <span class="count-badge" id="apps-count-badge">0</span>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <input type="text" class="search-input" id="app-search" placeholder="Search by name, email or domain...">
+                    <select id="app-status-filter" class="search-input" style="width:auto;cursor:pointer;">
+                        <option value="">All Statuses</option>
+                        <option>Selected</option>
+                        <option>Under Review</option>
+                        <option>Interview Scheduled</option>
+                        <option>Completed</option>
+                        <option>On Hold</option>
+                    </select>
+                </div>
+            </div>
+            <div class="admin-table-wrap">
+                <table class="admin-table" id="apps-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Applicant</th>
+                            <th>Domain</th>
+                            <th>Certificate ID</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="apps-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Certificates Tab -->
+        <div class="tab-section" id="tab-certificates">
+            <div class="table-toolbar">
+                <div class="section-title" style="margin:0;">
+                    Issued Certificates
+                    <span class="count-badge" id="cert-count-badge">0</span>
+                </div>
+                <input type="text" class="search-input" id="cert-search" placeholder="Search by name or certificate ID...">
+            </div>
+            <div class="admin-table-wrap">
+                <table class="admin-table" id="certs-table">
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Intern Name</th>
+                            <th>Email</th>
+                            <th>Domain</th>
+                            <th>Certificate ID</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="certs-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    // ── Admin Credentials ──
+    const ADMIN_CREDS = { user: 'admin', pass: 'codmint2026' };
+
+    const gate = document.getElementById('admin-gate');
+    const panel = document.getElementById('admin-panel');
+    const gateError = document.getElementById('gate-error');
+
+    document.getElementById('admin-login-btn').addEventListener('click', () => {
+        const u = document.getElementById('admin-user').value.trim();
+        const p = document.getElementById('admin-pass').value;
+        if (u === ADMIN_CREDS.user && p === ADMIN_CREDS.pass) {
+            gate.style.display = 'none';
+            panel.style.display = 'block';
+            renderDashboard();
+        } else {
+            gateError.style.display = 'block';
+        }
+    });
+
+    // Enter key support
+    document.getElementById('admin-pass').addEventListener('keydown', e => {
+        if (e.key === 'Enter') document.getElementById('admin-login-btn').click();
+    });
+
+    // ── Tab Navigation ──
+    document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-section').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // ── Data Helpers ──
+    function getUsers() {
+        return JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    }
+
+    function getAllApplications() {
+        return JSON.parse(localStorage.getItem('allApplications') || '{}');
+    }
+
+    function flatApplications() {
+        const allApps = getAllApplications();
+        const users = getUsers();
+        const flat = [];
+        for (const email in allApps) {
+            const user = users.find(u => u.email === email);
+            const name = user ? user.name : email;
+            allApps[email].forEach(app => {
+                flat.push({ email, name, ...app });
+            });
+        }
+        return flat;
+    }
+
+    function domainCounts() {
+        const apps = flatApplications();
+        const counts = {};
+        apps.forEach(a => { counts[a.domain] = (counts[a.domain] || 0) + 1; });
+        return counts;
+    }
+
+    // ── Render ──
+    function renderDashboard() {
+        const users = getUsers();
+        const apps = flatApplications();
+        const domains = domainCounts();
+        const maxDomain = Math.max(...Object.values(domains), 1);
+
+        // Stats
+        document.getElementById('stats-row').innerHTML = `
+            <div class="stat-box red">
+                <div class="label">Total Users</div>
+                <div class="value">${users.length}</div>
+                <div class="sub">Registered accounts</div>
+            </div>
+            <div class="stat-box green">
+                <div class="label">Applications</div>
+                <div class="value">${apps.length}</div>
+                <div class="sub">Total submitted</div>
+            </div>
+            <div class="stat-box blue">
+                <div class="label">Domains Active</div>
+                <div class="value">${Object.keys(domains).length}</div>
+                <div class="sub">Internship tracks</div>
+            </div>
+            <div class="stat-box yellow">
+                <div class="label">Acceptance Rate</div>
+                <div class="value">100%</div>
+                <div class="sub">All selected</div>
+            </div>
+        `;
+
+        // Domain bars
+        const barHtml = Object.entries(domains).sort((a,b) => b[1]-a[1]).map(([d, c]) => `
+            <div class="domain-bar-item">
+                <div class="domain-bar-label">
+                    <span>${d}</span>
+                    <span>${c} applicant${c>1?'s':''}</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:${Math.round((c/maxDomain)*100)}%"></div>
+                </div>
+            </div>
+        `).join('');
+        document.getElementById('domain-bars').innerHTML = barHtml || '<p style="color:var(--admin-muted);font-size:0.9rem;">No applications yet.</p>';
+
+        // Recent users
+        const recentHtml = users.slice(-5).reverse().map(u => `
+            <div class="recent-item">
+                <div class="user-avatar">${u.name.charAt(0).toUpperCase()}</div>
+                <div class="meta">
+                    <div class="name">${u.name}</div>
+                    <div class="detail">${u.email}</div>
+                </div>
+                <div class="time">Registered</div>
+            </div>
+        `).join('');
+        document.getElementById('recent-users').innerHTML = recentHtml || '<p style="color:var(--admin-muted);font-size:0.9rem;">No users yet.</p>';
+
+        // Users table
+        renderUsersTable(users);
+        // Applications table
+        renderAppsTable(apps);
+        // Certificates table
+        renderCertsTable(apps);
+    }
+
+    function renderUsersTable(users) {
+        document.getElementById('users-count-badge').textContent = users.length;
+        const tbody = document.getElementById('users-tbody');
+        if (!users.length) {
+            tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><p>No registered users yet.</p></div></td></tr>`;
+            return;
+        }
+        tbody.innerHTML = users.map((u, i) => `
+            <tr>
+                <td>
+                    <div class="user-avatar" style="display:inline-flex;">${u.name.charAt(0).toUpperCase()}</div>
+                    <strong>${u.name}</strong>
+                </td>
+                <td style="color:var(--admin-muted);">${u.email}</td>
+                <td style="color:var(--admin-muted); font-family:monospace; letter-spacing:1px;">••••••</td>
+                <td><span class="status-pill pill-green">Active</span></td>
+                <td>
+                    <button class="action-btn" onclick="deleteUser('${u.email}')">Remove</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function renderAppsTable(apps) {
+        document.getElementById('apps-count-badge').textContent = apps.length;
+        const tbody = document.getElementById('apps-tbody');
+        if (!apps.length) {
+            tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><p>No applications yet.</p></div></td></tr>`;
+            return;
+        }
+        tbody.innerHTML = apps.map((a, i) => {
+            const certId = `CM-2026-${String(i+1).padStart(4,'0')}`;
+            const pillMap = { 'Selected':'pill-green', 'Under Review':'pill-yellow', 'Interview Scheduled':'pill-blue', 'Completed':'pill-green', 'On Hold':'pill-red' };
+            const pillClass = pillMap[a.status] || 'pill-green';
+            return `
+            <tr>
+                <td style="color:var(--admin-muted);font-weight:600;">${i+1}</td>
+                <td>
+                    <div class="user-avatar" style="display:inline-flex;">${a.name.charAt(0).toUpperCase()}</div>
+                    <strong>${a.name}</strong>
+                    <div style="font-size:0.75rem;color:var(--admin-muted);margin-left:44px;">${a.email}</div>
+                </td>
+                <td><span class="status-pill pill-blue">${a.domain}</span></td>
+                <td style="font-family:monospace;font-size:0.8rem;color:var(--admin-muted);">${certId}</td>
+                <td style="color:var(--admin-muted);">${a.date || 'N/A'}</td>
+                <td><span class="status-pill ${pillClass}">${a.status || 'Selected'}</span></td>
+                <td>
+                    <button class="action-btn" onclick="updateStatus('${a.email}', ${i})">Update</button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    function renderCertsTable(apps) {
+        document.getElementById('cert-count-badge').textContent = apps.filter(a => (a.status||'Selected')==='Completed' || (a.status||'Selected')==='Selected').length;
+        const tbody = document.getElementById('certs-tbody');
+        if (!apps.length) {
+            tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><p>No certificates issued yet.</p></div></td></tr>`;
+            return;
+        }
+        tbody.innerHTML = apps.map((a, i) => {
+            const certId = `CM-2026-${String(i+1).padStart(4,'0')}`;
+            return `
+            <tr>
+                <td style="color:var(--admin-muted);font-weight:600;">${i+1}</td>
+                <td><div class="user-avatar" style="display:inline-flex;">${a.name.charAt(0).toUpperCase()}</div><strong>${a.name}</strong></td>
+                <td style="color:var(--admin-muted);">${a.email}</td>
+                <td><span class="status-pill pill-blue">${a.domain}</span></td>
+                <td style="font-family:monospace;font-size:0.82rem;color:#f59e0b;">${certId}</td>
+                <td><span class="status-pill pill-green">${a.status || 'Selected'}</span></td>
+            </tr>`;
+        }).join('');
+    }
+
+    // ── Actions ──
+    function deleteUser(email) {
+        if (!confirm(`Remove user: ${email}?\n\nThis will also delete their applications.`)) return;
+        let users = getUsers().filter(u => u.email !== email);
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+        const apps = getAllApplications();
+        delete apps[email];
+        localStorage.setItem('allApplications', JSON.stringify(apps));
+        renderDashboard();
+    }
+
+    function updateStatus(email, idx) {
+        const statuses = ['Selected', 'Under Review', 'Interview Scheduled', 'Completed', 'On Hold'];
+        const next = prompt(`Update status for ${email}.\n\nOptions:\n${statuses.map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\nEnter number (1-${statuses.length}):`);
+        if (!next) return;
+        const chosen = statuses[parseInt(next)-1];
+        if (!chosen) { alert('Invalid choice.'); return; }
+        const apps = getAllApplications();
+        if (apps[email] && apps[email][idx]) {
+            apps[email][idx].status = chosen;
+            localStorage.setItem('allApplications', JSON.stringify(apps));
+            renderDashboard();
+        }
+    }
+
+    // ── Live Search ──
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('user-search').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            const users = getUsers().filter(u =>
+                u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)
+            );
+            renderUsersTable(users);
+        });
+
+        document.getElementById('app-search').addEventListener('input', () => filterApps());
+        document.getElementById('app-status-filter').addEventListener('change', () => filterApps());
+
+        function filterApps() {
+            const q = document.getElementById('app-search').value.toLowerCase();
+            const status = document.getElementById('app-status-filter').value;
+            let apps = flatApplications().filter(a =>
+                a.name.toLowerCase().includes(q) || a.domain.toLowerCase().includes(q) || a.email.toLowerCase().includes(q)
+            );
+            if (status) apps = apps.filter(a => (a.status||'Selected') === status);
+            renderAppsTable(apps);
+        }
+
+        document.getElementById('cert-search').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            const apps = flatApplications().filter(a =>
+                a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q)
+            );
+            renderCertsTable(apps);
+        });
+    });
+</script>
+</body>
+</html>
