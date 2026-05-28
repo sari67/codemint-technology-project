@@ -136,7 +136,7 @@ const initPlatform = () => {
         if (!document.getElementById('nav-mobile-verify')) {
             const verifyLink = document.createElement('a');
             verifyLink.id = 'nav-mobile-verify';
-            verifyLink.href = 'verify.html';
+            verifyLink.href = '/verify';
             verifyLink.className = 'mobile-only-link';
             verifyLink.textContent = 'Verify Certificate';
             mainNav.appendChild(verifyLink);
@@ -154,7 +154,7 @@ const initPlatform = () => {
                 if (!document.getElementById('nav-dash-link')) {
                     const dashLink = document.createElement('a');
                     dashLink.id = 'nav-dash-link';
-                    dashLink.href = 'dashboard.html';
+                    dashLink.href = '/dashboard';
                     dashLink.textContent = 'Dashboard';
                     dashLink.style.color = '#FF6B6B';
                     dashLink.style.fontWeight = '700';
@@ -448,7 +448,7 @@ const initPlatform = () => {
             // Redirect to dashboard after short delay if logged in
             if (currentUserStr) {
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html';
+                    window.location.href = '/dashboard';
                 }, 1000);
             }
         });
@@ -690,3 +690,5 @@ if (document.readyState === 'loading') {
 } else {
     initPlatform();
 }
+
+

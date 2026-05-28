@@ -406,7 +406,7 @@
             <button class="admin-tab-btn" data-tab="applications">Applications</button>
             <button class="admin-tab-btn" data-tab="certificates">Certificates</button>
         </nav>
-        <a href="index.html" class="admin-exit-btn">Exit Panel</a>
+        <a class='admin-exit-btn' href='/'>Exit Panel</a>
     </header>
 
     <main class="admin-main">
@@ -558,19 +558,23 @@
         return JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     }
 
+    // Get all applications directly
     function getAllApplications() {
         return JSON.parse(localStorage.getItem('allApplications') || '{}');
     }
 
+    // Return flat applications list with unique indexes mapped
     function flatApplications() {
         const allApps = getAllApplications();
         const users = getUsers();
         const flat = [];
+        let globalIndex = 0;
         for (const email in allApps) {
             const user = users.find(u => u.email === email);
             const name = user ? user.name : email;
-            allApps[email].forEach(app => {
-                flat.push({ email, name, ...app });
+            allApps[email].forEach((app, userAppIndex) => {
+                flat.push({ email, name, ...app, globalIndex, userAppIndex });
+                globalIndex++;
             });
         }
         return flat;
@@ -680,7 +684,7 @@
             return;
         }
         tbody.innerHTML = apps.map((a, i) => {
-            const certId = `CM-2026-${String(i+1).padStart(4,'0')}`;
+            const certId = `CM-2026-${String(a.globalIndex+1).padStart(4,'0')}`;
             const pillMap = { 'Selected':'pill-green', 'Under Review':'pill-yellow', 'Interview Scheduled':'pill-blue', 'Completed':'pill-green', 'On Hold':'pill-red' };
             const pillClass = pillMap[a.status] || 'pill-green';
             const showIssueBtn = (a.status || 'Selected') !== 'Completed';
@@ -697,8 +701,8 @@
                 <td style="color:var(--admin-muted);">${a.date || 'N/A'}</td>
                 <td><span class="status-pill ${pillClass}">${a.status || 'Selected'}</span></td>
                 <td style="white-space:nowrap;">
-                    <button class="action-btn" onclick="updateStatus('${a.email}', ${i})">Update</button>
-                    ${showIssueBtn ? `<button class="action-btn" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.25); color:var(--admin-green); margin-left:6px;" onclick="issueCertDirectly('${a.email}', ${i})">Issue Cert</button>` : ''}
+                    <button class="action-btn" onclick="updateStatus('${a.email}', ${a.userAppIndex})">Update</button>
+                    ${showIssueBtn ? `<button class="action-btn" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.25); color:var(--admin-green); margin-left:6px;" onclick="issueCertDirectly('${a.email}', ${a.userAppIndex}, ${a.globalIndex})">Issue Cert</button>` : ''}
                 </td>
             </tr>`;
         }).join('');
@@ -713,8 +717,7 @@
             return;
         }
         tbody.innerHTML = completedApps.map((a, i) => {
-            const originalIndex = apps.findIndex(app => app.email === a.email && app.domain === a.domain);
-            const certId = `CM-2026-${String(originalIndex+1).padStart(4,'0')}`;
+            const certId = `CM-2026-${String(a.globalIndex+1).padStart(4,'0')}`;
             return `
             <tr>
                 <td style="color:var(--admin-muted);font-weight:600;">${i+1}</td>
@@ -738,11 +741,11 @@
         renderDashboard();
     }
 
-    function issueCertDirectly(email, idx) {
+    function issueCertDirectly(email, userAppIndex, globalIndex) {
         if (!confirm(`Are you sure you want to issue a completion certificate for ${email}? This will set their status to Completed.`)) return;
         const apps = getAllApplications();
-        if (apps[email] && apps[email][idx]) {
-            apps[email][idx].status = 'Completed';
+        if (apps[email] && apps[email][userAppIndex]) {
+            apps[email][userAppIndex].status = 'Completed';
             localStorage.setItem('allApplications', JSON.stringify(apps));
             
             // Sync with User's Assigned Task if present
@@ -755,20 +758,20 @@
                 localStorage.setItem('userTasks', JSON.stringify(allTasks));
             }
             
-            alert(`Certificate generated successfully!\nID: CM-2026-${String(idx+1).padStart(4,'0')}`);
+            alert(`Certificate generated successfully!\nID: CM-2026-${String(globalIndex+1).padStart(4,'0')}`);
             renderDashboard();
         }
     }
 
-    function updateStatus(email, idx) {
+    function updateStatus(email, userAppIndex) {
         const statuses = ['Selected', 'Under Review', 'Interview Scheduled', 'Completed', 'On Hold'];
         const next = prompt(`Update status for ${email}.\n\nOptions:\n${statuses.map((s,i)=>`${i+1}. ${s}`).join('\n')}\n\nEnter number (1-${statuses.length}):`);
         if (!next) return;
         const chosen = statuses[parseInt(next)-1];
         if (!chosen) { alert('Invalid choice.'); return; }
         const apps = getAllApplications();
-        if (apps[email] && apps[email][idx]) {
-            apps[email][idx].status = chosen;
+        if (apps[email] && apps[email][userAppIndex]) {
+            apps[email][userAppIndex].status = chosen;
             
             // Sync dashboard task status to completed if status set to Completed
             if (chosen === 'Completed') {
@@ -821,3 +824,5 @@
 </script>
 </body>
 </html>
+
+

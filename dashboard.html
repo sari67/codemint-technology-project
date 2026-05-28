@@ -349,7 +349,7 @@
                 font-size: 0.75rem;
                 font-weight: 500;
                 gap: 4px;
-                width: 25%;
+                width: 20%;
                 height: 100%;
                 transition: var(--transition-fast);
                 cursor: pointer;
@@ -362,6 +362,184 @@
                 font-weight: 600;
             }
         }
+
+        /* Premium Certificate Styling */
+        .certificate-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .certificate-container {
+            background: #FFFFFF;
+            background-image: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.02) 0%, transparent 80%),
+                              radial-gradient(circle at 10% 20%, rgba(255, 61, 61, 0.01) 0%, transparent 50%);
+            border: 12px double #D4AF37; /* Gold double border */
+            border-radius: 12px;
+            padding: 50px 60px;
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            color: #2D3748;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* Certificate Watermark background styling */
+        .certificate-container::before {
+            content: "C";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25rem;
+            color: rgba(255, 61, 61, 0.02);
+            font-weight: 800;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Premium Certificate Inner Elements */
+        .cert-header {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        .cert-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1A202C;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .cert-logo-icon {
+            background-color: var(--primary-red);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .cert-subtitle {
+            font-size: 0.75rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .cert-title-main {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #B7791F; /* Gold color */
+            margin: 25px 0 15px;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+        }
+        .cert-title-main::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: #D4AF37;
+            margin: 10px auto 0;
+        }
+        .cert-presentation {
+            font-size: 0.85rem;
+            color: #718096;
+            font-style: italic;
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+        }
+        .cert-candidate-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1A202C;
+            border-bottom: 2px solid #E2E8F0;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            min-width: 300px;
+            z-index: 1;
+            position: relative;
+        }
+        .cert-body-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #4A5568;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            z-index: 1;
+            position: relative;
+        }
+        .cert-body-text strong {
+            color: #1A202C;
+            font-weight: 600;
+        }
+        .cert-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        .cert-meta-block {
+            flex: 1;
+            text-align: center;
+        }
+        .cert-signature-line {
+            width: 150px;
+            border-bottom: 1px solid #A0AEC0;
+            margin: 0 auto 8px;
+        }
+        .cert-meta-block span {
+            display: block;
+            font-size: 0.72rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cert-meta-block strong {
+            color: #4A5568;
+        }
+        .cert-seal {
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #ffd700 0%, #d4af37 100%);
+            border-radius: 50%;
+            border: 4px double #fff;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.2;
+            transform: rotate(-5px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        @media print {
+            body { padding: 0; margin: 0; background: none; }
+            .certificate-container { border-width: 12px; margin: 0; }
+        }
     </style>
 </head>
 
@@ -369,21 +547,21 @@
 
     <!-- Glassmorphism Sticky Navigation -->
     <header id="main-header">
-        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
             <div style="background-color: var(--primary-red); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">C</div>
             Codmint
         </a>
         <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="internships.html">Internships</a>
-            <a href="services.html">Services</a>
-            <a href="careers.html">Careers</a>
-            <a href="contact.html">Contact</a>
-            <a href="admin.html" style="color: var(--primary-red); font-weight: 600;">Admin</a>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/internships">Internships</a>
+            <a href="/services">Services</a>
+            <a href="/careers">Careers</a>
+            <a href="/contact">Contact</a>
+            <a href="/admin" style="color: var(--primary-red); font-weight: 600;">Admin</a>
         </nav>
         <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
-            <a href="verify.html" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
+            <a href="/verify" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 <span class="btn-text">Verify Certificate</span>
             </a>
@@ -546,11 +724,23 @@
                     <div id="view-certificates" class="dashboard-view">
                         <div class="dashboard-card">
                             <h2>🎓 My Certificates</h2>
-                            <div style="text-align: center; padding: 60px 20px; color: #888;">
-                                <div style="font-size: 3rem; margin-bottom: 20px;">📜</div>
-                                <h3>No certificates yet</h3>
-                                <p>Complete your internship tasks to earn your verified certificate.</p>
-                                <button onclick="switchView('overview')" class="cta-btn" style="margin-top: 20px; padding: 10px 25px;">View Tasks</button>
+                            <p style="color: #666; margin-bottom: 25px;">View, print, or verify your completed internship certificates.</p>
+                            
+                            <div id="certificates-selector-container" style="margin-bottom: 30px; display: none;">
+                                <label for="certificate-select" style="font-weight: 600; color: var(--dark-grey); display: block; margin-bottom: 8px;">Select Certificate:</label>
+                                <select id="certificate-select" onchange="renderSelectedCertificate()" style="padding: 12px 18px; border: 2px solid #F0F0F0; border-radius: 12px; font-family: inherit; font-size: 1rem; width: 100%; max-width: 400px; cursor: pointer; outline: none; transition: var(--border-color, #EAEAEA) 0.3s;">
+                                    <!-- Dynamic select options -->
+                                </select>
+                            </div>
+
+                            <div id="certificates-display-container">
+                                <!-- Dynamically populated by JS (Either premium certificate or 'No certificates yet' placeholder) -->
+                                <div style="text-align: center; padding: 60px 20px; color: #888;">
+                                    <div style="font-size: 3rem; margin-bottom: 20px;">📜</div>
+                                    <h3>No certificates yet</h3>
+                                    <p>Complete your internship tasks to earn your verified certificate.</p>
+                                    <button onclick="switchView('overview')" class="cta-btn" style="margin-top: 20px; padding: 10px 25px;">View Tasks</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -616,13 +806,13 @@
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="internships.html">Internships</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="verify.html">Verify Certificate</a></li>
-                    <li><a href="contact.html">Contact</a>
-            <a href="admin.html" style="color: var(--primary-red); font-weight: 600;">Admin</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/internships">Internships</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/verify">Verify Certificate</a></li>
+                    <li><a href="/contact">Contact</a>
+            <a href="/admin" style="color: var(--primary-red); font-weight: 600;">Admin</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -659,6 +849,10 @@
         <a onclick="switchView('tasks')" id="bottom-nav-tasks">
             <span class="nav-icon">📝</span>
             <span class="nav-text">Tasks</span>
+        </a>
+        <a onclick="switchView('certificates')" id="bottom-nav-certificates">
+            <span class="nav-icon">📜</span>
+            <span class="nav-text">Certs</span>
         </a>
         <a onclick="switchView('settings')" id="bottom-nav-settings">
             <span class="nav-icon">⚙️</span>
@@ -866,7 +1060,7 @@
                     activeTasksContainer.innerHTML = `
                         <div style="text-align: center; padding: 40px; color: #888;">
                             <p>No active internship tasks assigned. Apply for a domain to receive your tasks!</p>
-                            <a href="internships.html" class="cta-btn" style="display:inline-block;margin-top:15px;padding:10px 25px;text-decoration:none;">Browse Internship Tracks</a>
+                            <a href="/internships" class="cta-btn" style="display:inline-block;margin-top:15px;padding:10px 25px;text-decoration:none;">Browse Internship Tracks</a>
                         </div>
                     `;
                 }
@@ -902,7 +1096,7 @@
                         appliedList.appendChild(item);
                     });
                 } else {
-                    appliedList.innerHTML = '<div style="text-align: center; padding: 40px; color: #888;"><p>No applications found.</p><a href="internships.html" class="text-red">Browse Internships</a></div>';
+                    appliedList.innerHTML = '<div style="text-align: center; padding: 40px; color: #888;"><p>No applications found.</p><a href="/internships" class="text-red">Browse Internships</a></div>';
                 }
             }
 
@@ -956,6 +1150,40 @@
                     offerLetterSec.style.display = 'none';
                 }
             }
+
+            // Load Certificates
+            const certificatesSelectorContainer = document.getElementById('certificates-selector-container');
+            const certificatesDisplayContainer = document.getElementById('certificates-display-container');
+            const selectEl = document.getElementById('certificate-select');
+
+            if (certificatesDisplayContainer) {
+                const completedApps = userApplications.filter(app => app.status === 'Completed');
+                
+                if (completedApps.length > 0) {
+                    if (certificatesSelectorContainer && selectEl) {
+                        certificatesSelectorContainer.style.display = 'block';
+                        
+                        // Populate select options if they are different
+                        const currentVal = selectEl.value;
+                        selectEl.innerHTML = completedApps.map(app => `<option value="${app.domain}">${app.domain} Internship</option>`).join('');
+                        if (currentVal && completedApps.some(app => app.domain === currentVal)) {
+                            selectEl.value = currentVal;
+                        }
+                    }
+                    renderSelectedCertificate();
+                } else {
+                    if (certificatesSelectorContainer) certificatesSelectorContainer.style.display = 'none';
+                    certificatesDisplayContainer.innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px; color: #888;">
+                            <div style="font-size: 3rem; margin-bottom: 20px;">📜</div>
+                            <h3>No certificates yet</h3>
+                            <p>Complete your internship tasks to earn your verified certificate.</p>
+                            <button onclick="switchView('overview')" class="cta-btn" style="margin-top: 20px; padding: 10px 25px;">View Tasks</button>
+                        </div>
+                    `;
+                }
+            }
+        }
         function submitTaskSolution(event, idx) {
             event.preventDefault();
             const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
@@ -999,6 +1227,311 @@
                     loadDashboardData();
                 }
             }
+        }
+
+        function getCertIdForApp(email, domain) {
+            const allApps = JSON.parse(localStorage.getItem('allApplications') || '{}');
+            const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            let globalIndex = 0;
+            for (const uEmail in allApps) {
+                const user = users.find(u => u.email === uEmail);
+                for (let i = 0; i < allApps[uEmail].length; i++) {
+                    const app = allApps[uEmail][i];
+                    if (uEmail === email && app.domain === domain) {
+                        return `CM-2026-${String(globalIndex + 1).padStart(4, '0')}`;
+                    }
+                    globalIndex++;
+                }
+            }
+            return 'CM-2026-0000';
+        }
+
+        function renderSelectedCertificate() {
+            const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (!currentUserStr) return;
+            const user = JSON.parse(currentUserStr);
+
+            const select = document.getElementById('certificate-select');
+            const displayContainer = document.getElementById('certificates-display-container');
+            if (!select || !displayContainer) return;
+
+            const domain = select.value;
+            if (!domain) {
+                displayContainer.innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px; color: #888;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">📜</div>
+                        <h3>No certificate selected</h3>
+                        <p>Please select a completed internship certificate from the dropdown above.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const certId = getCertIdForApp(user.email, domain);
+            
+            // Format today's date or completion date if available
+            const allApplications = JSON.parse(localStorage.getItem('allApplications') || '{}');
+            const userApps = allApplications[user.email] || [];
+            const app = userApps.find(a => a.domain === domain) || {};
+            const certDate = app.date || new Date().toLocaleDateString();
+
+            displayContainer.innerHTML = `
+                <div class="certificate-wrapper fade-in-up">
+                    <div class="certificate-container" id="printable-certificate">
+                        <div class="cert-header">
+                            <div class="cert-logo">
+                                <div class="cert-logo-icon">C</div>
+                                Codmint
+                            </div>
+                            <div class="cert-subtitle">Technologies</div>
+                        </div>
+                        <div class="cert-title-main">CERTIFICATE OF COMPLETION</div>
+                        <div class="cert-presentation">This is proudly presented to</div>
+                        <div class="cert-candidate-name">${user.name}</div>
+                        <div class="cert-body-text">
+                            for successfully completing their <strong>${domain}</strong> internship training at Codmint Technologies.
+                            During this tenure, they have demonstrated outstanding development capabilities, technical expertise, and a commitment to professional growth.
+                        </div>
+                        <div class="cert-meta-row">
+                            <div class="cert-meta-block" style="text-align: left;">
+                                <div class="cert-signature-line"></div>
+                                <span>Verification Date</span>
+                                <strong>${certDate}</strong>
+                            </div>
+                            <div class="cert-meta-block" style="display: flex; justify-content: center; align-items: center;">
+                                <div class="cert-seal">
+                                    Codmint<br>Official<br>Seal
+                                </div>
+                            </div>
+                            <div class="cert-meta-block" style="text-align: right;">
+                                <div class="cert-signature-line"></div>
+                                <span>Certificate ID</span>
+                                <strong>${certId}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <button onclick="printCertificate()" class="cta-btn" style="padding: 10px 25px; display: flex; align-items: center; gap: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                            Print Certificate
+                        </button>
+                        <a href="/verify?id=${certId}" class="nav-btn" style="padding: 10px 25px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Verify Link
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function printCertificate() {
+            const certElement = document.getElementById('printable-certificate');
+            if (!certElement) return;
+
+            const printContent = certElement.innerHTML;
+            const printWindow = window.open('', '_blank', 'width=900,height=650');
+            if (!printWindow) {
+                alert('Popup blocked! Please allow popups to print/save your certificate.');
+                return;
+            }
+
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Internship Completion Certificate | Codmint Technologies</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+                    <style>
+                        body {
+                            background: #F4F6F8;
+                            font-family: 'Poppins', sans-serif;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            min-height: 100vh;
+                            margin: 0;
+                            padding: 20px;
+                            box-sizing: border-box;
+                        }
+                        .certificate-container {
+                            background: #FFFFFF;
+                            background-image: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.02) 0%, transparent 80%),
+                                              radial-gradient(circle at 10% 20%, rgba(255, 61, 61, 0.01) 0%, transparent 50%);
+                            border: 12px double #D4AF37;
+                            border-radius: 12px;
+                            padding: 50px 60px;
+                            position: relative;
+                            max-width: 800px;
+                            width: 100%;
+                            box-sizing: border-box;
+                            color: #2D3748;
+                            text-align: center;
+                            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+                            overflow: hidden;
+                        }
+                        .certificate-container::before {
+                            content: "C";
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: 25rem;
+                            color: rgba(255, 61, 61, 0.02);
+                            font-weight: 800;
+                            z-index: 0;
+                            pointer-events: none;
+                        }
+                        .cert-header {
+                            margin-bottom: 25px;
+                            position: relative;
+                            z-index: 1;
+                        }
+                        .cert-logo {
+                            font-size: 1.8rem;
+                            font-weight: 800;
+                            color: #1A202C;
+                            margin-bottom: 5px;
+                            letter-spacing: -0.5px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        }
+                        .cert-logo-icon {
+                            background-color: #FF3D3D;
+                            color: white;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: bold;
+                            font-size: 1.2rem;
+                        }
+                        .cert-subtitle {
+                            font-size: 0.75rem;
+                            color: #718096;
+                            text-transform: uppercase;
+                            letter-spacing: 2px;
+                            font-weight: 600;
+                        }
+                        .cert-title-main {
+                            font-size: 2.2rem;
+                            font-weight: 700;
+                            color: #B7791F;
+                            margin: 25px 0 15px;
+                            letter-spacing: 2px;
+                            text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+                            position: relative;
+                            z-index: 1;
+                        }
+                        .cert-title-main::after {
+                            content: '';
+                            display: block;
+                            width: 80px;
+                            height: 2px;
+                            background: #D4AF37;
+                            margin: 10px auto 0;
+                        }
+                        .cert-presentation {
+                            font-size: 0.85rem;
+                            color: #718096;
+                            font-style: italic;
+                            margin-bottom: 20px;
+                            z-index: 1;
+                            position: relative;
+                        }
+                        .cert-candidate-name {
+                            font-size: 2rem;
+                            font-weight: 700;
+                            color: #1A202C;
+                            border-bottom: 2px solid #E2E8F0;
+                            display: inline-block;
+                            padding-bottom: 5px;
+                            margin-bottom: 20px;
+                            min-width: 300px;
+                            z-index: 1;
+                            position: relative;
+                        }
+                        .cert-body-text {
+                            font-size: 0.95rem;
+                            line-height: 1.8;
+                            color: #4A5568;
+                            max-width: 600px;
+                            margin: 0 auto 30px;
+                            z-index: 1;
+                            position: relative;
+                        }
+                        .cert-body-text strong {
+                            color: #1A202C;
+                            font-weight: 600;
+                        }
+                        .cert-meta-row {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+                            margin-top: 40px;
+                            position: relative;
+                            z-index: 1;
+                        }
+                        .cert-meta-block {
+                            flex: 1;
+                            text-align: center;
+                        }
+                        .cert-signature-line {
+                            width: 150px;
+                            border-bottom: 1px solid #A0AEC0;
+                            margin: 0 auto 8px;
+                        }
+                        .cert-meta-block span {
+                            display: block;
+                            font-size: 0.72rem;
+                            color: #718096;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                        }
+                        .cert-meta-block strong {
+                            color: #4A5568;
+                        }
+                        .cert-seal {
+                            width: 90px;
+                            height: 90px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: radial-gradient(circle, #ffd700 0%, #d4af37 100%);
+                            border-radius: 50%;
+                            border: 4px double #fff;
+                            color: #fff;
+                            font-weight: 700;
+                            font-size: 0.72rem;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            text-align: center;
+                            line-height: 1.2;
+                            transform: rotate(-5px);
+                        }
+                        @media print {
+                            body { padding: 0; margin: 0; background: none; }
+                            .certificate-container { border-width: 12px; margin: 0; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="certificate-container">
+                        ${printContent}
+                    </div>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                            setTimeout(function() { window.close(); }, 500);
+                        }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
