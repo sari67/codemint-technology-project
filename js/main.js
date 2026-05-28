@@ -680,6 +680,35 @@ const initPlatform = () => {
         });
     }
 
+    // Global Theme Switcher Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('theme-toggle-sun');
+    const moonIcon = document.getElementById('theme-toggle-moon');
+
+    function updateThemeUI(isDark) {
+        if (isDark) {
+            document.body.classList.add('dark-theme');
+            if (sunIcon) sunIcon.style.display = 'block';
+            if (moonIcon) moonIcon.style.display = 'none';
+        } else {
+            document.body.classList.remove('dark-theme');
+            if (sunIcon) sunIcon.style.display = 'none';
+            if (moonIcon) moonIcon.style.display = 'block';
+        }
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI(isDark);
+        });
+    }
+
+    // Init theme based on saved preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    updateThemeUI(savedTheme === 'dark');
+
     // Initialize navigation bar and user authentication state on page load
     updateNavState();
 

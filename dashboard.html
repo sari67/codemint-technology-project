@@ -334,10 +334,17 @@
                 backdrop-filter: blur(20px) saturate(180%);
                 -webkit-backdrop-filter: blur(20px) saturate(180%);
                 border-top: 1px solid rgba(0, 0, 0, 0.05);
-                justify-content: space-around;
+                justify-content: flex-start;
                 align-items: center;
                 z-index: 1000;
                 box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.03);
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .mobile-bottom-nav::-webkit-scrollbar {
+                display: none;
             }
             .mobile-bottom-nav a {
                 display: flex;
@@ -349,7 +356,8 @@
                 font-size: 0.75rem;
                 font-weight: 500;
                 gap: 4px;
-                width: 20%;
+                width: 80px;
+                flex-shrink: 0;
                 height: 100%;
                 transition: var(--transition-fast);
                 cursor: pointer;
@@ -544,6 +552,11 @@
 </head>
 
 <body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    </script>
 
     <!-- Glassmorphism Sticky Navigation -->
     <header id="main-header">
@@ -561,6 +574,11 @@
             <a href="/admin" style="color: var(--primary-red); font-weight: 600;">Admin</a>
         </nav>
         <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
+
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme" style="background: none; border: none; cursor: pointer; color: var(--dark-grey); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #EAEAEA; transition: var(--transition-smooth); margin-right: 5px;">
+                <svg id="theme-toggle-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="theme-toggle-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
             <a href="/verify" class="nav-btn verify-btn" style="display: flex; align-items: center; gap: 6px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 <span class="btn-text">Verify Certificate</span>
@@ -592,6 +610,8 @@
                         <li><a onclick="switchView('overview')" class="active" id="nav-overview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Dashboard</a></li>
                         <li><a onclick="switchView('applications')" id="nav-applications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> My Applications</a></li>
                         <li><a onclick="switchView('tasks')" id="nav-tasks"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Tasks</a></li>
+                        <li><a onclick="switchView('interview')" id="nav-interview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg> Mock Interview</a></li>
+                        <li><a onclick="switchView('achievements')" id="nav-achievements"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path><path d="M12 2a6 6 0 0 1 6 6v4a6 6 0 0 1-6 6 6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z"></path></svg> Achievements</a></li>
                         <li><a onclick="switchView('certificates')" id="nav-certificates"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Certificates</a></li>
                         <li><a onclick="switchView('settings')" id="nav-settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings</a></li>
                     </ul>
@@ -710,12 +730,35 @@
 
                     <!-- 2.5 Tasks View -->
                     <div id="view-tasks" class="dashboard-view">
-                        <div class="dashboard-card">
+                        <div class="dashboard-card" style="max-width: 100%;">
                             <h2>📝 Assigned Tasks</h2>
                             <p style="color: #666; margin-bottom: 25px;">Complete your assigned tasks and submit your solutions for verification.</p>
                             
-                            <div id="active-tasks-container" style="display: flex; flex-direction: column; gap: 24px;">
-                                <!-- Dynamic task detail and submission cards go here -->
+                            <div class="kanban-board">
+                                <!-- Column 1: To Do -->
+                                <div class="kanban-column" id="kanban-todo">
+                                    <div class="kanban-column-header">
+                                        <h3 style="color: var(--primary-red); font-size: 0.95rem; font-weight:700;">To Do</h3>
+                                        <span class="kanban-count" id="count-todo">0</span>
+                                    </div>
+                                    <div class="kanban-tasks-list" id="list-todo" style="display: flex; flex-direction: column; gap: 15px;"></div>
+                                </div>
+                                <!-- Column 2: Under Review -->
+                                <div class="kanban-column" id="kanban-review">
+                                    <div class="kanban-column-header">
+                                        <h3 style="color: #3b82f6; font-size: 0.95rem; font-weight:700;">Under Review</h3>
+                                        <span class="kanban-count" id="count-review" style="background: rgba(59, 130, 246, 0.08); color: #3b82f6;">0</span>
+                                    </div>
+                                    <div class="kanban-tasks-list" id="list-review" style="display: flex; flex-direction: column; gap: 15px;"></div>
+                                </div>
+                                <!-- Column 3: Completed -->
+                                <div class="kanban-column" id="kanban-completed">
+                                    <div class="kanban-column-header">
+                                        <h3 style="color: #22c55e; font-size: 0.95rem; font-weight:700;">Completed</h3>
+                                        <span class="kanban-count" id="count-completed" style="background: rgba(34, 197, 94, 0.08); color: #22c55e;">0</span>
+                                    </div>
+                                    <div class="kanban-tasks-list" id="list-completed" style="display: flex; flex-direction: column; gap: 15px;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -740,6 +783,147 @@
                                     <h3>No certificates yet</h3>
                                     <p>Complete your internship tasks to earn your verified certificate.</p>
                                     <button onclick="switchView('overview')" class="cta-btn" style="margin-top: 20px; padding: 10px 25px;">View Tasks</button>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Mock Interview View -->
+                    <div id="view-interview" class="dashboard-view">
+                        <div class="dashboard-card" style="max-width: 100%;">
+                            <h2>🤖 AI Mock Interview Simulator</h2>
+                            <p style="color: #666; margin-bottom: 25px;">Hone your technical interview skills with real-time feedback and keyword scoring.</p>
+                            
+                            <div class="simulator-container">
+                                <!-- Chat Area -->
+                                <div class="chat-window">
+                                    <div class="chat-header">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <span style="font-size: 1.5rem;">🤖</span>
+                                            <div>
+                                                <h4 style="margin: 0; font-size: 0.95rem; font-weight: 600;" id="interviewer-title">Codmint Interview Bot</h4>
+                                                <span style="font-size: 0.72rem; color: #10B981; font-weight: 600;">● Active</span>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <select id="interview-track-select" style="padding: 6px 12px; border: 1px solid var(--light-grey); border-radius: 8px; font-family: inherit; font-size: 0.8rem; outline: none; cursor: pointer; background: var(--white); color: var(--dark-grey);">
+                                                <option value="Web Development">Web Development</option>
+                                                <option value="UI/UX Design">UI/UX Design</option>
+                                                <option value="Data Science">Data Science</option>
+                                                <option value="Python Developer">Python Developer</option>
+                                                <option value="Cyber Security">Cyber Security</option>
+                                            </select>
+                                            <button id="start-interview-btn" onclick="startMockInterview()" class="cta-btn" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 8px;">Start</button>
+                                        </div>
+                                    </div>
+                                    <div class="chat-messages" id="interview-messages">
+                                        <div class="message-bubble message-bot">
+                                            Hello! Welcome to your Codmint AI Mock Interview. Select your track from the header dropdown above and click <strong>Start</strong> to begin. I will ask you 5 technical questions. Good luck!
+                                        </div>
+                                    </div>
+                                    <form id="chat-input-form" onsubmit="submitInterviewResponse(event)" class="chat-input-area" style="display: none;">
+                                        <textarea id="chat-user-response" placeholder="Type your technical answer here..." required style="background: var(--white); color: var(--dark-grey);"></textarea>
+                                        <button type="submit" class="cta-btn" style="padding: 0 20px; border-radius: 12px; height: 45px; display: flex; align-items: center; justify-content: center;">Send</button>
+                                    </form>
+                                </div>
+                                
+                                <!-- Evaluation Panel -->
+                                <div class="simulator-info-panel">
+                                    <div class="scorecard-card" id="interview-scorecard" style="display: none; animation: scaleIn 0.4s ease-out; background: var(--white); color: var(--dark-grey);">
+                                        <h3 style="margin: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; color: #B7791F;">🏆 Interview Scorecard</h3>
+                                        <p style="font-size: 0.8rem; color: #888; margin: 0;">Evaluation metrics based on conceptual clarity, vocabulary, and relevance.</p>
+                                        
+                                        <hr style="border: 0; border-top: 1px solid var(--light-grey); margin: 5px 0;">
+                                        
+                                        <div class="score-metric">
+                                            <span style="font-weight: 600;">Overall Score</span>
+                                            <span id="score-overall" style="font-weight: 700; color: var(--primary-red);">0/100</span>
+                                        </div>
+                                        <div class="score-bar-bg">
+                                            <div class="score-bar-fill" id="score-bar-overall" style="width: 0%;"></div>
+                                        </div>
+                                        
+                                        <div class="score-metric">
+                                            <span>Technical Depth</span>
+                                            <span id="score-depth">0%</span>
+                                        </div>
+                                        <div class="score-bar-bg">
+                                            <div class="score-bar-fill" id="score-bar-depth" style="width: 0%; background: #3b82f6;"></div>
+                                        </div>
+                                        
+                                        <div class="score-metric">
+                                            <span>Accuracy & Knowledge</span>
+                                            <span id="score-accuracy">0%</span>
+                                        </div>
+                                        <div class="score-bar-bg">
+                                            <div class="score-bar-fill" id="score-bar-accuracy" style="width: 0%; background: #22c55e;"></div>
+                                        </div>
+                                        
+                                        <div class="score-metric">
+                                            <span>Communication Skills</span>
+                                            <span id="score-communication">0%</span>
+                                        </div>
+                                        <div class="score-bar-bg">
+                                            <div class="score-bar-fill" id="score-bar-communication" style="width: 0%; background: #f59e0b;"></div>
+                                        </div>
+                                        
+                                        <hr style="border: 0; border-top: 1px solid var(--light-grey); margin: 5px 0;">
+                                        
+                                        <div>
+                                            <h4 style="margin: 0 0 5px 0; font-size: 0.88rem; font-weight: 600;">📝 Feedback & Improvement:</h4>
+                                            <p id="interview-feedback" style="font-size: 0.8rem; color: var(--medium-grey); line-height: 1.5; margin: 0;"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="scorecard-card" id="past-interviews-card" style="background: var(--white); color: var(--dark-grey);">
+                                        <h3 style="margin: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">📊 Session History</h3>
+                                        <p style="font-size: 0.8rem; color: #888; margin: 0;">Your past AI mock interview performance records.</p>
+                                        
+                                        <div id="past-interviews-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                                            <!-- Dynamically populated -->
+                                            <p style="font-size: 0.8rem; color: #999; text-align: center; margin: 20px 0;">No sessions completed yet.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements View -->
+                    <div id="view-achievements" class="dashboard-view">
+                        <div class="dashboard-card" style="max-width: 100%;">
+                            <h2>🏆 Achievements & Gamified Badges</h2>
+                            <p style="color: #666; margin-bottom: 25px;">Track your platform activity milestones and unlock exclusive professional credentials.</p>
+                            
+                            <div class="achievements-grid" id="achievements-badges-grid">
+                                <!-- Welcome Badge -->
+                                <div class="badge-card locked" id="badge-welcome">
+                                    <div class="badge-icon">👋</div>
+                                    <h4>Welcome Aboard</h4>
+                                    <p>Registered an account on Codmint Internships.</p>
+                                </div>
+                                <!-- Applicant Badge -->
+                                <div class="badge-card locked" id="badge-applicant">
+                                    <div class="badge-icon">💼</div>
+                                    <h4>Track Applicant</h4>
+                                    <p>Applied for at least one internship track.</p>
+                                </div>
+                                <!-- Explorer Badge -->
+                                <div class="badge-card locked" id="badge-explorer">
+                                    <div class="badge-icon">🚀</div>
+                                    <h4>First Step</h4>
+                                    <p>Submitted your first task solution for mentor review.</p>
+                                </div>
+                                <!-- Rising Star Badge -->
+                                <div class="badge-card locked" id="badge-rising">
+                                    <div class="badge-icon">🌟</div>
+                                    <h4>Rising Developer</h4>
+                                    <p>Successfully completed 50% or more of assigned tasks.</p>
+                                </div>
+                                <!-- Certified Specialist Badge -->
+                                <div class="badge-card locked" id="badge-certified">
+                                    <div class="badge-icon">🎓</div>
+                                    <h4>Certified Specialist</h4>
+                                    <p>Completed your internship track and generated your certificate.</p>
                                 </div>
                             </div>
                         </div>
@@ -850,6 +1034,14 @@
             <span class="nav-icon">📝</span>
             <span class="nav-text">Tasks</span>
         </a>
+        <a onclick="switchView('interview')" id="bottom-nav-interview">
+            <span class="nav-icon">🤖</span>
+            <span class="nav-text">Interview</span>
+        </a>
+        <a onclick="switchView('achievements')" id="bottom-nav-achievements">
+            <span class="nav-icon">🏆</span>
+            <span class="nav-text">Badges</span>
+        </a>
         <a onclick="switchView('certificates')" id="bottom-nav-certificates">
             <span class="nav-icon">📜</span>
             <span class="nav-text">Certs</span>
@@ -860,6 +1052,7 @@
         </a>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Dashboard Tab Switching Logic
@@ -927,6 +1120,11 @@
                     </style>
                 </head>
                 <body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    </script>
                     <div class="offer-letter-container">
                         \${printContent}
                     </div>
@@ -1000,70 +1198,96 @@
                 });
             }
 
-            // Load Active Tasks in Dedicated Tasks View Tab
-            const activeTasksContainer = document.getElementById('active-tasks-container');
-            if (activeTasksContainer) {
-                activeTasksContainer.innerHTML = '';
-                // Filter user tasks to show user's active domain tasks
-                // Exclude system tasks like Profile Setup and Email Verified
+            // Load Active Tasks in Kanban Columns
+            const listTodo = document.getElementById('list-todo');
+            const listReview = document.getElementById('list-review');
+            const listCompleted = document.getElementById('list-completed');
+            
+            const countTodo = document.getElementById('count-todo');
+            const countReview = document.getElementById('count-review');
+            const countCompleted = document.getElementById('count-completed');
+
+            if (listTodo && listReview && listCompleted) {
+                listTodo.innerHTML = '';
+                listReview.innerHTML = '';
+                listCompleted.innerHTML = '';
+                
                 const domainTasks = userTasks.filter(t => t.title !== 'Profile Setup' && t.title !== 'Email Verified');
                 
+                let todoCount = 0;
+                let reviewCount = 0;
+                let completedCountVal = 0;
+
                 if (domainTasks.length > 0) {
                     domainTasks.forEach((task, idx) => {
-                        const statusText = task.completed === true ? 'Completed' : (task.completed === 'Under Review' ? 'Under Review' : 'Pending');
-                        const statusClass = task.completed === true ? 'status-completed' : (task.completed === 'Under Review' ? 'status-review' : 'status-pending');
-                        
                         const card = document.createElement('div');
-                        card.style.background = '#FFFFFF';
-                        card.style.border = '1px solid #EAEAEA';
-                        card.style.borderRadius = '20px';
-                        card.style.padding = '30px';
-                        card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.01)';
-                        card.style.display = 'flex';
-                        card.style.flexDirection = 'column';
-                        card.style.gap = '20px';
+                        card.className = 'kanban-task-card fade-in-up';
                         
-                        card.innerHTML = `
-                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-                                <div>
-                                    <span style="display:inline-block;background:rgba(255, 61, 61, 0.08);color:var(--primary-red);font-size:0.75rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Active Internship Module</span>
-                                    <h3 style="margin:0;font-size:1.3rem;">${task.title}</h3>
+                        // Find original index in original userTasks array
+                        const originalIdx = userTasks.findIndex(t => t.title === task.title);
+
+                        if (task.completed === true) {
+                            completedCountVal++;
+                            card.innerHTML = `
+                                <div class="kanban-task-header">
+                                    <h4 style="font-size:0.95rem; font-weight:600; margin:0;">${task.title}</h4>
+                                    <span style="font-size:0.75rem; color:#10B981; font-weight:700;">✓ Approved</span>
                                 </div>
-                                <span class="app-status ${statusClass}">${statusText}</span>
-                            </div>
-                            
-                            <p style="color:#666;font-size:0.95rem;line-height:1.6;margin:0;">${task.desc}</p>
-                            
-                            ${task.completed === false ? `
-                                <hr style="border:0;border-top:1px solid #EAEAEA;margin:10px 0;">
-                                <form onsubmit="submitTaskSolution(event, ${idx})" style="display:flex;flex-direction:column;gap:15px;">
-                                    <div class="input-group">
-                                        <label style="font-size:0.85rem;font-weight:600;color:#555;">Submission Link (GitHub, Google Drive, or Figma URL)</label>
-                                        <input type="url" id="solution-link-${idx}" placeholder="https://github.com/yourusername/project" required style="padding:12px 18px;border:2px solid #F0F0F0;border-radius:12px;font-family:inherit;">
+                                <p class="kanban-task-desc" style="font-size: 0.82rem; color: var(--medium-grey); margin: 0; line-height: 1.5;">${task.desc}</p>
+                                <div class="kanban-task-actions" style="font-size:0.75rem; color:var(--medium-grey); margin-top:5px;">
+                                    <span>Verified by Codmint Mentors</span>
+                                </div>
+                            `;
+                            listCompleted.appendChild(card);
+                        } else if (task.completed === 'Under Review') {
+                            reviewCount++;
+                            card.innerHTML = `
+                                <div class="kanban-task-header">
+                                    <h4 style="font-size:0.95rem; font-weight:600; margin:0;">${task.title}</h4>
+                                    <span style="font-size:0.75rem; color:#3b82f6; font-weight:700;">⏳ Reviewing</span>
+                                </div>
+                                <p class="kanban-task-desc" style="font-size: 0.82rem; color: var(--medium-grey); margin: 0; line-height: 1.5;">${task.desc}</p>
+                                <div class="kanban-task-actions" style="font-size:0.75rem; color:var(--medium-grey); margin-top:5px; display:flex; flex-direction:column; align-items:flex-start; gap:4px; width:100%;">
+                                    <span style="word-break:break-all;">Link: <a href="${task.submissionLink}" target="_blank" style="color:var(--primary-red); font-weight:600;">Open Submission</a></span>
+                                </div>
+                            `;
+                            listReview.appendChild(card);
+                        } else {
+                            todoCount++;
+                            card.innerHTML = `
+                                <div class="kanban-task-header">
+                                    <h4 style="font-size:0.95rem; font-weight:600; margin:0;">${task.title}</h4>
+                                    <span style="font-size:0.75rem; color:var(--primary-red); font-weight:700;">Pending</span>
+                                </div>
+                                <p class="kanban-task-desc" style="font-size: 0.82rem; color: var(--medium-grey); margin: 0; line-height: 1.5;">${task.desc}</p>
+                                <hr style="border:0; border-top:1px solid var(--light-grey); margin:5px 0;">
+                                <form onsubmit="submitTaskSolution(event, ${originalIdx})" style="display:flex; flex-direction:column; gap:8px; width:100%;">
+                                    <div style="display:flex; flex-direction:column; gap:3px;">
+                                        <label style="font-size:0.7rem; font-weight:600; color:var(--medium-grey);">Solution Link</label>
+                                        <input type="url" id="solution-link-${originalIdx}" placeholder="GitHub or Drive URL" required style="padding:6px 10px; border:1px solid var(--light-grey); border-radius:6px; font-size:0.78rem; font-family:inherit; width:100%; box-sizing:border-box;">
                                     </div>
-                                    <div class="input-group">
-                                        <label style="font-size:0.85rem;font-weight:600;color:#555;">Submission Notes (Optional)</label>
-                                        <input type="text" id="solution-notes-${idx}" placeholder="e.g., Completed all frontend modules and added extra animations." style="padding:12px 18px;border:2px solid #F0F0F0;border-radius:12px;font-family:inherit;">
+                                    <div style="display:flex; flex-direction:column; gap:3px;">
+                                        <label style="font-size:0.7rem; font-weight:600; color:var(--medium-grey);">Notes</label>
+                                        <input type="text" id="solution-notes-${originalIdx}" placeholder="e.g. Done layout improvements" style="padding:6px 10px; border:1px solid var(--light-grey); border-radius:6px; font-size:0.78rem; font-family:inherit; width:100%; box-sizing:border-box;">
                                     </div>
-                                    <button type="submit" class="cta-btn" style="width:fit-content;padding:12px 30px;">Submit Project Module</button>
+                                    <button type="submit" class="cta-btn" style="padding:6px 14px; font-size:0.78rem; border-radius:6px; width:fit-content; margin-top:3px;">Submit Project</button>
                                 </form>
-                            ` : `
-                                <div style="background:#F9F9FB;border:1px dashed #EAEAEA;border-radius:12px;padding:15px;font-size:0.85rem;color:#777;display:flex;align-items:center;gap:10px;">
-                                    <span>🎉</span>
-                                    <span>${task.completed === 'Under Review' ? 'Task solution submitted! Codmint Mentors are currently evaluating your solution.' : 'Fantastic job! This module has been approved and marked as completed.'}</span>
-                                </div>
-                            `}
-                        `;
-                        activeTasksContainer.appendChild(card);
+                            `;
+                            listTodo.appendChild(card);
+                        }
                     });
                 } else {
-                    activeTasksContainer.innerHTML = `
-                        <div style="text-align: center; padding: 40px; color: #888;">
-                            <p>No active internship tasks assigned. Apply for a domain to receive your tasks!</p>
-                            <a href="/internships" class="cta-btn" style="display:inline-block;margin-top:15px;padding:10px 25px;text-decoration:none;">Browse Internship Tracks</a>
+                    listTodo.innerHTML = `
+                        <div style="text-align: center; padding: 25px 10px; color: #888; font-size:0.82rem;">
+                            <p>No active internship tasks assigned.</p>
+                            <a href="/internships" class="cta-btn" style="display:inline-block; margin-top:10px; padding:6px 15px; font-size:0.75rem; text-decoration:none; border-radius:6px;">Browse Internship Tracks</a>
                         </div>
                     `;
                 }
+
+                if (countTodo) countTodo.textContent = todoCount;
+                if (countReview) countReview.textContent = reviewCount;
+                if (countCompleted) countCompleted.textContent = completedCountVal;
             }
 
             // Update Progress Bar
@@ -1183,7 +1407,432 @@
                     `;
                 }
             }
+
+            // Load achievements & past interviews
+            updateAchievements(user, userTasks, userApplications);
+            loadPastInterviews(user.email);
         }
+
+        // Achievements Badge System
+        function updateAchievements(user, userTasks, userApplications) {
+            const badgeWelcome = document.getElementById('badge-welcome');
+            const badgeApplicant = document.getElementById('badge-applicant');
+            const badgeExplorer = document.getElementById('badge-explorer');
+            const badgeRising = document.getElementById('badge-rising');
+            const badgeCertified = document.getElementById('badge-certified');
+
+            if (!badgeWelcome) return;
+
+            // Welcome is always unlocked for logged in users
+            badgeWelcome.classList.remove('locked');
+
+            // Applicant (applied for at least one internship track)
+            if (userApplications.length > 0) {
+                badgeApplicant.classList.remove('locked');
+            } else {
+                badgeApplicant.classList.add('locked');
+            }
+
+            // Explorer (submitted at least one task or has a review/completed task)
+            const hasSubmitted = userTasks.some(t => t.completed === 'Under Review' || t.completed === true && t.title !== 'Profile Setup' && t.title !== 'Email Verified');
+            if (hasSubmitted) {
+                badgeExplorer.classList.remove('locked');
+            } else {
+                badgeExplorer.classList.add('locked');
+            }
+
+            // Rising Star (50% or more tasks completed)
+            const completedCount = userTasks.filter(t => t.completed === true).length;
+            const totalCount = userTasks.length;
+            const completionPercent = totalCount > 0 ? (completedCount / totalCount) : 0;
+            if (completionPercent >= 0.5) {
+                badgeRising.classList.remove('locked');
+            } else {
+                badgeRising.classList.add('locked');
+            }
+
+            // Certified
+            const hasCompletedTrack = userApplications.some(app => app.status === 'Completed');
+            if (hasCompletedTrack) {
+                badgeCertified.classList.remove('locked');
+            } else {
+                badgeCertified.classList.add('locked');
+            }
+        }
+
+        // AI Interview Simulator Questions
+        const interviewQuestions = {
+            'Web Development': [
+                {
+                    q: "What is the difference between let, const, and var in JavaScript?",
+                    keywords: ["scope", "hoist", "block", "reassign", "redeclare", "global", "function scope"],
+                    ideal: "var is function-scoped and hoisted. let and const are block-scoped and not hoisted. const cannot be reassigned."
+                },
+                {
+                    q: "Explain the Box Model in CSS and how box-sizing: border-box changes it.",
+                    keywords: ["content", "padding", "border", "margin", "width", "height", "total size", "box-sizing"],
+                    ideal: "The Box Model consists of content, padding, border, and margin. border-box includes padding and border in the specified width/height."
+                },
+                {
+                    q: "What is Event Delegation in JavaScript and why is it useful?",
+                    keywords: ["bubble", "parent", "listener", "target", "event bubble", "dynamic", "performance", "memory"],
+                    ideal: "Event delegation attaches a single event listener to a parent to manage events for all children using event bubbling."
+                },
+                {
+                    q: "What are Promises in JavaScript and how do they differ from callbacks?",
+                    keywords: ["asynchronous", "resolve", "reject", "pending", "callback hell", "then", "catch", "async/await", "state"],
+                    ideal: "Promises represent the completion or failure of an asynchronous operation, preventing callback hell."
+                },
+                {
+                    q: "What is the purpose of Semantic HTML, and can you name three semantic tags?",
+                    keywords: ["seo", "accessibility", "meaning", "structure", "header", "footer", "article", "section", "aside", "nav", "main"],
+                    ideal: "Semantic HTML adds structural meaning to elements, which improves SEO and accessibility (e.g., <header>, <article>, <footer>)."
+                }
+            ],
+            'UI/UX Design': [
+                {
+                    q: "What is the difference between UX and UI design?",
+                    keywords: ["experience", "interface", "usability", "visual", "layout", "journey", "wireframe", "color", "interaction"],
+                    ideal: "UX is user journey and structure; UI is visual presentation and aesthetic interaction."
+                },
+                {
+                    q: "Explain the concept of 'Visual Hierarchy' in design.",
+                    keywords: ["size", "color", "contrast", "alignment", "importance", "focal point", "read", "scan", "typography"],
+                    ideal: "Visual hierarchy is presenting elements in order of importance using size, color, and spacing."
+                },
+                {
+                    q: "What are wireframes, and what stage of the design process are they used in?",
+                    keywords: ["layout", "low-fidelity", "structure", "sketch", "early", "blueprint", "ux", "feedback"],
+                    ideal: "Wireframes are early, low-fidelity structural blueprints defining basic layout and elements."
+                },
+                {
+                    q: "What is Responsive Design and why is it important?",
+                    keywords: ["mobile", "screen", "breakpoint", "media query", "flexible", "grid", "device", "user experience"],
+                    ideal: "Responsive design adapts a website layout dynamically to fit any device or screen size."
+                },
+                {
+                    q: "Explain what usability testing is and why we do it.",
+                    keywords: ["user", "test", "feedback", "prototype", "behavior", "pain point", "validate", "observe", "problems"],
+                    ideal: "Usability testing evaluates a prototype with real users to identify pain points and design issues."
+                }
+            ],
+            'Data Science': [
+                {
+                    q: "What is the difference between supervised and unsupervised learning?",
+                    keywords: ["label", "unlabeled", "train", "classification", "regression", "clustering", "features", "target"],
+                    ideal: "Supervised learning uses labeled training data; unsupervised learning finds patterns in unlabeled data."
+                },
+                {
+                    q: "What is overfitting, and how can you prevent it?",
+                    keywords: ["noise", "regularization", "cross-validation", "dropout", "test", "complexity", "underfit", "generalize"],
+                    ideal: "Overfitting is when a model learns noise in training data. Prevent it using cross-validation or regularization."
+                },
+                {
+                    q: "Explain the term 'Confusion Matrix' and its components.",
+                    keywords: ["true positive", "false positive", "true negative", "false negative", "accuracy", "precision", "recall", "metrics", "actual", "predicted"],
+                    ideal: "A table describing classification model performance, showing True/False Positives and Negatives."
+                },
+                {
+                    q: "What is the difference between L1 (Lasso) and L2 (Ridge) regularization?",
+                    keywords: ["l1", "l2", "lasso", "ridge", "penalty", "absolute", "squared", "sparse", "coefficients", "feature selection"],
+                    ideal: "L1 adds an absolute penalty (creating sparse models); L2 adds a squared penalty."
+                },
+                {
+                    q: "What is the Central Limit Theorem and why is it important?",
+                    keywords: ["sample size", "normal distribution", "mean", "variance", "population", "sampling", "inference"],
+                    ideal: "It states sample means will approach a normal distribution as sample size grows, regardless of population distribution."
+                }
+            ],
+            'Python Developer': [
+                {
+                    q: "What are decorators in Python and how do you use them?",
+                    keywords: ["function", "wrapper", "modify", "behavior", "syntactic sugar", "@", "arguments", "return"],
+                    ideal: "Decorators wrap functions to dynamically extend or modify their behavior using the @ syntax."
+                },
+                {
+                    q: "What is the difference between lists and tuples in Python?",
+                    keywords: ["mutable", "immutable", "syntax", "brackets", "parentheses", "memory", "speed", "reassign"],
+                    ideal: "Lists are mutable and defined with [], whereas tuples are immutable and defined with ()."
+                },
+                {
+                    q: "What are generators in Python, and how do they save memory?",
+                    keywords: ["yield", "iterator", "lazy", "memory", "on demand", "generator expression", "next"],
+                    ideal: "Generators yield values lazy on-the-fly rather than loading everything into memory at once."
+                },
+                {
+                    q: "How does memory management work in Python?",
+                    keywords: ["garbage collector", "reference count", "heap", "private", "memory manager", "allocation", "deallocation"],
+                    ideal: "Python handles memory via private heaps, using reference counts and cyclic garbage collection."
+                },
+                {
+                    q: "What is the difference between deep copy and shallow copy in Python?",
+                    keywords: ["copy module", "reference", "nested", "object", "shallow", "deep", "memory address"],
+                    ideal: "Shallow copy copies references of nested items; deep copy recursively copies nested elements fully."
+                }
+            ],
+            'Cyber Security': [
+                {
+                    q: "What is the difference between symmetric and asymmetric encryption?",
+                    keywords: ["key", "public", "private", "same key", "different keys", "speed", "rsa", "aes", "distribution"],
+                    ideal: "Symmetric uses one secret key for encryption/decryption. Asymmetric uses public and private key pairs."
+                },
+                {
+                    q: "What is SQL Injection (SQLi) and how can it be prevented?",
+                    keywords: ["database", "query", "sanitize", "input", "parameterized", "prepared statement", "orm", "validation"],
+                    ideal: "SQLi executes malicious SQL inputs; it's prevented using parameterized queries and prepared statements."
+                },
+                {
+                    q: "Explain the concept of 'Cross-Site Scripting' (XSS) and how it works.",
+                    keywords: ["javascript", "browser", "malicious script", "stored", "reflected", "dom-based", "cookie", "sanitize"],
+                    ideal: "XSS injects client-side scripts into web pages to compromise session keys or user data."
+                },
+                {
+                    q: "What is the difference between a Vulnerability Assessment and a Penetration Test?",
+                    keywords: ["scan", "exploit", "automated", "manual", "find", "prove", "security posture", "depth"],
+                    ideal: "Vulnerability assessment is finding security gaps (automated); pentest is actively trying to exploit them."
+                },
+                {
+                    q: "Explain what Multi-Factor Authentication (MFA) is and its three main factors.",
+                    keywords: ["know", "have", "are", "password", "token", "biometric", "security", "factors"],
+                    ideal: "MFA requires key verification factors: something you know, something you have, and something you are."
+                }
+            ]
+        };
+
+        let currentInterview = null;
+
+        function startMockInterview() {
+            const trackSelect = document.getElementById('interview-track-select');
+            const startBtn = document.getElementById('start-interview-btn');
+            const inputForm = document.getElementById('chat-input-form');
+            const chatMessages = document.getElementById('interview-messages');
+            
+            if (!trackSelect || !startBtn || !inputForm || !chatMessages) return;
+
+            const selectedTrack = trackSelect.value;
+            const questions = interviewQuestions[selectedTrack];
+            
+            if (!questions) return;
+
+            // Reset interview state
+            currentInterview = {
+                track: selectedTrack,
+                questions: questions,
+                currentIdx: 0,
+                responses: [],
+                scores: []
+            };
+
+            // Update UI
+            trackSelect.disabled = true;
+            startBtn.disabled = true;
+            startBtn.textContent = 'In Progress';
+            inputForm.style.display = 'flex';
+            
+            chatMessages.innerHTML = `
+                <div class="message-bubble message-bot">
+                    Great! Let's start the mock interview for the <strong>${selectedTrack}</strong> track. I'll ask you 5 questions.
+                </div>
+            `;
+
+            // Ask first question
+            setTimeout(() => {
+                askNextInterviewQuestion();
+            }, 800);
+        }
+
+        function askNextInterviewQuestion() {
+            const chatMessages = document.getElementById('interview-messages');
+            const inputArea = document.getElementById('chat-user-response');
+            if (!chatMessages || !currentInterview) return;
+
+            const qIdx = currentInterview.currentIdx;
+            const questionObj = currentInterview.questions[qIdx];
+
+            const botMsg = document.createElement('div');
+            botMsg.className = 'message-bubble message-bot fade-in-up';
+            botMsg.innerHTML = `<strong>Question ${qIdx + 1}/5:</strong><br>${questionObj.q}`;
+            chatMessages.appendChild(botMsg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            if (inputArea) {
+                inputArea.value = '';
+                inputArea.focus();
+            }
+        }
+
+        function submitInterviewResponse(event) {
+            event.preventDefault();
+            const responseInput = document.getElementById('chat-user-response');
+            const chatMessages = document.getElementById('interview-messages');
+            
+            if (!responseInput || !chatMessages || !currentInterview) return;
+
+            const userText = responseInput.value.trim();
+            if (!userText) return;
+
+            // Add user response to chat
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message-bubble message-user fade-in-up';
+            userMsg.textContent = userText;
+            chatMessages.appendChild(userMsg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Grade response
+            const qIdx = currentInterview.currentIdx;
+            const questionObj = currentInterview.questions[qIdx];
+            const scoreObj = gradeResponse(userText, questionObj);
+            
+            currentInterview.responses.push(userText);
+            currentInterview.scores.push(scoreObj);
+
+            currentInterview.currentIdx++;
+
+            if (currentInterview.currentIdx < 5) {
+                responseInput.value = '';
+                // Wait and ask next question
+                setTimeout(() => {
+                    askNextInterviewQuestion();
+                }, 1000);
+            } else {
+                // End interview and show scorecard
+                responseInput.value = '';
+                document.getElementById('chat-input-form').style.display = 'none';
+                
+                const finalMsg = document.createElement('div');
+                finalMsg.className = 'message-bubble message-bot fade-in-up';
+                finalMsg.innerHTML = `Thank you! That completes our interview. Generating your performance scorecard...`;
+                chatMessages.appendChild(finalMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                setTimeout(() => {
+                    generateInterviewScorecard();
+                }, 1500);
+            }
+        }
+
+        function gradeResponse(userText, questionObj) {
+            const textLower = userText.toLowerCase();
+            let matchedKeywords = 0;
+            
+            questionObj.keywords.forEach(kw => {
+                if (textLower.includes(kw.toLowerCase())) {
+                    matchedKeywords++;
+                }
+            });
+
+            const keywordRatio = matchedKeywords / questionObj.keywords.length;
+            
+            // Grading heuristic
+            let depth = Math.min(Math.round(keywordRatio * 100 + (userText.length > 150 ? 10 : 0)), 100);
+            let accuracy = Math.min(Math.round(keywordRatio * 100 + (userText.length > 100 ? 5 : 0)), 100);
+            
+            // Check communication
+            const words = userText.split(/\s+/).filter(w => w.length > 0).length;
+            let communication = 60; // base score
+            if (words > 30) communication += 15;
+            if (words > 60) communication += 15;
+            if (userText.includes('.') && userText.includes(',')) communication += 10;
+            communication = Math.min(communication, 100);
+
+            if (words < 5) {
+                depth = 10;
+                accuracy = 10;
+                communication = 20;
+            }
+
+            const overall = Math.round((depth * 0.4) + (accuracy * 0.4) + (communication * 0.2));
+
+            return {
+                overall,
+                depth,
+                accuracy,
+                communication
+            };
+        }
+
+        function generateInterviewScorecard() {
+            if (!currentInterview) return;
+
+            const scores = currentInterview.scores;
+            const avgOverall = Math.round(scores.reduce((sum, s) => sum + s.overall, 0) / 5);
+            const avgDepth = Math.round(scores.reduce((sum, s) => sum + s.depth, 0) / 5);
+            const avgAccuracy = Math.round(scores.reduce((sum, s) => sum + s.accuracy, 0) / 5);
+            const avgComm = Math.round(scores.reduce((sum, s) => sum + s.communication, 0) / 5);
+
+            // Save score to localStorage
+            const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (currentUserStr) {
+                const user = JSON.parse(currentUserStr);
+                const pastSessions = JSON.parse(localStorage.getItem('mockInterviews_' + user.email) || '[]');
+                pastSessions.unshift({
+                    track: currentInterview.track,
+                    date: new Date().toLocaleDateString(),
+                    score: avgOverall
+                });
+                localStorage.setItem('mockInterviews_' + user.email, JSON.stringify(pastSessions));
+                loadPastInterviews(user.email);
+            }
+
+            // Update Scorecard UI
+            document.getElementById('score-overall').textContent = avgOverall + '/100';
+            document.getElementById('score-bar-overall').style.width = avgOverall + '%';
+            
+            document.getElementById('score-depth').textContent = avgDepth + '%';
+            document.getElementById('score-bar-depth').style.width = avgDepth + '%';
+
+            document.getElementById('score-accuracy').textContent = avgAccuracy + '%';
+            document.getElementById('score-bar-accuracy').style.width = avgAccuracy + '%';
+
+            document.getElementById('score-communication').textContent = avgComm + '%';
+            document.getElementById('score-bar-communication').style.width = avgComm + '%';
+
+            // Generate constructive feedback
+            let feedback = "";
+            if (avgOverall >= 85) {
+                feedback = "Exceptional performance! You demonstrated comprehensive technical knowledge, used precise domain terminology, and structured your answers logically. Ready for live client rounds.";
+            } else if (avgOverall >= 70) {
+                feedback = "Solid performance. You understood core principles and explained them reasonably well. To reach the next level, work on explaining edge cases and expanding your technical vocabulary.";
+            } else if (avgOverall >= 50) {
+                feedback = "Average performance. While you have basic familiarity, your responses lack depth and key technical keywords. Review the official documentation and retry the simulator.";
+            } else {
+                feedback = "Needs significant improvement. Several responses were too brief or lacked correct technical terms. Focus on core concepts of the track, practice writing structured answers, and try again.";
+            }
+
+            document.getElementById('interview-feedback').textContent = feedback;
+            document.getElementById('interview-scorecard').style.display = 'flex';
+
+            // Reset start button
+            const trackSelect = document.getElementById('interview-track-select');
+            const startBtn = document.getElementById('start-interview-btn');
+            if (trackSelect && startBtn) {
+                trackSelect.disabled = false;
+                startBtn.disabled = false;
+                startBtn.textContent = 'Retry';
+            }
+        }
+
+        function loadPastInterviews(email) {
+            const listEl = document.getElementById('past-interviews-list');
+            if (!listEl) return;
+
+            const pastSessions = JSON.parse(localStorage.getItem('mockInterviews_' + email) || '[]');
+            
+            if (pastSessions.length > 0) {
+                listEl.innerHTML = pastSessions.slice(0, 5).map(session => `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: rgba(0,0,0,0.02); border: 1px solid var(--light-grey); border-radius: 12px; font-size: 0.82rem; color: var(--dark-grey);">
+                        <div>
+                            <strong style="display: block;">${session.track}</strong>
+                            <span style="font-size: 0.72rem; color: #888;">${session.date}</span>
+                        </div>
+                        <span style="font-weight: 700; color: ${session.score >= 70 ? '#22c55e' : (session.score >= 50 ? '#f59e0b' : 'var(--primary-red)')}">${session.score}/100</span>
+                    </div>
+                `).join('');
+            } else {
+                listEl.innerHTML = `<p style="font-size: 0.8rem; color: #999; text-align: center; margin: 20px 0;">No sessions completed yet.</p>`;
+            }
+        }
+
         function submitTaskSolution(event, idx) {
             event.preventDefault();
             const currentUserStr = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
@@ -1314,6 +1963,10 @@
                         <button onclick="printCertificate()" class="cta-btn" style="padding: 10px 25px; display: flex; align-items: center; gap: 8px;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                             Print Certificate
+                        </button>
+                        <button onclick="downloadCertificatePDF('${user.name}', '${domain}')" class="cta-btn" style="padding: 10px 25px; display: flex; align-items: center; gap: 8px; background: #10B981; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Download PDF
                         </button>
                         <a href="/verify?id=${certId}" class="nav-btn" style="padding: 10px 25px; border: 1px solid #EAEAEA; background: var(--white); text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -1519,6 +2172,11 @@
                     </style>
                 </head>
                 <body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    </script>
                     <div class="certificate-container">
                         ${printContent}
                     </div>
@@ -1532,6 +2190,65 @@
                 </html>
             `);
             printWindow.document.close();
+        }
+
+        function downloadCertificatePDF(name, domain) {
+            const certElement = document.getElementById('printable-certificate');
+            if (!certElement) return;
+
+            // Save current theme, set light theme for pdf generation to ensure professional colors
+            const isDark = document.body.classList.contains('dark-theme');
+            if (isDark) {
+                document.body.classList.remove('dark-theme');
+            }
+
+            // Create temporary container for clean rendering without shadows and margins
+            const element = certElement.cloneNode(true);
+            element.style.boxShadow = 'none';
+            element.style.margin = '0';
+            element.style.width = '800px';
+            element.style.padding = '40px';
+            element.style.border = '12px double #D4AF37';
+            element.style.borderRadius = '12px';
+            element.style.backgroundColor = '#FFFFFF';
+            element.style.boxSizing = 'border-box';
+            
+            // Add temp styles for proper printing font and colors
+            element.style.color = '#2D3748';
+            element.style.fontFamily = "'Poppins', sans-serif";
+
+            // Append temp element to body offscreen
+            element.style.position = 'fixed';
+            element.style.top = '-9999px';
+            element.style.left = '-9999px';
+            document.body.appendChild(element);
+
+            const filename = `Codmint_Certificate_${name.replace(/\\s+/g, '_')}_${domain.replace(/\\s+/g, '_')}.pdf`;
+            
+            const opt = {
+                margin:       10,
+                filename:     filename,
+                image:        { type: 'jpeg', quality: 1.0 },
+                html2canvas:  { scale: 2.5, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+
+            // Generate PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Cleanup
+                document.body.removeChild(element);
+                // Restore theme
+                if (isDark) {
+                    document.body.classList.add('dark-theme');
+                }
+            }).catch(err => {
+                console.error('PDF Generation Error:', err);
+                document.body.removeChild(element);
+                if (isDark) {
+                    document.body.classList.add('dark-theme');
+                }
+                alert('Error generating PDF. Please use the Print Certificate button to Save as PDF instead.');
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
