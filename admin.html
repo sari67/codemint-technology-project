@@ -365,8 +365,43 @@
         .recent-item .time { font-size: 0.75rem; color: var(--admin-muted); white-space: nowrap; }
 
         @media (max-width: 768px) {
+            .admin-header {
+                flex-wrap: wrap;
+                gap: 12px;
+                padding: 12px 4%;
+            }
+            .admin-brand {
+                order: 1;
+            }
+            .admin-header .theme-toggle-btn {
+                order: 2;
+                margin-left: auto;
+            }
+            .admin-exit-btn {
+                order: 3;
+            }
+            .admin-nav-links {
+                display: flex;
+                order: 4;
+                width: 100%;
+                justify-content: space-between;
+                gap: 6px;
+                overflow-x: auto;
+                padding-bottom: 2px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .admin-nav-links::-webkit-scrollbar {
+                display: none;
+            }
+            .admin-tab-btn {
+                flex: 1;
+                text-align: center;
+                padding: 8px 6px;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
             .overview-grid { grid-template-columns: 1fr; }
-            .admin-nav-links { display: none; }
             .admin-table th:nth-child(3),
             .admin-table td:nth-child(3) { display: none; }
         }
