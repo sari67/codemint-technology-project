@@ -517,13 +517,34 @@
         </div>
 
         <div class="tab-section" id="tab-applications">
+            <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;">
+                <div class="mini-stat-box" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:14px 22px;">
+                    <div style="font-size:0.72rem;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:1px;">Ongoing</div>
+                    <div id="ongoing-count" style="font-size:2rem;font-weight:800;color:#22c55e;">0</div>
+                </div>
+                <div class="mini-stat-box" style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:14px 22px;">
+                    <div style="font-size:0.72rem;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:1px;">Completed</div>
+                    <div id="completed-count" style="font-size:2rem;font-weight:800;color:#3b82f6;">0</div>
+                </div>
+            </div>
             <div class="table-toolbar">
                 <div class="section-title" style="margin:0;">
                     All Applications
                     <span class="count-badge" id="apps-count-badge">0</span>
                 </div>
                 <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                    <input type="text" class="search-input" id="app-search" placeholder="Search by name, email or domain...">
+                    <input type="text" class="search-input" id="app-search" placeholder="Search by name or email...">
+                    <select id="app-domain-filter" class="search-input" style="width:auto;cursor:pointer;">
+                        <option value="">All Domains</option>
+                        <option>Web Development</option>
+                        <option>Python</option>
+                        <option>Data Science</option>
+                        <option>Machine Learning</option>
+                        <option>UI/UX Design</option>
+                        <option>Android Development</option>
+                        <option>Cloud Computing</option>
+                        <option>Cybersecurity</option>
+                    </select>
                     <select id="app-status-filter" class="search-input" style="width:auto;cursor:pointer;">
                         <option value="">All Statuses</option>
                         <option>Selected</option>
@@ -568,9 +589,13 @@
                             <th>SL No.</th>
                             <th>Intern Name</th>
                             <th>Email</th>
-                            <th>Domain</th>
+                            <th>Domain / Title</th>
                             <th>Certificate ID</th>
-                            <th>Status</th>
+                            <th>Issue Date</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Skills</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="certs-tbody"></tbody>
@@ -656,6 +681,8 @@
         const apps = flatApplications();
         const domains = domainCounts();
         const maxDomain = Math.max(...Object.values(domains), 1);
+        const ongoingApps = apps.filter(a => (a.status||'Selected') !== 'Completed');
+        const completedApps = apps.filter(a => (a.status||'Selected') === 'Completed');
 
         // Stats
         document.getElementById('stats-row').innerHTML = `
@@ -665,21 +692,27 @@
                 <div class="sub">Registered accounts</div>
             </div>
             <div class="stat-box green">
-                <div class="label">Applications</div>
-                <div class="value">${apps.length}</div>
-                <div class="sub">Total submitted</div>
+                <div class="label">Ongoing</div>
+                <div class="value">${ongoingApps.length}</div>
+                <div class="sub">Active internships</div>
             </div>
             <div class="stat-box blue">
+                <div class="label">Completed</div>
+                <div class="value">${completedApps.length}</div>
+                <div class="sub">Certificates issued</div>
+            </div>
+            <div class="stat-box yellow">
                 <div class="label">Domains Active</div>
                 <div class="value">${Object.keys(domains).length}</div>
                 <div class="sub">Internship tracks</div>
             </div>
-            <div class="stat-box yellow">
-                <div class="label">Acceptance Rate</div>
-                <div class="value">100%</div>
-                <div class="sub">All selected</div>
-            </div>
         `;
+
+        // Update application tab counters
+        const ongoingEl = document.getElementById('ongoing-count');
+        const completedEl = document.getElementById('completed-count');
+        if (ongoingEl) ongoingEl.textContent = ongoingApps.length;
+        if (completedEl) completedEl.textContent = completedApps.length;
 
         // Domain bars
         const barHtml = Object.entries(domains).sort((a,b) => b[1]-a[1]).map(([d, c]) => `
@@ -720,10 +753,14 @@
         document.getElementById('users-count-badge').textContent = users.length;
         const tbody = document.getElementById('users-tbody');
         if (!users.length) {
-            tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><p>No registered users yet.</p></div></td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><p>No registered users yet.</p></div></td></tr>`;
             return;
         }
-        tbody.innerHTML = users.map((u, i) => `
+        const allApps = getAllApplications();
+        tbody.innerHTML = users.map((u, i) => {
+            const userApps = allApps[u.email] || [];
+            const isPaid = userApps.length > 0;
+            return `
             <tr>
                 <td>
                     <div class="user-avatar" style="display:inline-flex;">${u.name.charAt(0).toUpperCase()}</div>
@@ -731,12 +768,13 @@
                 </td>
                 <td style="color:var(--admin-muted);">${u.email}</td>
                 <td style="color:var(--admin-muted); font-family:monospace; letter-spacing:1px;">••••••</td>
-                <td><span class="status-pill pill-green">Active</span></td>
+                <td><span class="status-pill ${isPaid ? 'pill-green' : 'pill-yellow'}">${isPaid ? 'Paid / Enrolled' : 'Registered'}</span></td>
+                <td><span class="status-pill pill-blue">${userApps.length} Application${userApps.length !== 1 ? 's' : ''}</span></td>
                 <td>
                     <button class="action-btn" onclick="deleteUser('${u.email}')">Remove</button>
                 </td>
-            </tr>
-        `).join('');
+            </tr>`;
+        }).join('');
     }
 
     function renderAppsTable(apps) {
@@ -776,21 +814,53 @@
         document.getElementById('cert-count-badge').textContent = completedApps.length;
         const tbody = document.getElementById('certs-tbody');
         if (!completedApps.length) {
-            tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><p>No certificates issued yet.</p></div></td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state"><p>No certificates issued yet.</p></div></td></tr>`;
             return;
         }
         tbody.innerHTML = completedApps.map((a, i) => {
             const certId = `CM-2026-${String(a.globalIndex+1).padStart(4,'0')}`;
+            const issueDate = a.issueDate || new Date().toLocaleDateString('en-IN');
+            const startDate = a.startDate || a.date || 'N/A';
+            const endDate = a.endDate || issueDate;
+            const skills = a.skills || getSkillsByDomain(a.domain);
+            const certTitle = `${a.domain} Internship Certificate`;
             return `
             <tr>
                 <td style="color:var(--admin-muted);font-weight:600;">${i+1}</td>
                 <td><div class="user-avatar" style="display:inline-flex;">${a.name.charAt(0).toUpperCase()}</div><strong>${a.name}</strong></td>
-                <td style="color:var(--admin-muted);">${a.email}</td>
-                <td><span class="status-pill pill-blue">${a.domain}</span></td>
+                <td style="color:var(--admin-muted);font-size:0.82rem;">${a.email}</td>
+                <td>
+                    <span class="status-pill pill-blue">${a.domain}</span>
+                    <div style="font-size:0.72rem;color:var(--admin-muted);margin-top:4px;">${certTitle}</div>
+                </td>
                 <td style="font-family:monospace;font-size:0.82rem;color:#f59e0b;">${certId}</td>
-                <td><span class="status-pill pill-green">${a.status || 'Selected'}</span></td>
+                <td style="color:var(--admin-muted);font-size:0.82rem;">${issueDate}</td>
+                <td style="color:var(--admin-muted);font-size:0.82rem;">${startDate}</td>
+                <td style="color:var(--admin-muted);font-size:0.82rem;">${endDate}</td>
+                <td style="font-size:0.78rem;color:var(--admin-muted);max-width:160px;">${skills}</td>
+                <td>
+                    <button class="action-btn" onclick="viewCertificate('${certId}','${a.name}','${a.domain}')">View Cert</button>
+                </td>
             </tr>`;
         }).join('');
+    }
+
+    function getSkillsByDomain(domain) {
+        const map = {
+            'Web Development': 'HTML, CSS, JavaScript, React',
+            'Python': 'Python, OOP, File Handling, Libraries',
+            'Data Science': 'Python, Pandas, NumPy, Data Analysis',
+            'Machine Learning': 'ML Algorithms, Scikit-learn, TensorFlow',
+            'UI/UX Design': 'Figma, Wireframing, Prototyping',
+            'Android Development': 'Java/Kotlin, Android SDK, Firebase',
+            'Cloud Computing': 'AWS, Azure, GCP, DevOps',
+            'Cybersecurity': 'Network Security, Ethical Hacking, SIEM'
+        };
+        return map[domain] || 'Internship Skills';
+    }
+
+    function viewCertificate(certId, name, domain) {
+        alert(`Certificate Details:\n\nID: ${certId}\nIntern: ${name}\nDomain: ${domain}\n\nOpen the Certificate Verification page to view the full certificate.`);
     }
 
     // ── Actions ──
@@ -865,14 +935,17 @@
 
         document.getElementById('app-search').addEventListener('input', () => filterApps());
         document.getElementById('app-status-filter').addEventListener('change', () => filterApps());
+        document.getElementById('app-domain-filter').addEventListener('change', () => filterApps());
 
         function filterApps() {
             const q = document.getElementById('app-search').value.toLowerCase();
             const status = document.getElementById('app-status-filter').value;
+            const domain = document.getElementById('app-domain-filter').value;
             let apps = flatApplications().filter(a =>
-                a.name.toLowerCase().includes(q) || a.domain.toLowerCase().includes(q) || a.email.toLowerCase().includes(q)
+                a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q)
             );
             if (status) apps = apps.filter(a => (a.status||'Selected') === status);
+            if (domain) apps = apps.filter(a => a.domain === domain);
             renderAppsTable(apps);
         }
 
