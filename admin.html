@@ -319,6 +319,28 @@
         .search-input:focus { border-color: var(--admin-accent); outline: none; }
         .search-input::placeholder { color: var(--admin-muted); }
 
+        /* Dark dropdown options */
+        select.search-input {
+            background: var(--admin-card);
+            color: var(--admin-text);
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+        select.search-input option {
+            background: var(--admin-card);
+            color: var(--admin-text);
+            padding: 10px 16px;
+        }
+        select.search-input option:hover,
+        select.search-input option:checked {
+            background: var(--admin-accent);
+            color: #fff;
+        }
+
         /* Avatar */
         .user-avatar {
             width: 34px; height: 34px;
