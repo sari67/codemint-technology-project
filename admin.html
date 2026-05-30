@@ -512,14 +512,38 @@
 
         <!-- Overview Tab -->
         <div class="tab-section active" id="tab-overview">
-            <div class="overview-grid">
+
+            <!-- Live Login Status Banner -->
+            <div id="live-login-banner" style="margin-bottom:24px;"></div>
+
+            <div class="overview-grid" style="grid-template-columns:1fr 1fr;gap:24px;">
                 <div class="admin-card">
-                    <h3>Applications by Domain</h3>
+                    <h3>📊 Applications by Domain</h3>
                     <div class="domain-bars" id="domain-bars"></div>
                 </div>
                 <div class="admin-card">
-                    <h3>Recent Registrations</h3>
+                    <h3>🆕 Recent Registrations</h3>
                     <div class="recent-list" id="recent-users"></div>
+                </div>
+            </div>
+
+            <!-- Login History Table -->
+            <div class="admin-card" style="margin-top:24px;">
+                <h3 style="margin-bottom:18px;">🔐 User Login History</h3>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="login-history-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Last Login</th>
+                                <th>Total Logins</th>
+                                <th>Login Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="login-history-tbody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -780,10 +804,79 @@
                     <div class="name">${u.name}</div>
                     <div class="detail">${u.email}</div>
                 </div>
-                <div class="time">Registered</div>
+                <div class="time">${u.signupTime || 'Registered'}</div>
             </div>
         `).join('');
         document.getElementById('recent-users').innerHTML = recentHtml || '<p style="color:var(--admin-muted);font-size:0.9rem;">No users yet.</p>';
+
+        // ── Live Login Banner ──
+        const loginLog = JSON.parse(localStorage.getItem('userLoginLog') || '{}');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser') || 'null');
+        const banner = document.getElementById('live-login-banner');
+        if (currentUser) {
+            banner.innerHTML = `
+                <div style="background:linear-gradient(135deg,rgba(34,197,94,0.15),rgba(34,197,94,0.05));border:1px solid rgba(34,197,94,0.3);border-radius:14px;padding:16px 22px;display:flex;align-items:center;gap:14px;">
+                    <span style="font-size:1.6rem;">🟢</span>
+                    <div>
+                        <div style="font-weight:700;font-size:1rem;color:#22c55e;">User Currently Logged In</div>
+                        <div style="font-size:0.88rem;color:var(--admin-muted);margin-top:2px;">
+                            <strong style="color:var(--admin-text);">${currentUser.name}</strong> — ${currentUser.email}
+                        </div>
+                    </div>
+                </div>`;
+        } else {
+            banner.innerHTML = `
+                <div style="background:rgba(255,255,255,0.03);border:1px solid var(--admin-border);border-radius:14px;padding:14px 22px;display:flex;align-items:center;gap:12px;">
+                    <span style="font-size:1.4rem;">⚪</span>
+                    <div style="color:var(--admin-muted);font-size:0.9rem;">No user is currently logged in on this device.</div>
+                </div>`;
+        }
+
+        // ── Login History Table ──
+        const loginHistoryTbody = document.getElementById('login-history-tbody');
+        if (!users.length) {
+            loginHistoryTbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><p>No login history yet.</p></div></td></tr>`;
+        } else {
+            const usersWithLogin = users.map(u => ({
+                ...u,
+                log: loginLog[u.email] || {}
+            })).sort((a, b) => {
+                if (!a.log.lastLogin && !b.log.lastLogin) return 0;
+                if (!a.log.lastLogin) return 1;
+                if (!b.log.lastLogin) return -1;
+                return new Date(b.log.lastLogin) - new Date(a.log.lastLogin);
+            });
+
+            loginHistoryTbody.innerHTML = usersWithLogin.map((u, i) => {
+                const hasLogged = !!u.log.lastLogin;
+                const isCurrentUser = currentUser && currentUser.email === u.email;
+                return `
+                <tr style="${isCurrentUser ? 'background:rgba(34,197,94,0.05);' : ''}">
+                    <td style="color:var(--admin-muted);font-weight:600;">${i+1}</td>
+                    <td>
+                        <div class="user-avatar" style="display:inline-flex;${isCurrentUser ? 'background:linear-gradient(135deg,#22c55e,#16a34a);' : ''}">${u.name.charAt(0).toUpperCase()}</div>
+                        <strong>${u.name}</strong>
+                        ${isCurrentUser ? '<span style="font-size:0.72rem;background:rgba(34,197,94,0.2);color:#22c55e;padding:2px 8px;border-radius:10px;margin-left:6px;">ONLINE</span>' : ''}
+                    </td>
+                    <td style="color:var(--admin-muted);font-size:0.85rem;">${u.email}</td>
+                    <td style="font-size:0.85rem;">
+                        ${hasLogged
+                            ? `<span style="color:#22c55e;">🟢 ${u.log.lastLogin}</span>`
+                            : `<span style="color:var(--admin-muted);">⚪ Never logged in</span>`}
+                    </td>
+                    <td style="text-align:center;">
+                        <span class="status-pill pill-blue">${u.log.count || 0} time${(u.log.count || 0) !== 1 ? 's' : ''}</span>
+                    </td>
+                    <td>
+                        ${isCurrentUser
+                            ? '<span class="status-pill pill-green">🟢 Currently Online</span>'
+                            : hasLogged
+                                ? '<span class="status-pill pill-yellow">Last Seen</span>'
+                                : '<span class="status-pill" style="background:rgba(255,255,255,0.05);color:var(--admin-muted);">Never Logged In</span>'}
+                    </td>
+                </tr>`;
+            }).join('');
+        }
 
         // Users table
         renderUsersTable(users);
