@@ -443,9 +443,52 @@
                 font-size: 0.95rem;
                 margin-bottom: 5px;
             }
-            .overview-grid { grid-template-columns: 1fr; }
-            .admin-table th:nth-child(3),
-            .admin-table td:nth-child(3) { display: none; }
+            .overview-grid { grid-template-columns: 1fr !important; }
+
+            /* Make all tables horizontally scrollable on mobile */
+            .admin-table-wrap {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .admin-table {
+                min-width: 600px;
+            }
+
+            /* Hide less important columns on mobile */
+            /* Applications table - hide Certificate ID & Date Applied */
+            #apps-table th:nth-child(4),
+            #apps-table td:nth-child(4),
+            #apps-table th:nth-child(5),
+            #apps-table td:nth-child(5) { display: none; }
+
+            /* Users table - hide Signed Up & Logins columns */
+            #users-table th:nth-child(4),
+            #users-table td:nth-child(4),
+            #users-table th:nth-child(6),
+            #users-table td:nth-child(6) { display: none; }
+
+            /* Certs table - hide Start/End Date & Skills on mobile */
+            #certs-table th:nth-child(7),
+            #certs-table td:nth-child(7),
+            #certs-table th:nth-child(8),
+            #certs-table td:nth-child(8),
+            #certs-table th:nth-child(9),
+            #certs-table td:nth-child(9) { display: none; }
+
+            /* Login history table - hide total logins on mobile */
+            #login-history-table th:nth-child(5),
+            #login-history-table td:nth-child(5) { display: none; }
+
+            /* Full width search inputs and filters */
+            .table-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
+            .search-input { width: 100% !important; box-sizing: border-box; }
+            .table-toolbar > div { flex-direction: column; gap: 8px; }
+
+            /* Admin main padding */
+            .admin-main { padding: 20px 4%; }
+
+            /* Mini stat boxes wrap */
+            .mini-stat-box { flex: 1; min-width: 120px; }
         }
     </style>
 </head>
