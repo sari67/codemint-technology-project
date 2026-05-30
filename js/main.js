@@ -299,17 +299,27 @@ const initPlatform = () => {
                     if (loginError) loginError.style.display = 'none';
                     const userObj = { email: foundUser.email, name: foundUser.name };
                     
+                    // Track login activity in admin
+                    const now = new Date();
+                    const loginLog = JSON.parse(localStorage.getItem('userLoginLog') || '{}');
+                    if (!loginLog[email]) loginLog[email] = { count: 0, history: [] };
+                    loginLog[email].count++;
+                    loginLog[email].lastLogin = now.toLocaleString('en-IN');
+                    loginLog[email].history.unshift(now.toLocaleString('en-IN'));
+                    if (loginLog[email].history.length > 5) loginLog[email].history.pop();
+                    localStorage.setItem('userLoginLog', JSON.stringify(loginLog));
+
                     // Auto-save logic
                     if (rememberMe) {
-                        localStorage.setItem('currentUser', JSON.stringify(userObj)); // Persists across browser restarts
+                        localStorage.setItem('currentUser', JSON.stringify(userObj));
                     } else {
-                        sessionStorage.setItem('currentUser', JSON.stringify(userObj)); // Clears when tab closes
+                        sessionStorage.setItem('currentUser', JSON.stringify(userObj));
                     }
 
                     alert('Login successful! Welcome back.');
                     closeModal(loginModal);
                     loginForm.reset();
-                    updateNavState(); // Update UI
+                    updateNavState();
                 } else {
                     if (loginError) {
                         loginError.style.display = 'block';
@@ -349,8 +359,9 @@ const initPlatform = () => {
                 
                 regError.style.display = 'none';
                 
-                // Add to registered users
-                registeredUsers.push({ name, email, password: pwd });
+                // Add to registered users with signup time
+                const signupTime = new Date().toLocaleString('en-IN');
+                registeredUsers.push({ name, email, password: pwd, signupTime });
                 localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
                 
                 alert('Registration successful! Please log in to continue.');

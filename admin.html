@@ -531,9 +531,12 @@
                 <table class="admin-table" id="users-table">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>User</th>
                             <th>Email</th>
-                            <th>Password</th>
+                            <th>Signed Up</th>
+                            <th>Last Login</th>
+                            <th>Logins</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -788,23 +791,37 @@
         document.getElementById('users-count-badge').textContent = users.length;
         const tbody = document.getElementById('users-tbody');
         if (!users.length) {
-            tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><p>No registered users yet.</p></div></td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><p>No registered users yet.</p></div></td></tr>`;
             return;
         }
         const allApps = getAllApplications();
+        const loginLog = JSON.parse(localStorage.getItem('userLoginLog') || '{}');
         tbody.innerHTML = users.map((u, i) => {
             const userApps = allApps[u.email] || [];
             const isPaid = userApps.length > 0;
+            const log = loginLog[u.email] || {};
+            const lastLogin = log.lastLogin || '—';
+            const loginCount = log.count || 0;
+            const signupTime = u.signupTime || '—';
+            const isLoggedIn = lastLogin !== '—';
             return `
             <tr>
+                <td style="color:var(--admin-muted);font-weight:600;">${i+1}</td>
                 <td>
                     <div class="user-avatar" style="display:inline-flex;">${u.name.charAt(0).toUpperCase()}</div>
                     <strong>${u.name}</strong>
                 </td>
-                <td style="color:var(--admin-muted);">${u.email}</td>
-                <td style="color:var(--admin-muted); font-family:monospace; letter-spacing:1px;">••••••</td>
-                <td><span class="status-pill ${isPaid ? 'pill-green' : 'pill-yellow'}">${isPaid ? 'Paid / Enrolled' : 'Registered'}</span></td>
-                <td><span class="status-pill pill-blue">${userApps.length} Application${userApps.length !== 1 ? 's' : ''}</span></td>
+                <td style="color:var(--admin-muted);font-size:0.85rem;">${u.email}</td>
+                <td style="color:var(--admin-muted);font-size:0.8rem;">${signupTime}</td>
+                <td style="font-size:0.8rem;">
+                    ${isLoggedIn
+                        ? `<span style="color:#22c55e;">🟢 ${lastLogin}</span>`
+                        : `<span style="color:var(--admin-muted);">⚪ Never</span>`}
+                </td>
+                <td style="text-align:center;">
+                    <span class="status-pill pill-blue">${loginCount} time${loginCount !== 1 ? 's' : ''}</span>
+                </td>
+                <td><span class="status-pill ${isPaid ? 'pill-green' : 'pill-yellow'}">${isPaid ? '✅ Enrolled' : '📝 Registered'}</span></td>
                 <td>
                     <button class="action-btn" onclick="deleteUser('${u.email}')">Remove</button>
                 </td>
