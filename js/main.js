@@ -459,7 +459,7 @@ const initPlatform = () => {
             // Redirect to dashboard after short delay if logged in
             if (currentUserStr) {
                 setTimeout(() => {
-                    window.location.href = '/dashboard';
+                    window.location.href = 'dashboard.html';
                 }, 1000);
             }
         });
