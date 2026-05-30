@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,12 @@
         }
 
         * { -webkit-tap-highlight-color: transparent; }
+
+        /* Hide browser native password reveal button */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear,
+        input[type="password"]::-webkit-credentials-auto-fill-button,
+        input[type="password"]::-webkit-textfield-decoration-container { display: none !important; }
 
         body {
             background: var(--admin-bg);
@@ -456,9 +462,9 @@
         <div class="gate-logo">C</div>
         <h2>Admin Access</h2>
         <p>Restricted area — Codmint staff only</p>
-        <input type="text" id="admin-user" class="gate-input" placeholder="Admin username" autocomplete="username" value="admin">
+        <input type="text" id="admin-user" class="gate-input" placeholder="Admin username" autocomplete="off">
         <div style="position:relative;">
-            <input type="password" id="admin-pass" class="gate-input" placeholder="Password" autocomplete="current-password" style="padding-right:48px;">
+            <input type="password" id="admin-pass" class="gate-input" placeholder="Password" autocomplete="off" style="padding-right:48px; -webkit-appearance:none; -ms-reveal:none;">
             <button onclick="togglePassVis()" type="button" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#64748b;padding:0;" id="pass-eye-btn">
                 <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
             </button>
