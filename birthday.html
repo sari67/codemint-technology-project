@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0417">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Happy Birthday Bharath! ❤️ | Forever & Always</title>
+  <meta name="description" content="A professional, aesthetic, and adorable interactive birthday story application created with love for Bharath.">
+  <link rel="stylesheet" href="css/birthday.css">
+</head>
+<body>
+  <!-- Cute & Romantic Ambient Aurora Orbs -->
+  <div class="bg-ambient-glow" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- Canvas Backgrounds -->
+  <canvas id="particles-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-wrapper">
+    <!-- Navbar Header -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span>Forever & Always</span> ❤️
+      </div>
+      <div class="nav-controls">
+        <button id="btn-audio-toggle" class="btn-icon" aria-label="Toggle Romantic Music">
+          <div id="sound-wave-icon" class="sound-wave muted">
+            <span></span><span></span><span></span>
+          </div>
+          <span id="audio-toggle-text">Play Music 🎵</span>
+        </button>
+      </div>
+    </header>
+
+
+
+    <!-- =========================================================
+         STEP 1: Welcome Bharath & October 31 Countdown
+         ========================================================= -->
+    <section class="step-screen active" id="step-screen-1">
+      <div class="step-card">
+        <div class="cute-mascot-box">
+          <img src="images/cute_teddy.jpg" alt="Cute Birthday Teddy Bear" class="cute-mascot-img">
+        </div>
+        <h1 class="step-title" id="display-boyfriend-name">Happy Birthday Bharath! ❤️</h1>
+
+        <!-- Live Countdown Timer to October 31 -->
+        <div class="countdown-box">
+          <div class="countdown-item">
+            <span class="countdown-num" id="count-hours">00</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="count-mins">00</span>
+            <span class="countdown-label">Mins</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="count-secs">00</span>
+            <span class="countdown-label">Secs</span>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-primary" data-next-step>
+            Begin Celebration Journey ✨ →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 2: Cutest Birthday Cake Operation for Bharath
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-2">
+      <div class="step-card">
+        <h2 class="step-title">A Sweet Birthday Wish 🎂</h2>
+
+        <div class="cake-display-box">
+          <div class="cake-banner" id="cake-banner-name">✨ Happy Birthday Bharath! ✨</div>
+          <img src="images/simple_cake.jpg" alt="Simple aesthetic birthday cake" class="cake-img">
+          <div class="cake-flames-overlay">
+            <div class="candle-interactive"><div class="flame-glow"></div><div class="candle-stick"></div></div>
+            <div class="candle-interactive"><div class="flame-glow"></div><div class="candle-stick"></div></div>
+            <div class="candle-interactive"><div class="flame-glow"></div><div class="candle-stick"></div></div>
+          </div>
+        </div>
+
+        <p id="cake-status-text">
+          Tap the glowing candles or click the button below to blow them out! 💨
+        </p>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-secondary" id="btn-blow-candles-op">
+            💨 Blow Out Candles
+          </button>
+          <button class="btn-primary" id="btn-next-after-cake" data-next-step disabled>
+            Next Surprise 🎈 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 3: Pop Balloon Surprises Operation
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-3">
+      <div class="step-card">
+        <h2 class="step-title">Pop The Balloons, Bharath! 🎈</h2>
+
+        <div class="balloons-grid">
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#ff436e"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#db1b4f"/>
+            </svg>
+            <div class="balloon-note">💖 <strong>Your Smile:</strong> The cutest thing in the world! One smile from you lights up my entire universe.</div>
+          </div>
+
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#f7d070"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#d9ad40"/>
+            </svg>
+            <div class="balloon-note">🌟 <strong>Your Hugs:</strong> My personal safe haven. Being in your arms makes every worry disappear.</div>
+          </div>
+
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#ff8da5"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#e06580"/>
+            </svg>
+            <div class="balloon-note">🥰 <strong>Your Beautiful Soul:</strong> You are so kind, caring, and thoughtful. I am so lucky to be loved by you.</div>
+          </div>
+
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#2ed573"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#1b9e50"/>
+            </svg>
+            <div class="balloon-note">👑 <strong>My Forever Love:</strong> Today, tomorrow, and every moment forever, you have 100% of my heart, Bharath!</div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-primary" id="btn-next-after-balloons" data-next-step disabled>
+            Read Secret Letter 💌 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 4: Secret Love Letter Operation
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-4">
+      <div class="step-card">
+        <h2 class="step-title">A Letter From My Heart 💌</h2>
+
+        <div class="envelope-graphic" id="envelope-graphic" title="Click to unlock letter">
+          💌
+        </div>
+
+        <div class="letter-paper" id="letter-paper">
+          <h3 id="display-letter-title">To My Favorite Human Being, Bharath ❤️</h3>
+          <div class="letter-content" id="display-letter-content">
+            My Dearest Bharath,
+
+            Happy Birthday to the most handsome, kind-hearted, and extraordinary man in my life!
+
+            Today is the most precious day in my world, because it's the day the universe gifted me YOU. From the moment you walked into my life, every ordinary day became brighter, sweeter, and infinitely happier. You are my safe haven, my loudest laughter, and my deepest peace.
+
+            Thank you for being your wonderful self—for the way you hold my hand, the way your eyes crinkle when you laugh, and how loved you make me feel every single second.
+
+            On your special day, I wish you all the happiness, good health, wild success, and dreams come true that your beautiful heart can hold. I promise to be by your side cheering for you through all of it!
+          </div>
+          <div class="letter-signature" id="display-letter-signature">
+            Yours Forever & Always with all my love ❤️
+          </div>
+        </div>
+
+        <div class="step-actions" style="margin-top: 24px;">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-primary" id="btn-next-after-letter" data-next-step disabled>
+            Why I Love You 💖 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 5: Reasons Why I Love You Operation (Requires 3 Taps)
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-5">
+      <div class="step-card">
+        <h2 class="step-title">Reasons Why I Love You, Bharath 💖</h2>
+
+        <p id="reasons-tap-badge">
+          Tap count: 0 / 3 taps needed to unlock next step ✨
+        </p>
+
+        <div class="reason-card-display" id="reason-card-text">
+          "The way your eyes crinkle with pure warmth whenever you laugh, Bharath."
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-secondary" id="btn-next-reason">
+            ✨ Draw Next Reason (Tap Here) ✨
+          </button>
+          <button class="btn-primary" id="btn-next-after-reasons" data-next-step disabled>
+            Grand Award 🎉 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 6: Grand Celebration & Boyfriend Award
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-6">
+      <div class="step-card">
+        <h2 class="step-title">Happy Birthday Bharath! 🎉❤️</h2>
+
+        <!-- Official Certificate Award -->
+        <div class="certificate-box">
+          <div class="certificate-title">🏆 Certificate of Infinite Love 🏆</div>
+          <div style="font-size: 0.9rem; color: var(--gold-accent); letter-spacing: 1.5px; text-transform: uppercase;">
+            THIS OFFICIAL AWARD IS PROUDLY PRESENTED TO
+          </div>
+          <div class="certificate-name" id="cert-boyfriend-name">Bharath</div>
+          <p class="certificate-desc">
+            For being the most wonderful, handsome, caring, and loving boyfriend in the entire universe. Certified 100% Loved, Cherished, and Adored forever and always! ❤️✨
+          </p>
+        </div>
+
+        <!-- Memories Grid -->
+        <div class="memories-grid">
+          <div class="memory-card">
+            <img src="images/couple_memory.jpg" alt="Better Together - Bharath & Sarika" style="object-position: center 20%;">
+            <div class="memory-body">
+              <h3 class="memory-title">Better Together ❤️</h3>
+              <p class="memory-desc">You & me, our story, our forever. Every day with you is my favorite, Bharath!</p>
+            </div>
+          </div>
+
+          <div class="memory-card">
+            <img src="images/simple_cake.jpg" alt="Simple aesthetic birthday cake">
+            <div class="memory-body">
+              <h3 class="memory-title">Your Sweetest Birthday</h3>
+              <p class="memory-desc">Baked with infinite love, sweet moments, and timeless blessings.</p>
+            </div>
+          </div>
+
+          <div class="memory-card">
+            <img src="images/bharath_birthday_poster.png" alt="Happy Birthday Bharath Kumar" style="object-position: center top;">
+            <div class="memory-body">
+              <h3 class="memory-title">Happy Birthday Bharath Kumar 👑</h3>
+              <p class="memory-desc">Celebrating the most handsome, wonderful, and extraordinary king in my world!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-secondary" onclick="window.triggerConfetti()">
+            🎉 Shower Confetti!
+          </button>
+          <button class="btn-primary" onclick="location.reload()">
+            🔄 Replay Story Journey
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>Crafted with endless love & devotion for Bharath, Forever & Always ❤️</p>
+    </footer>
+  </div>
+
+  <!-- Customizer Drawer Modal -->
+  <div class="modal-overlay" id="modal-customizer">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color: #fff; font-family: var(--font-heading);">⚙️ Personalize Wish</h3>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+      <form id="form-customizer">
+        <div class="form-group">
+          <label class="form-label">Boyfriend's Name</label>
+          <input type="text" id="input-bf-name" class="form-input" value="Bharath">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cute Nickname</label>
+          <input type="text" id="input-nickname" class="form-input" value="My Handsome Prince">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Love Letter Title</label>
+          <input type="text" id="input-letter-title" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Love Letter Text</label>
+          <textarea id="input-letter-text" class="form-textarea"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Signature</label>
+          <input type="text" id="input-signature" class="form-input">
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+          💾 Save Personalizations
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Direct Song Player (Starts immediately at 'Enadhuyire') -->
+  <audio id="local-audio-player" preload="auto" loop>
+    <source src="audio/enadhuyire.m4a?v=enadhuyire_direct" type="audio/mp4">
+    <source src="audio/enadhuyire.mp3?v=enadhuyire_direct" type="audio/mpeg">
+  </audio>
+
+  <script src="js/birthday.js"></script>
+</body>
+</html>
