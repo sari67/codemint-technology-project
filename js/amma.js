@@ -190,28 +190,18 @@ With endless love, gratitude, and devotion,`,
     isPlayingAudio = playing;
     if (playing) {
       if (soundWave) soundWave.classList.remove('muted');
-      if (audioToggleText) audioToggleText.textContent = 'Neeye Neeye Playing ♪';
+      if (audioToggleText) audioToggleText.textContent = 'Playing Music ♪';
     } else {
       if (soundWave) soundWave.classList.add('muted');
-      if (audioToggleText) audioToggleText.textContent = '🎵 Neeye Neeye (M. Kumaran)';
+      if (audioToggleText) audioToggleText.textContent = 'Play Music 🎵';
     }
   }
 
   if (localAudio) {
-    localAudio.addEventListener('loadedmetadata', () => {
-      if (localAudio.currentTime < SONG_START_TIME) {
-        localAudio.currentTime = SONG_START_TIME;
-      }
-    });
-    localAudio.addEventListener('play', () => {
-      if (localAudio.currentTime < SONG_START_TIME - 1) {
-        localAudio.currentTime = SONG_START_TIME;
-      }
-      setPlayerUI(true);
-    });
+    localAudio.addEventListener('play', () => setPlayerUI(true));
     localAudio.addEventListener('pause', () => setPlayerUI(false));
     localAudio.addEventListener('ended', () => {
-      localAudio.currentTime = SONG_START_TIME;
+      localAudio.currentTime = 0;
       localAudio.play();
     });
   }
@@ -230,9 +220,6 @@ With endless love, gratitude, and devotion,`,
       setPlayerUI(false);
     } else {
       if (localAudio) {
-        if (localAudio.currentTime < SONG_START_TIME - 1) {
-          localAudio.currentTime = SONG_START_TIME;
-        }
         localAudio.play().then(() => {
           setPlayerUI(true);
         }).catch((err) => {
