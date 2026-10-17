@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0417">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Happy Birthday Amma! 🌸 | World's Best Mom & Guiding Light</title>
+  <meta name="description" content="An interactive, heartfelt and aesthetic birthday story website crafted with infinite love for Amma.">
+  <link rel="stylesheet" href="css/birthday.css">
+  <style>
+    /* Amma Special Elegant Accents */
+    :root {
+      --primary-rose: #ff6b8b;
+      --primary-glow: rgba(255, 107, 139, 0.45);
+      --rose-light: #ff9ebb;
+      --gold-accent: #f7d070;
+      --gold-glow: rgba(247, 208, 112, 0.4);
+    }
+    .badge-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(255, 107, 139, 0.18);
+      border: 1px solid rgba(255, 107, 139, 0.4);
+      color: #ffb3c6;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Ambient Rose-Gold Aurora Glow Orbs -->
+  <div class="bg-ambient-glow" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- Canvas Backgrounds for Floating Hearts/Petals and Confetti -->
+  <canvas id="particles-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-wrapper">
+    <!-- Navbar Header -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span>To My Queen Amma</span> 🌸❤️
+      </div>
+      <div class="nav-controls">
+        <button id="btn-audio-toggle" class="btn-icon" aria-label="Toggle Amma Song">
+          <div id="sound-wave-icon" class="sound-wave muted">
+            <span></span><span></span><span></span>
+          </div>
+          <span id="audio-toggle-text">🎵 Neeye Neeye (M. Kumaran)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- =========================================================
+         STEP 1: Welcome Amma Screen
+         ========================================================= -->
+    <section class="step-screen active" id="step-screen-1">
+      <div class="step-card">
+        <div class="badge-tag">👑 Queen of Our Family & Heart</div>
+        <div class="cute-mascot-box">
+          <img src="images/cute_teddy.jpg" alt="Cute Birthday Teddy" class="cute-mascot-img">
+        </div>
+        <h1 class="step-title" id="display-amma-name">Happy Birthday Amma! 🌸❤️</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.6;">
+          Celebrating the most selfless, caring, and beautiful soul in the universe. Today is all about honoring you!
+        </p>
+
+        <!-- Celebration Pulse Clock -->
+        <div class="countdown-box">
+          <div class="countdown-item">
+            <span class="countdown-num" id="count-hours">00</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="count-mins">00</span>
+            <span class="countdown-label">Mins</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="count-secs">00</span>
+            <span class="countdown-label">Secs</span>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-primary" data-next-step>
+            Begin Amma's Celebration Journey ✨ →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 2: Cutest Birthday Cake & Wish For Amma
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-2">
+      <div class="step-card">
+        <div class="badge-tag">🎂 Birthday Cake Ceremony</div>
+        <h2 class="step-title">A Sweet Birthday Wish For Amma 🎂</h2>
+
+        <div class="cake-display-box">
+          <div class="cake-banner" id="cake-banner-name">✨ Happy Birthday Dearest Amma! ✨</div>
+          <img src="images/simple_cake.jpg" alt="Aesthetic Birthday Cake" class="cake-img">
+          <div class="cake-flames-overlay">
+            <div class="candle-interactive"><div class="flame-glow"></div><div class="candle-stick"></div></div>
+            <div class="candle-interactive"><div class="flame-glow"></div><div class="candle-stick"></div></div>
+            <div class="candle-interactive"><div class="flame-glow"></div><div class="candle-stick"></div></div>
+          </div>
+        </div>
+
+        <p id="cake-status-text">
+          Amma, make a secret wish in your heart and tap the candles or click below to blow them out! 💨
+        </p>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-secondary" id="btn-blow-candles-op">
+            💨 Blow Out Candles
+          </button>
+          <button class="btn-primary" id="btn-next-after-cake" data-next-step disabled>
+            Next Surprise 🎈 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 3: Pop Balloon Surprises
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-3">
+      <div class="step-card">
+        <div class="badge-tag">🎈 Pop To Reveal Hidden Surprises</div>
+        <h2 class="step-title">Pop The Balloons, Amma! 🎈</h2>
+        <p style="color: var(--text-muted); margin-bottom: 18px; font-size: 0.95rem;">
+          Tap on each colorful balloon to unveil a heartfelt message dedicated to you.
+        </p>
+
+        <div class="balloons-grid">
+          <!-- Balloon 1 -->
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#ff436e"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#db1b4f"/>
+            </svg>
+            <div class="balloon-note">
+              🌸 <strong>Unconditional Love:</strong> The purest and most selfless love in the universe. Thank you for loving me before I even knew myself, Amma!
+            </div>
+          </div>
+
+          <!-- Balloon 2 -->
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#f7d070"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#d9ad40"/>
+            </svg>
+            <div class="balloon-note">
+              🍲 <strong>Magic in Your Hands:</strong> From your delicious comforting meals to your healing touch when I'm tired, your hands carry God's own grace.
+            </div>
+          </div>
+
+          <!-- Balloon 3 -->
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#ff8da5"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#e06580"/>
+            </svg>
+            <div class="balloon-note">
+              🕊️ <strong>Pillar of Strength:</strong> You faced every challenge with quiet resilience and protected us. You are the real hero of our home!
+            </div>
+          </div>
+
+          <!-- Balloon 4 -->
+          <div class="balloon-item">
+            <svg class="balloon-svg" viewBox="0 0 100 120">
+              <path d="M50 0 C20 0 0 25 0 60 C0 90 35 110 50 110 C65 110 100 90 100 60 C100 25 80 0 50 0 Z" fill="#2ed573"/>
+              <path d="M46 110 L54 110 L50 120 Z" fill="#1b9e50"/>
+            </svg>
+            <div class="balloon-note">
+              👑 <strong>My Greatest Blessing:</strong> No matter how old I grow, I will always run back to your loving embrace. Thank you for being my Amma!
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-primary" id="btn-next-after-balloons" data-next-step disabled>
+            Read Special Letter 💌 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 4: Heartfelt Love Letter to Amma
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-4">
+      <div class="step-card">
+        <div class="badge-tag">💌 From My Deepest Heart</div>
+        <h2 class="step-title">A Letter From My Heart to Amma 💌</h2>
+
+        <div class="envelope-graphic" id="envelope-graphic" title="Click to open letter for Amma">
+          💌
+        </div>
+
+        <div class="letter-paper" id="letter-paper">
+          <h3 id="display-letter-title">To My First Home, My Forever Hero — Amma 🌸❤️</h3>
+          <div class="letter-content" id="display-letter-content">
+            Dearest Amma,
+
+            Happy Birthday to the most selfless, loving, and extraordinary mother in the entire universe!
+
+            Words will never be enough to thank you for everything you have quietly done for me. You woke up before dawn, sacrificed your sleep, set aside your own wishes, and poured your whole heart into making our lives comfortable, secure, and happy.
+
+            Whenever life gets exhausting or confusing, just hearing your reassuring voice or resting my head upon your lap makes every worry disappear. You are my first teacher, my greatest blessing, my safest sanctuary, and my biggest inspiration.
+
+            On your special birthday, my only prayer to God is for your vibrant health, deep inner peace, long life, and endless reasons to smile. May your heart be as full of happiness as you have made mine every single day!
+          </div>
+          <div class="letter-signature" id="display-letter-signature">
+            Yours Forever & Always with Infinite Love, Your Child ❤️
+          </div>
+        </div>
+
+        <div class="step-actions" style="margin-top: 24px;">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-primary" id="btn-next-after-letter" data-next-step disabled>
+            Why Amma is #1 💖 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 5: Reasons Why You Are The Best Amma (Tap 3x Required)
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-5">
+      <div class="step-card">
+        <div class="badge-tag">✨ Why You Are Incredible</div>
+        <h2 class="step-title">Reasons Why Amma is The Greatest Gift 💖</h2>
+
+        <p id="reasons-tap-badge">
+          Tap count: 0 / 3 taps needed to unlock next step ✨
+        </p>
+
+        <div class="reason-card-display" id="reason-card-text">
+          "The way you look into my eyes and instantly understand what I am feeling without me uttering a single word."
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-secondary" id="btn-next-reason">
+            ✨ Draw Next Reason (Tap Here) ✨
+          </button>
+          <button class="btn-primary" id="btn-next-after-reasons" data-next-step disabled>
+            Amma's Award 🏆 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STEP 6: Grand Motherhood Award & Tribute
+         ========================================================= -->
+    <section class="step-screen" id="step-screen-6">
+      <div class="step-card">
+        <div class="badge-tag">🏆 Official Recognition</div>
+        <h2 class="step-title">Happy Birthday Amma! 🎉🌸</h2>
+
+        <!-- Official Award Certificate -->
+        <div class="certificate-box">
+          <div class="certificate-title">🏆 Lifetime Achievement Award 🏆</div>
+          <div style="font-size: 0.9rem; color: var(--gold-accent); letter-spacing: 1.5px; text-transform: uppercase;">
+            THIS OFFICIAL HONOR IS PROUDLY PRESENTED TO
+          </div>
+          <div class="certificate-name" id="cert-amma-name">World's Greatest Amma</div>
+          <p class="certificate-desc">
+            For infinite patience, unconditional sacrifices, warmest embraces, and a heart made of purest gold. Certified 100% Loved, Cherished, and Admired in the entire universe today & forever! 🌸👑❤️
+          </p>
+        </div>
+
+        <!-- Tribute Cards Grid -->
+        <div class="memories-grid">
+          <div class="memory-card">
+            <img src="images/cute_teddy.jpg" alt="A Mother's Warmth">
+            <div class="memory-body">
+              <h3 class="memory-title">Her Gentle Grace 🌸</h3>
+              <p class="memory-desc">A mother's smile is the brightest sunlight that warms our home and guides our journey.</p>
+            </div>
+          </div>
+
+          <div class="memory-card">
+            <img src="images/simple_cake.jpg" alt="Sweetest Birthday">
+            <div class="memory-body">
+              <h3 class="memory-title">Sweetest Birthday Blessings 🎂</h3>
+              <p class="memory-desc">Baked with infinite prayers, everlasting health, and abundant joy for Amma.</p>
+            </div>
+          </div>
+
+          <div class="memory-card">
+            <img src="images/letter.png" alt="Love for Mom">
+            <div class="memory-body">
+              <h3 class="memory-title">Queen of Our Family 👑</h3>
+              <p class="memory-desc">Forever grateful for your selfless love, strength, and timeless wisdom.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-secondary" data-prev-step>
+            ← Back
+          </button>
+          <button class="btn-secondary" onclick="window.triggerConfetti()">
+            🎉 Shower Confetti!
+          </button>
+          <button class="btn-primary" onclick="location.reload()">
+            🔄 Replay Story Journey
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer & Tribute -->
+    <footer>
+      <p style="margin-bottom: 8px;">Crafted with endless love, respect & devotion for Amma, Forever & Always 🌸❤️</p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; opacity: 0.9;">
+        🎵 Featuring <em>"Neeye Neeye"</em> from <strong>M. Kumaran Son of Mahalakshmi</strong><br>
+        Starring: Jayam Ravi, Asin, Nadhiya, Prakash Raj • Directed by M. Raja • Music by Srikanth Deva
+      </p>
+    </footer>
+  </div>
+
+  <!-- Audio Player (Neeye Neeye - M. Kumaran Son of Mahalakshmi) -->
+  <audio id="local-audio-player" preload="auto" loop>
+    <source src="audio/neeye_neeye.webm" type="audio/webm">
+    <source src="audio/enadhuyire.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- YouTube Player Fallback Container -->
+  <div id="yt-player-container" style="position:fixed; bottom:-9999px; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"></div>
+
+  <script src="js/amma.js"></script>
+</body>
+</html>
