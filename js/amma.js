@@ -142,7 +142,10 @@ With endless love, gratitude, and devotion,`,
   let ytPlayer = null;
   let ytReady = false;
 
-  // Load YouTube IFrame API as fallback for "Neeye Neeye" - M. Kumaran Son of Mahalakshmi
+  const SONG_START_TIME = 172; // Starts at 2 minutes 52 seconds
+  const YT_VIDEO_ID = 'YbbLBUTwLHM'; // Think Music Official "Neeye Neeye" - M. Kumaran Son of Mahalakshmi
+
+  // Load YouTube IFrame API as fallback for "Neeye Neeye"
   const ytScriptTag = document.createElement('script');
   ytScriptTag.src = "https://www.youtube.com/iframe_api";
   const firstScript = document.getElementsByTagName('script')[0];
@@ -157,11 +160,12 @@ With endless love, gratitude, and devotion,`,
       ytPlayer = new YT.Player('yt-player-container', {
         height: '100',
         width: '100',
-        videoId: 'xQZL1Yp3hHw', // "Neeye Neeye" - M. Kumaran Son of Mahalakshmi
+        videoId: YT_VIDEO_ID,
         playerVars: {
+          start: SONG_START_TIME,
           autoplay: 0,
           loop: 1,
-          playlist: 'xQZL1Yp3hHw',
+          playlist: YT_VIDEO_ID,
           controls: 0
         },
         events: {
@@ -194,9 +198,22 @@ With endless love, gratitude, and devotion,`,
   }
 
   if (localAudio) {
-    localAudio.addEventListener('play', () => setPlayerUI(true));
+    localAudio.addEventListener('loadedmetadata', () => {
+      if (localAudio.currentTime < SONG_START_TIME) {
+        localAudio.currentTime = SONG_START_TIME;
+      }
+    });
+    localAudio.addEventListener('play', () => {
+      if (localAudio.currentTime < SONG_START_TIME - 1) {
+        localAudio.currentTime = SONG_START_TIME;
+      }
+      setPlayerUI(true);
+    });
     localAudio.addEventListener('pause', () => setPlayerUI(false));
-    localAudio.addEventListener('ended', () => setPlayerUI(false));
+    localAudio.addEventListener('ended', () => {
+      localAudio.currentTime = SONG_START_TIME;
+      localAudio.play();
+    });
   }
 
   function toggleSongPlay() {
@@ -213,12 +230,16 @@ With endless love, gratitude, and devotion,`,
       setPlayerUI(false);
     } else {
       if (localAudio) {
+        if (localAudio.currentTime < SONG_START_TIME - 1) {
+          localAudio.currentTime = SONG_START_TIME;
+        }
         localAudio.play().then(() => {
           setPlayerUI(true);
         }).catch((err) => {
           console.warn("Local audio play failed, falling back to YouTube:", err);
           if (ytPlayer && ytReady && typeof ytPlayer.playVideo === 'function') {
             try {
+              ytPlayer.seekTo(SONG_START_TIME, true);
               ytPlayer.playVideo();
               setPlayerUI(true);
             } catch (e) {
