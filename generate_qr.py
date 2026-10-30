@@ -4,6 +4,7 @@ import os
 import shutil
 import math
 
+# Target website URL encoded into the QR code
 url = "https://sari67.github.io/codemint-technology-project/birthday.html"
 
 # 1. Generate High-Res Standard QR Code (Clean & 100% Scannable)
@@ -21,10 +22,10 @@ qr_output_path = os.path.abspath("birthday_qr_code.png")
 qr_img.save(qr_output_path)
 print(f"Standard QR Code generated: {qr_output_path} ({qr_img.size})")
 
-# 2. Generate a Cute, Romantic Presentation Card
+# 2. Generate a Cute, Romantic Presentation Card (GitHub Link and Music Info Hidden)
 card_w = 900
 card_h = 1260
-card = Image.new("RGBA", (card_w, card_h), (13, 4, 23, 255)) # Dark romantic #0d0417
+card = Image.new("RGBA", (card_w, card_h), (13, 4, 23, 255)) # Romantic dark midnight #0d0417
 
 # Ambient glowing orbs
 glow = Image.new("RGBA", (card_w, card_h), (0, 0, 0, 0))
@@ -39,10 +40,16 @@ draw = ImageDraw.Draw(card)
 box_w = 660
 box_h = 660
 box_x = (card_w - box_w) // 2
-box_y = 350
-draw.rounded_rectangle([box_x, box_y, box_x + box_w, box_y + box_h], radius=32, fill=(255, 255, 255, 255), outline=(247, 208, 112, 220), width=4)
+box_y = 340
+draw.rounded_rectangle(
+    [box_x, box_y, box_x + box_w, box_y + box_h],
+    radius=32,
+    fill=(255, 255, 255, 255),
+    outline=(247, 208, 112, 220),
+    width=4
+)
 
-# Place QR code
+# Place QR code centered inside white frame
 qr_resized = qr_img.resize((580, 580), Image.Resampling.LANCZOS)
 qr_x = (card_w - 580) // 2
 qr_y = box_y + (box_h - 580) // 2
@@ -54,53 +61,63 @@ def draw_heart(d, cx, cy, size, color):
     for t_deg in range(0, 360, 4):
         t = math.radians(t_deg)
         x = 16 * (math.sin(t) ** 3)
-        y = -(13 * math.cos(t) - 5 * math.cos(2*t) - 2 * math.cos(3*t) - math.cos(4*t))
+        y = -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t))
         points.append((cx + x * (size / 16.0), cy + y * (size / 16.0)))
     d.polygon(points, fill=color)
 
-# Draw decorative hearts around header
-draw_heart(draw, 140, 170, 22, (255, 67, 110, 255))
-draw_heart(draw, 760, 170, 22, (255, 67, 110, 255))
-draw_heart(draw, 450, 100, 16, (247, 208, 112, 255))
-
-# Load clean fonts
+# Fonts configuration
 font_title = None
 font_sub = None
 font_inst = None
+font_sub_inst = None
 font_footer = None
 
 for font_path in [
     "C:/Windows/Fonts/georgiab.ttf",
     "C:/Windows/Fonts/arialbd.ttf",
+    "C:/Windows/Fonts/arial.ttf",
 ]:
     if os.path.exists(font_path):
         try:
             font_title = ImageFont.truetype(font_path, 44)
-            font_sub = ImageFont.truetype(font_path, 26)
-            font_inst = ImageFont.truetype(font_path, 25)
-            font_footer = ImageFont.truetype(font_path, 21)
+            font_sub = ImageFont.truetype(font_path, 25)
+            font_inst = ImageFont.truetype(font_path, 27)
+            font_sub_inst = ImageFont.truetype(font_path, 22)
+            font_footer = ImageFont.truetype(font_path, 22)
             break
         except Exception:
             pass
 
 if not font_title:
-    font_title = ImageFont.load_default()
-    font_sub = ImageFont.load_default()
-    font_inst = ImageFont.load_default()
-    font_footer = ImageFont.load_default()
+    font_title = font_sub = font_inst = font_sub_inst = font_footer = ImageFont.load_default()
 
 def draw_centered(text, y, font, fill):
     bbox = draw.textbbox((0, 0), text, font=font)
     tw = bbox[2] - bbox[0]
     draw.text(((card_w - tw) // 2, y), text, font=font, fill=fill)
+    return tw
 
-draw_centered("Happy Birthday Bharath!", 150, font_title, (255, 255, 255, 255))
-draw_centered("A Sweet Storybook Celebration Just For You", 230, font_sub, (247, 208, 112, 255))
+# 1. Top Decorative Golden Heart
+draw_heart(draw, card_w // 2, 95, 14, (247, 208, 112, 255))
 
-draw_centered("Scan with your phone camera to open", 1045, font_inst, (255, 220, 235, 255))
-draw_centered("sari67.github.io/codemint-technology-project/birthday.html", 1095, font_footer, (200, 190, 220, 255))
+# 2. Header Title with Flanking Pink Hearts
+title_text = "Happy Birthday Bharath!"
+t_bbox = draw.textbbox((0, 0), title_text, font=font_title)
+tw = t_bbox[2] - t_bbox[0]
+tx = (card_w - tw) // 2
+ty = 155
+draw.text((tx, ty), title_text, font=font_title, fill=(255, 255, 255, 255))
+draw_heart(draw, tx - 36, ty + 24, 18, (255, 67, 110, 255))
+draw_heart(draw, tx + tw + 36, ty + 24, 18, (255, 67, 110, 255))
 
-# Footer with cleanly framed hearts
+# 3. Subtitle
+draw_centered("A Sweet Storybook Celebration Just For You", 235, font_sub, (247, 208, 112, 255))
+
+# 4. Instructions (GitHub Link and Music Information Hidden)
+draw_centered("Scan with your phone camera to open", 1040, font_inst, (255, 255, 255, 255))
+draw_centered("Open camera on iPhone or Android and point at QR code", 1090, font_sub_inst, (247, 208, 112, 230))
+
+# 5. Romantic Footer with Hearts
 footer_txt = "Forever & Always  |  October 31"
 bbox_f = draw.textbbox((0, 0), footer_txt, font=font_footer)
 tw_f = bbox_f[2] - bbox_f[0]
@@ -108,16 +125,17 @@ fx = (card_w - tw_f) // 2
 fy = 1165
 
 draw.text((fx, fy), footer_txt, font=font_footer, fill=(247, 208, 112, 240))
-draw_heart(draw, fx - 26, fy + 12, 11, (255, 67, 110, 255))
-draw_heart(draw, fx + tw_f + 26, fy + 12, 11, (255, 67, 110, 255))
+draw_heart(draw, fx - 28, fy + 12, 12, (255, 67, 110, 255))
+draw_heart(draw, fx + tw_f + 28, fy + 12, 12, (255, 67, 110, 255))
 
+# Save romantic QR presentation card
 card_output_path = os.path.abspath("birthday_qr_card.png")
 card.save(card_output_path)
 print(f"Romantic QR Presentation Card generated: {card_output_path}")
 
-# Copy to artifacts directory
-artifact_dir = r"C:\Users\Sarika\.gemini\antigravity\brain\f7a88468-03c5-444d-872c-f24c5d80e7af"
-if os.path.exists(artifact_dir):
-    shutil.copy(qr_output_path, os.path.join(artifact_dir, "birthday_qr_code.png"))
-    shutil.copy(card_output_path, os.path.join(artifact_dir, "birthday_qr_card.png"))
-    print("Files successfully copied to artifact directory.")
+# Copy to conversation artifact directory if available
+current_artifact_dir = r"C:\Users\Sarika\.gemini\antigravity\brain\b7f77f99-5e28-469f-a23b-96613526af9d"
+if os.path.exists(current_artifact_dir):
+    shutil.copy(qr_output_path, os.path.join(current_artifact_dir, "birthday_qr_code.png"))
+    shutil.copy(card_output_path, os.path.join(current_artifact_dir, "birthday_qr_card.png"))
+    print("Files successfully copied to conversation artifact directory.")
