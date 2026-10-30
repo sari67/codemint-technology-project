@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     boyfriendName: "Bharath",
     nickname: "My Handsome Prince",
     birthdayDate: oct31Target.toISOString(),
-    letterTitle: "To My Favorite Human Being, Bharath ❤️",
+    letterTitle: "To The Love of My Life, Bharath ❤️",
     letterText: `My Dearest Bharath,
 
 Happy Birthday to the most handsome, kind-hearted, and extraordinary man in my life!
@@ -36,6 +36,9 @@ Forever & Always Yours with all my love,`,
   if (savedState) {
     try {
       appState = { ...defaultData, ...JSON.parse(savedState) };
+      if (!appState.letterTitle || appState.letterTitle.includes("Human Being")) {
+        appState.letterTitle = defaultData.letterTitle;
+      }
     } catch (e) {
       console.warn("State parse error:", e);
     }
