@@ -30,19 +30,22 @@ Forever & Always Yours with all my love,`,
     signature: "Yours Forever & Always ❤️"
   };
 
-  // State Management
+  // State Management (v3 with updated letter title)
   let appState = { ...defaultData };
-  const savedState = localStorage.getItem('birthday_wish_state_bharath_v2');
+  const savedState = localStorage.getItem('birthday_wish_state_bharath_v3') || localStorage.getItem('birthday_wish_state_bharath_v2');
   if (savedState) {
     try {
       appState = { ...defaultData, ...JSON.parse(savedState) };
-      if (!appState.letterTitle || appState.letterTitle.includes("Human Being")) {
+      if (!appState.letterTitle || appState.letterTitle.includes("Human Being") || appState.letterTitle.includes("Favorite")) {
         appState.letterTitle = defaultData.letterTitle;
       }
     } catch (e) {
       console.warn("State parse error:", e);
     }
   }
+  try {
+    localStorage.setItem('birthday_wish_state_bharath_v3', JSON.stringify(appState));
+  } catch(e) {}
 
   // DOM Elements
   const elBoyfriendName = document.getElementById('display-boyfriend-name');
@@ -659,7 +662,7 @@ Forever & Always Yours with all my love,`,
       appState.letterText = document.getElementById('input-letter-text').value || defaultData.letterText;
       appState.signature = document.getElementById('input-signature').value || defaultData.signature;
 
-      localStorage.setItem('birthday_wish_state_bharath_v2', JSON.stringify(appState));
+      localStorage.setItem('birthday_wish_state_bharath_v3', JSON.stringify(appState));
       renderApp();
       modalOverlay.classList.remove('active');
       if (window.triggerConfetti) window.triggerConfetti();
